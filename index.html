@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Omnissiah — download</title>
+  <meta name="description" content="Download Omnissiah: een persoonlijke, self-hosted AI-workspace voor macOS en Windows." />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --surface: #171717;
+      --border: #2a2a2a;
+      --text: #fafafa;
+      --muted: #a3a3a3;
+      --accent: #0891b2;
+      --accent-hover: #0aa8ce;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.25rem;
+      text-align: center;
+    }
+    .logo {
+      width: 96px; height: 96px;
+      border-radius: 22%;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgb(8 145 178 / 0.25);
+      margin-bottom: 1.5rem;
+    }
+    .logo svg { display: block; width: 100%; height: 100%; }
+    h1 { font-size: 2.5rem; letter-spacing: -0.02em; }
+    .tagline {
+      color: var(--muted);
+      max-width: 34rem;
+      margin: 0.75rem auto 1.25rem;
+      line-height: 1.6;
+    }
+    .version {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .version .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    .buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.4rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .btn small { display: block; font-weight: 400; font-size: 0.75rem; opacity: 0.8; text-align: left; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--muted); }
+    .btn svg { width: 22px; height: 22px; flex: none; fill: currentColor; }
+    .notes {
+      max-width: 36rem;
+      text-align: left;
+      display: grid;
+      gap: 0.5rem;
+      width: 100%;
+    }
+    details {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    summary { cursor: pointer; color: var(--text); font-weight: 500; }
+    details code {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.1rem 0.4rem;
+      font-size: 0.85em;
+    }
+    footer { margin-top: 2.5rem; font-size: 0.85rem; color: var(--muted); }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+  <div class="logo" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <rect width="512" height="512" fill="#171717" />
+      <g fill="none" stroke="#ffffff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M256 140 L170 372" />
+        <path d="M256 140 L342 372" />
+        <path d="M205 300 L307 300" />
+      </g>
+    </svg>
+  </div>
+
+  <h1>Omnissiah</h1>
+  <p class="tagline">
+    Jouw persoonlijke AI-workspace — self-hosted en privé, met cloud- én lokale
+    modellen, geheugen, skills en deep research. Alle data blijft op je eigen machine.
+  </p>
+
+  <p class="version"><span class="dot"></span><span id="version">Nieuwste versie ophalen…</span></p>
+
+  <div class="buttons">
+    <a class="btn btn-primary" id="dl-mac" href="https://github.com/Robinvliet/omnissiah-releases/releases/latest">
+      <svg viewBox="0 0 24 24"><path d="M17.05 12.54c-.03-2.63 2.15-3.89 2.25-3.95-1.23-1.79-3.14-2.04-3.81-2.07-1.62-.16-3.17.95-3.99.95-.82 0-2.1-.93-3.45-.9-1.77.03-3.41 1.03-4.32 2.62-1.84 3.19-.47 7.92 1.32 10.51.88 1.27 1.92 2.69 3.29 2.64 1.32-.05 1.82-.85 3.42-.85 1.6 0 2.05.85 3.44.82 1.43-.02 2.33-1.29 3.2-2.57 1.01-1.47 1.42-2.9 1.44-2.97-.03-.01-2.76-1.06-2.79-4.23zM14.44 4.7c.73-.88 1.22-2.11 1.08-3.33-1.05.04-2.32.7-3.07 1.58-.67.78-1.27 2.02-1.11 3.22 1.17.09 2.37-.6 3.1-1.47z"/></svg>
+      <span>Download voor macOS<small>Apple Silicon · .dmg</small></span>
+    </a>
+    <a class="btn btn-secondary" id="dl-win" href="https://github.com/Robinvliet/omnissiah-releases/releases/latest">
+      <svg viewBox="0 0 24 24"><path d="M3 5.5l7.5-1v7H3v-6zm0 13l7.5 1v-7H3v6zm8.5 1.2l9.5 1.3V12.5h-9.5v7.2zm0-15.4v7.2H21V3l-9.5 1.3z"/></svg>
+      <span>Download voor Windows<small>x64 · installer (.exe)</small></span>
+    </a>
+  </div>
+
+  <div class="notes">
+    <details>
+      <summary>Installeren op macOS</summary>
+      Open de .dmg en sleep Omnissiah naar Programma's. De app is (bewust) niet
+      ondertekend: macOS toont daarom eenmalig een waarschuwing. Oplossing:
+      Systeeminstellingen → Privacy en beveiliging → <em>Open toch</em>, of in
+      Terminal: <code>xattr -cr /Applications/Omnissiah.app</code>.
+    </details>
+    <details>
+      <summary>Installeren op Windows</summary>
+      Start de installer. SmartScreen toont "Windows heeft je pc beschermd" —
+      klik <em>Meer informatie</em> en dan <em>Toch uitvoeren</em> (eenmalig per
+      versie). Updates installeert de app daarna zelf, na jouw bevestiging.
+    </details>
+    <details>
+      <summary>Wat heb ik verder nodig?</summary>
+      Niets — de app werkt direct. Voor lokale (gratis, offline) modellen
+      installeer je <a href="https://ollama.com" style="color: var(--accent)">Ollama</a>;
+      Omnissiah vindt hem automatisch en kan er via "Modellen ontdekken"
+      rechtstreeks modellen van Hugging Face in laden.
+    </details>
+  </div>
+
+  <footer>
+    <a href="https://github.com/Robinvliet/omnissiah-releases/releases">Alle releases</a>
+    · Data blijft lokaal — de app belt nergens naar huis, behalve om updates te checken.
+  </footer>
+
+  <script>
+    // Nieuwste versie + directe downloadlinks via de publieke GitHub-API.
+    // Faalt de API (offline, rate limit), dan blijven de fallback-links naar
+    // de releasepagina gewoon werken.
+    (async () => {
+      try {
+        const res = await fetch(
+          "https://api.github.com/repos/Robinvliet/omnissiah-releases/releases/latest",
+          { headers: { Accept: "application/vnd.github+json" } },
+        );
+        if (!res.ok) return;
+        const release = await res.json();
+        const date = new Date(release.published_at).toLocaleDateString("nl-NL", {
+          day: "numeric", month: "long", year: "numeric",
+        });
+        document.getElementById("version").textContent =
+          `${release.tag_name} · ${date}`;
+        const asset = (test) => release.assets.find((a) => test(a.name));
+        const dmg = asset((n) => n.endsWith(".dmg"));
+        const exe = asset((n) => n.endsWith(".exe"));
+        if (dmg) document.getElementById("dl-mac").href = dmg.browser_download_url;
+        if (exe) document.getElementById("dl-win").href = exe.browser_download_url;
+      } catch {
+        document.getElementById("version").textContent = "Nieuwste release";
+      }
+    })();
+  </script>
+</body>
+</html>
