@@ -4,195 +4,591 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Omnissiah — download</title>
-  <meta name="description" content="Download Omnissiah: een persoonlijke, self-hosted AI-workspace voor macOS en Windows." />
+  <meta name="description" content="Download Omnissiah: een persoonlijke, self-hosted AI-workspace voor macOS en Windows. Cloud- en lokale modellen, geheugen, skills, agent en deep research — alle data lokaal." />
+  <meta name="theme-color" content="#091717" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f9f7f3" media="(prefers-color-scheme: light)" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
   <style>
+    /* ===================================================================
+       Omnissiah downloadpagina — design language "research library"
+       (redesign 2026): dark-first offblack met teal-ondertoon, warm-papier
+       light, alpha-hairlines i.p.v. schaduwen, frosted glass op vergankelijke
+       lagen, app-brede ademende aurora, Bricolage Grotesque als display-font.
+       Tokens gespiegeld uit src/app/globals.css zodat deze pagina en de app
+       dezelfde taal spreken.
+       =================================================================== */
+
     :root {
-      --bg: #0a0a0a;
-      --surface: #171717;
-      --border: #2a2a2a;
-      --text: #fafafa;
-      --muted: #a3a3a3;
-      --accent: #0891b2;
-      --accent-hover: #0aa8ce;
+      /* Dark is de thuisbasis (dark-first). */
+      --bg: #091717;
+      --surface: oklch(0.235 0.014 200);
+      --hairline: oklch(0.985 0.006 100 / 10%);
+      --hairline-strong: oklch(0.985 0.006 100 / 18%);
+      --text: #e0dfd9;
+      --reading: #fbfaf4;
+      --muted: oklch(0.72 0.01 100);
+      --accent: #00bcc9;
+      --accent-soft: oklch(0.72 0.12 200 / 90%);
+      --primary-fg: #091717;
+
+      /* Glas & atmosfeer. */
+      --glass-bg: color-mix(in srgb, var(--surface) 70%, transparent);
+      --glass-blur: 20px;
+      --overlay-scrim: oklch(0.12 0.015 200 / 45%);
+
+      /* Aurora-tint (chroma-cap zodat het nooit schreeuwt). */
+      --aurora-1: oklch(0.6 0.09 200 / 22%);
+      --aurora-2: oklch(0.7 0.07 150 / 16%);
+      --aurora-3: oklch(0.55 0.08 250 / 14%);
+
+      --warning: #f0b429;
+      --warning-bg: oklch(0.72 0.14 75 / 12%);
+      --warning-line: oklch(0.72 0.14 75 / 35%);
+
+      --radius: 16px;
+      --radius-sm: 8px;
+      --radius-lg: 20px;
+
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-press: cubic-bezier(0.3, 1.35, 0.5, 1);
+      --dur: 200ms;
+
+      --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-heading: "Bricolage Grotesque", var(--font-sans);
     }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        /* Warm papier — leeszaal bij daglicht. */
+        --bg: #f9f7f3;
+        --surface: oklch(0.993 0.003 95);
+        --hairline: oklch(0.2 0.01 95 / 10%);
+        --hairline-strong: oklch(0.2 0.01 95 / 16%);
+        --text: #2b2925;
+        --reading: #2b2925;
+        --muted: oklch(0.5 0.008 95);
+        --accent: #00828f;
+        --accent-soft: oklch(0.55 0.1 200 / 85%);
+        --primary-fg: #f9f7f3;
+
+        --glass-bg: color-mix(in srgb, var(--surface) 76%, transparent);
+        --overlay-scrim: oklch(0.85 0.01 95 / 45%);
+
+        --aurora-1: oklch(0.7 0.08 200 / 20%);
+        --aurora-2: oklch(0.82 0.07 120 / 16%);
+        --aurora-3: oklch(0.75 0.07 250 / 12%);
+
+        --warning: #a15c00;
+        --warning-bg: oklch(0.72 0.14 75 / 14%);
+        --warning-line: oklch(0.6 0.13 75 / 35%);
+      }
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: var(--font-sans);
+      font-feature-settings: "cv05" 1, "ss01" 1;
+      line-height: 1.6;
       min-height: 100svh;
+      position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- Ademende aurora, app-breed en subtiel. Ligt achter alles, is
+           inert, en staat stil bij prefers-reduced-motion. --- */
+    .aurora {
+      position: fixed;
+      inset: -25vmax;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(38vmax 34vmax at 22% 18%, var(--aurora-1), transparent 62%),
+        radial-gradient(42vmax 38vmax at 82% 26%, var(--aurora-3), transparent 60%),
+        radial-gradient(46vmax 40vmax at 60% 88%, var(--aurora-2), transparent 64%);
+      filter: blur(28px);
+      animation: aurora-drift 24s var(--ease-out) infinite alternate;
+      will-change: transform, opacity;
+    }
+    @keyframes aurora-drift {
+      0%   { transform: translate3d(0, 0, 0) scale(1);      opacity: 0.85; }
+      50%  { transform: translate3d(2%, -1.5%, 0) scale(1.06); opacity: 1; }
+      100% { transform: translate3d(-1.5%, 1%, 0) scale(1.03); opacity: 0.9; }
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 62rem;
+      margin: 0 auto;
+      padding: clamp(3rem, 8vh, 6rem) 1.25rem 4rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      padding: 3rem 1.25rem;
       text-align: center;
     }
+
+    /* --- Logo --- */
     .logo {
-      width: 96px; height: 96px;
-      border-radius: 22%;
+      width: 92px; height: 92px;
+      border-radius: 24%;
       overflow: hidden;
-      box-shadow: 0 8px 40px rgb(8 145 178 / 0.25);
-      margin-bottom: 1.5rem;
+      position: relative;
+      margin-bottom: 1.75rem;
+      border: 1px solid var(--hairline-strong);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent),
+                  0 18px 60px oklch(0.55 0.12 200 / 0.28);
+    }
+    .logo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 55%);
+      pointer-events: none;
     }
     .logo svg { display: block; width: 100%; height: 100%; }
-    h1 { font-size: 2.5rem; letter-spacing: -0.02em; }
+
+    /* --- Kop --- */
+    h1 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: clamp(2.6rem, 7vw, 4rem);
+      letter-spacing: -0.03em;
+      line-height: 1.02;
+      background: linear-gradient(180deg, var(--reading), color-mix(in srgb, var(--reading) 68%, var(--accent)));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
     .tagline {
       color: var(--muted);
-      max-width: 34rem;
-      margin: 0.75rem auto 1.25rem;
-      line-height: 1.6;
+      max-width: 38rem;
+      margin: 1rem auto 1.5rem;
+      font-size: 1.075rem;
     }
+    .tagline strong { color: var(--text); font-weight: 500; }
+
     .version {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      border: 1px solid var(--border);
+      gap: 0.55rem;
+      border: 1px solid var(--hairline);
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      backdrop-filter: blur(var(--glass-blur));
       border-radius: 999px;
-      padding: 0.35rem 0.9rem;
+      padding: 0.4rem 0.95rem;
       font-size: 0.85rem;
       color: var(--muted);
-      margin-bottom: 2rem;
+      margin-bottom: 2.25rem;
     }
-    .version .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    .version .dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent);
+      animation: pulse 2.6s var(--ease-out) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 24%, transparent); }
+      50%      { box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 6%, transparent); }
+    }
+
+    /* --- Download-knoppen --- */
     .buttons {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.85rem;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
     }
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.85rem 1.4rem;
-      border-radius: 12px;
+      gap: 0.7rem;
+      padding: 0.9rem 1.5rem;
+      border-radius: var(--radius);
       font-size: 1rem;
       font-weight: 600;
       text-decoration: none;
-      transition: background 0.15s ease, border-color 0.15s ease;
-    }
-    .btn small { display: block; font-weight: 400; font-size: 0.75rem; opacity: 0.8; text-align: left; }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: var(--accent-hover); }
-    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
-    .btn-secondary:hover { border-color: var(--muted); }
-    .btn svg { width: 22px; height: 22px; flex: none; fill: currentColor; }
-    .notes {
-      max-width: 36rem;
-      text-align: left;
-      display: grid;
-      gap: 0.5rem;
-      width: 100%;
-    }
-    details {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    summary { cursor: pointer; color: var(--text); font-weight: 500; }
-    details code {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.1rem 0.4rem;
-      font-size: 0.85em;
-    }
-    .callout {
-      max-width: 36rem;
-      width: 100%;
-      text-align: left;
-      background: rgba(245, 158, 11, 0.1);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      border-radius: 12px;
-      padding: 0.8rem 1rem;
-      font-size: 0.9rem;
-      line-height: 1.6;
       color: var(--text);
+      transition: transform var(--dur) var(--ease-press),
+                  border-color var(--dur) var(--ease-out),
+                  background var(--dur) var(--ease-out),
+                  box-shadow var(--dur) var(--ease-out);
+    }
+    .btn small { display: block; font-weight: 400; font-size: 0.75rem; opacity: 0.82; text-align: left; margin-top: 1px; }
+    .btn svg { width: 22px; height: 22px; flex: none; fill: currentColor; }
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary {
+      color: var(--primary-fg);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 92%, white), var(--accent));
+      box-shadow: 0 10px 34px oklch(0.6 0.13 200 / 0.32);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 14px 42px oklch(0.6 0.13 200 / 0.42);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      backdrop-filter: blur(var(--glass-blur));
+      border: 1px solid var(--hairline-strong);
+    }
+    .btn-secondary:hover {
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--hairline-strong));
+      transform: translateY(-1px);
+    }
+
+    .other-links {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+    .other-links a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--hairline-strong); padding-bottom: 1px; }
+    .other-links a:hover { color: var(--text); }
+
+    /* --- Callout (mac / warning) --- */
+    .callout {
+      max-width: 40rem;
+      width: 100%;
+      text-align: left;
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-line);
+      border-radius: var(--radius);
+      padding: 0.95rem 1.15rem;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 3rem;
+    }
+    .callout strong { color: var(--warning); }
+    code {
+      font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, monospace;
+      background: color-mix(in srgb, var(--text) 8%, transparent);
+      border: 1px solid var(--hairline);
+      border-radius: 6px;
+      padding: 0.12rem 0.42rem;
+      font-size: 0.86em;
+    }
+
+    /* --- Sectiekop --- */
+    .section {
+      width: 100%;
+      max-width: 52rem;
+      margin-bottom: 3rem;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    h2 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 4vw, 1.9rem);
+      letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
     }
-    .callout strong { color: #f59e0b; }
-    .callout code {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.1rem 0.4rem;
-      font-size: 0.85em;
+    .section > p.lead {
+      color: var(--muted);
+      max-width: 40rem;
+      margin: 0 auto 1.75rem;
     }
-    footer { margin-top: 2.5rem; font-size: 0.85rem; color: var(--muted); }
+
+    /* --- "Nieuw in deze versie" glaskaart --- */
+    .whatsnew {
+      text-align: left;
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      backdrop-filter: blur(var(--glass-blur));
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem 1.65rem;
+    }
+    .whatsnew h3 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.1rem;
+    }
+    .whatsnew h3 .tag {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+      border-radius: 999px;
+      padding: 0.12rem 0.55rem;
+      letter-spacing: 0.02em;
+    }
+    .whatsnew ul { list-style: none; display: grid; gap: 0.85rem; }
+    .whatsnew li { position: relative; padding-left: 1.6rem; color: var(--muted); font-size: 0.95rem; }
+    .whatsnew li strong { color: var(--text); font-weight: 600; }
+    .whatsnew li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0.55em;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+    }
+
+    /* --- Feature-grid --- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: 0.85rem;
+      text-align: left;
+    }
+    .card {
+      background: color-mix(in srgb, var(--surface) 55%, transparent);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      padding: 1.15rem 1.2rem;
+      transition: border-color var(--dur) var(--ease-out),
+                  box-shadow var(--dur) var(--ease-out),
+                  transform var(--dur) var(--ease-out);
+    }
+    .card:hover {
+      border-color: color-mix(in srgb, var(--accent) 32%, var(--hairline));
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent),
+                  0 12px 34px oklch(0.5 0.1 200 / 0.14);
+      transform: translateY(-2px);
+    }
+    .card .ico {
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--accent) 14%, transparent);
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .card .ico svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+    .card h4 { font-size: 0.98rem; font-weight: 600; margin-bottom: 0.25rem; letter-spacing: -0.01em; }
+    .card p { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
+
+    /* --- Install details --- */
+    .notes { width: 100%; max-width: 40rem; display: grid; gap: 0.6rem; text-align: left; }
+    details {
+      background: color-mix(in srgb, var(--surface) 55%, transparent);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      padding: 0.9rem 1.15rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+      transition: border-color var(--dur) var(--ease-out);
+    }
+    details[open] { border-color: var(--hairline-strong); }
+    summary {
+      cursor: pointer;
+      color: var(--text);
+      font-weight: 500;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "";
+      width: 8px; height: 8px;
+      border-right: 1.8px solid var(--muted);
+      border-bottom: 1.8px solid var(--muted);
+      transform: rotate(45deg);
+      transition: transform var(--dur) var(--ease-out);
+      flex: none;
+    }
+    details[open] summary::after { transform: rotate(-135deg); }
+    details .body { margin-top: 0.7rem; }
+    details a { color: var(--accent); text-decoration: none; }
+    details a:hover { text-decoration: underline; }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      max-width: 40rem;
+      margin: 1rem auto 0;
+      padding: 0 1.25rem 3rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
     footer a { color: var(--muted); }
     footer a:hover { color: var(--text); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aurora, .version .dot { animation: none; }
+      * { transition-duration: 1ms !important; }
+    }
   </style>
 </head>
 <body>
-  <div class="logo" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-      <rect width="512" height="512" fill="#171717" />
-      <g fill="none" stroke="#ffffff" stroke-width="46" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M256 140 L170 372" />
-        <path d="M256 140 L342 372" />
-        <path d="M205 300 L307 300" />
-      </g>
-    </svg>
-  </div>
+  <div class="aurora" aria-hidden="true"></div>
 
-  <h1>Omnissiah</h1>
-  <p class="tagline">
-    Jouw persoonlijke AI-workspace — self-hosted en privé, met cloud- én lokale
-    modellen, geheugen, skills en deep research. Alle data blijft op je eigen machine.
-  </p>
+  <main>
+    <div class="logo" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <rect width="512" height="512" fill="#0c1c1c" />
+        <g fill="none" stroke="#e0dfd9" stroke-width="46" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M256 140 L170 372" />
+          <path d="M256 140 L342 372" />
+          <path d="M205 300 L307 300" />
+        </g>
+      </svg>
+    </div>
 
-  <p class="version"><span class="dot"></span><span id="version">Nieuwste versie ophalen…</span></p>
+    <h1>Omnissiah</h1>
+    <p class="tagline">
+      Jouw persoonlijke AI-workspace — <strong>self-hosted en privé</strong>, met
+      cloud- én lokale modellen, geheugen, skills, een agent en deep research.
+      Alle data blijft op je eigen machine.
+    </p>
 
-  <div class="buttons">
-    <a class="btn btn-primary" id="dl-mac" href="https://github.com/Robinvliet/omnissiah-releases/releases/latest">
-      <svg viewBox="0 0 24 24"><path d="M17.05 12.54c-.03-2.63 2.15-3.89 2.25-3.95-1.23-1.79-3.14-2.04-3.81-2.07-1.62-.16-3.17.95-3.99.95-.82 0-2.1-.93-3.45-.9-1.77.03-3.41 1.03-4.32 2.62-1.84 3.19-.47 7.92 1.32 10.51.88 1.27 1.92 2.69 3.29 2.64 1.32-.05 1.82-.85 3.42-.85 1.6 0 2.05.85 3.44.82 1.43-.02 2.33-1.29 3.2-2.57 1.01-1.47 1.42-2.9 1.44-2.97-.03-.01-2.76-1.06-2.79-4.23zM14.44 4.7c.73-.88 1.22-2.11 1.08-3.33-1.05.04-2.32.7-3.07 1.58-.67.78-1.27 2.02-1.11 3.22 1.17.09 2.37-.6 3.1-1.47z"/></svg>
-      <span>Download voor macOS<small>Apple Silicon · .dmg</small></span>
-    </a>
-    <a class="btn btn-secondary" id="dl-win" href="https://github.com/Robinvliet/omnissiah-releases/releases/latest">
-      <svg viewBox="0 0 24 24"><path d="M3 5.5l7.5-1v7H3v-6zm0 13l7.5 1v-7H3v6zm8.5 1.2l9.5 1.3V12.5h-9.5v7.2zm0-15.4v7.2H21V3l-9.5 1.3z"/></svg>
-      <span>Download voor Windows<small>x64 · installer (.exe)</small></span>
-    </a>
-  </div>
+    <p class="version"><span class="dot"></span><span id="version">Nieuwste versie ophalen…</span></p>
 
-  <div class="callout" id="mac-callout" hidden>
-    <strong>macOS: krijg je "Omnissiah is beschadigd en kan niet worden geopend"?</strong>
-    Dat hoort erbij — de app is (bewust) niet ondertekend, en macOS blokkeert
-    hem daarom de eerste keer. Hij is niet echt beschadigd. Fix: open Terminal
-    en plak <code>xattr -cr /Applications/Omnissiah.app</code>, en start de app
-    daarna opnieuw. (Of: Systeeminstellingen → Privacy en beveiliging →
-    <em>Toch openen</em>.) Eenmalig per versie.
-  </div>
+    <div class="buttons">
+      <a class="btn btn-primary" id="dl-mac" href="https://github.com/Robinvliet/omnissiah-releases/releases/latest">
+        <svg viewBox="0 0 24 24"><path d="M17.05 12.54c-.03-2.63 2.15-3.89 2.25-3.95-1.23-1.79-3.14-2.04-3.81-2.07-1.62-.16-3.17.95-3.99.95-.82 0-2.1-.93-3.45-.9-1.77.03-3.41 1.03-4.32 2.62-1.84 3.19-.47 7.92 1.32 10.51.88 1.27 1.92 2.69 3.29 2.64 1.32-.05 1.82-.85 3.42-.85 1.6 0 2.05.85 3.44.82 1.43-.02 2.33-1.29 3.2-2.57 1.01-1.47 1.42-2.9 1.44-2.97-.03-.01-2.76-1.06-2.79-4.23zM14.44 4.7c.73-.88 1.22-2.11 1.08-3.33-1.05.04-2.32.7-3.07 1.58-.67.78-1.27 2.02-1.11 3.22 1.17.09 2.37-.6 3.1-1.47z"/></svg>
+        <span>Download voor macOS<small>Apple Silicon · .dmg</small></span>
+      </a>
+      <a class="btn btn-secondary" id="dl-win" href="https://github.com/Robinvliet/omnissiah-releases/releases/latest">
+        <svg viewBox="0 0 24 24"><path d="M3 5.5l7.5-1v7H3v-6zm0 13l7.5 1v-7H3v6zm8.5 1.2l9.5 1.3V12.5h-9.5v7.2zm0-15.4v7.2H21V3l-9.5 1.3z"/></svg>
+        <span>Download voor Windows<small>x64 · installer (.exe)</small></span>
+      </a>
+    </div>
 
-  <div class="notes">
-    <details>
-      <summary>Installeren op macOS</summary>
-      Open de .dmg en sleep Omnissiah naar Programma's. De app is (bewust) niet
-      ondertekend, dus macOS meldt de eerste keer "Omnissiah is beschadigd en
-      kan niet worden geopend" — dat is Gatekeeper, niet een kapotte app. Fix:
-      Terminal openen en <code>xattr -cr /Applications/Omnissiah.app</code>
-      plakken, daarna de app opnieuw starten. Alternatief:
-      Systeeminstellingen → Privacy en beveiliging → <em>Toch openen</em>.
-    </details>
-    <details>
-      <summary>Installeren op Windows</summary>
-      Start de installer. SmartScreen toont "Windows heeft je pc beschermd" —
-      klik <em>Meer informatie</em> en dan <em>Toch uitvoeren</em> (eenmalig per
-      versie). Updates installeert de app daarna zelf, na jouw bevestiging.
-    </details>
-    <details>
-      <summary>Wat heb ik verder nodig?</summary>
-      Niets — de app werkt direct. Voor lokale (gratis, offline) modellen
-      installeer je <a href="https://ollama.com" style="color: var(--accent)">Ollama</a>;
-      Omnissiah vindt hem automatisch en kan er via "Modellen ontdekken"
-      rechtstreeks modellen van Hugging Face in laden.
-    </details>
-  </div>
+    <p class="other-links">
+      <a href="https://github.com/Robinvliet/omnissiah-releases/releases">Alle releases &amp; changelog</a>
+    </p>
+
+    <div class="callout" id="mac-callout" hidden>
+      <strong>macOS: krijg je "Omnissiah is beschadigd en kan niet worden geopend"?</strong>
+      Dat hoort erbij — de app is (bewust) niet ondertekend, en macOS blokkeert
+      hem daarom de eerste keer. Hij is niet echt beschadigd. Fix: open Terminal
+      en plak <code>xattr -cr /Applications/Omnissiah.app</code>, en start de app
+      daarna opnieuw. (Of: Systeeminstellingen → Privacy en beveiliging →
+      <em>Toch openen</em>.) Eenmalig per versie.
+    </div>
+
+    <!-- Nieuw in deze versie -->
+    <section class="section">
+      <div class="whatsnew">
+        <h3>Nieuw in deze versie <span class="tag" id="whatsnew-version">visuele herontwerp</span></h3>
+        <ul>
+          <li><strong>Nieuw kleurenpalet.</strong> Dark mode is nu een diep offblack met teal-ondertoon; light mode is warm papier in plaats van hard wit. Panelen leunen op haarfijne randen in plaats van zware schaduwen.</li>
+          <li><strong>Nieuwe typografie.</strong> Koppen dragen het display-lettertype Bricolage Grotesque, wat titels meer karakter geeft naast de rustige leestekst.</li>
+          <li><strong>Frosted glass.</strong> Menu's, dialogen en pop-overs krijgen een subtiel matglas-effect en zweven duidelijk boven de inhoud.</li>
+          <li><strong>Levende sfeer.</strong> Een zachte, app-brede aurora-gloed ademt op de achtergrond en wordt merkbaarder op wachtmomenten, zoals het inlogscherm en de begroeting.</li>
+          <li><strong>Verfijnde beweging.</strong> Knoppen hebben lichte indruk-fysica, klikbare kaarten lichten subtiel op bij hover, en overgangen zijn kalmer en sneller — altijd met respect voor "verminderde beweging".</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Wat zit erin -->
+    <section class="section">
+      <span class="eyebrow">Wat zit erin</span>
+      <h2>Eén private workspace, alles lokaal</h2>
+      <p class="lead">Geen abonnement, geen telemetrie, geen cloud die meekijkt. Je koppelt je eigen sleutels of draait volledig offline.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+          <h4>Multi-provider chat</h4>
+          <p>Claude, Gemini en lokale modellen naast elkaar, per gesprek wisselbaar. Betrouwbaar streamen met stop en retry.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6M9 13h4"/></svg></div>
+          <h4>Lokale modellen</h4>
+          <p>Ollama en LM Studio worden automatisch gevonden. Zoek en download GGUF-modellen van Hugging Face rechtstreeks in de app.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8l7-5 7 5M5 8v8l7 5 7-5V8"/></svg></div>
+          <h4>Geheugen &amp; skills</h4>
+          <p>Persistent geheugen over gesprekken heen, plus herbruikbare skills die de assistent zelf kan schrijven en aanpassen.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h4>Deep research</h4>
+          <p>Meerstaps onderzoek met bronnen, dat afsluit met een net rapport inclusief klikbare citaties.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.8 7.2 17l.9-5.4-3.9-3.8 5.4-.8z"/></svg></div>
+          <h4>Agent &amp; tools</h4>
+          <p>Websearch, web-fetch, bestandswerk, terminal en scripts — met goedkeuringsniveaus en vangnetten voor elke actie.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+          <h4>Geplande taken</h4>
+          <p>Laat taken zelfstandig op schema draaien — eenmalig, met interval of via cron — zonder dat jij erbij hoeft te zijn.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 9h16M8 5v14"/></svg></div>
+          <h4>Kennisbank &amp; projecten</h4>
+          <p>Groepeer gesprekken in projecten met een gedeelde kennisbank, hybride zoeken en klikbare citaties naar het origineel.</p>
+        </div>
+        <div class="card">
+          <div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 9V6a4 4 0 018 0v3"/></svg></div>
+          <h4>Privé &amp; mobiel</h4>
+          <p>Wachtwoordslot vóór de hele app en een PWA, zodat je hem veilig via Tailscale ook op je telefoon gebruikt.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installeren -->
+    <section class="section">
+      <span class="eyebrow">Installeren</span>
+      <h2>In een paar klikken draaiend</h2>
+      <div class="notes">
+        <details>
+          <summary>Installeren op macOS</summary>
+          <div class="body">
+            Open de .dmg en sleep Omnissiah naar Programma's. De app is (bewust) niet
+            ondertekend, dus macOS meldt de eerste keer "Omnissiah is beschadigd en
+            kan niet worden geopend" — dat is Gatekeeper, niet een kapotte app. Fix:
+            Terminal openen en <code>xattr -cr /Applications/Omnissiah.app</code>
+            plakken, daarna de app opnieuw starten. Alternatief:
+            Systeeminstellingen → Privacy en beveiliging → <em>Toch openen</em>.
+          </div>
+        </details>
+        <details>
+          <summary>Installeren op Windows</summary>
+          <div class="body">
+            Start de installer. SmartScreen toont "Windows heeft je pc beschermd" —
+            klik <em>Meer informatie</em> en dan <em>Toch uitvoeren</em> (eenmalig per
+            versie). Updates installeert de app daarna zelf, na jouw bevestiging.
+          </div>
+        </details>
+        <details>
+          <summary>Wat heb ik verder nodig?</summary>
+          <div class="body">
+            Niets — de app werkt direct met je eigen API-sleutels. Voor lokale (gratis,
+            offline) modellen installeer je <a href="https://ollama.com">Ollama</a>;
+            Omnissiah vindt hem automatisch en kan er via "Modellen ontdekken"
+            rechtstreeks modellen van Hugging Face in laden.
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
 
   <footer>
     <a href="https://github.com/Robinvliet/omnissiah-releases/releases">Alle releases</a>
@@ -222,6 +618,8 @@
         });
         document.getElementById("version").textContent =
           `${release.tag_name} · ${date}`;
+        const tag = document.getElementById("whatsnew-version");
+        if (tag && release.tag_name) tag.textContent = release.tag_name;
         const asset = (test) => release.assets.find((a) => test(a.name));
         const dmg = asset((n) => n.endsWith(".dmg"));
         const exe = asset((n) => n.endsWith(".exe"));
