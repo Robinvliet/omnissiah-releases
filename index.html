@@ -1659,13 +1659,13 @@
       /* ==============================================================
          Documentatiesite.
 
-         De site bestaat nog niet. Zodra fase 1 gepubliceerd is naar
-         docs/ in deze repo, zet je DOCS_URL op "docs/" en verschijnt de
-         link in de navigatie en in de voet. Zolang hij null is blijft de
-         link overal verborgen, dus er staat nooit een dode link op de
-         pagina.
+         Staat sinds 2 augustus 2026 in docs/ van deze repo, gegenereerd
+         uit docs/site/ in de hoofdrepo (npm run docs:publish). Zolang
+         DOCS_URL null is blijft de link in de navigatie en de voet
+         verborgen, dus er staat nooit een dode link op de pagina; zet
+         hem daarop terug als docs/ ooit weer leeg is.
          ============================================================== */
-      var DOCS_URL = null; // straks: "docs/"
+      var DOCS_URL = "docs/";
 
       if (DOCS_URL) {
         document.querySelectorAll("[data-docs-link]").forEach(function (el) {
