@@ -66,7 +66,12 @@
       --text: #e0dfd9;
       --reading: #fbfaf4;
       --muted: oklch(0.72 0.01 100);
-      --faint: oklch(0.72 0.01 100 / 60%);
+      /* 80% en niet lager: op 60% kwam deze kleur op --bg uit op 3,42:1 en
+         zakte daarmee onder de WCAG AA-eis van 4,5:1, terwijl hij echte
+         lopende tekst kleurt (de regel onder de downloadknop, de hint voor
+         telefoon- en Linux-bezoekers, en de voet). Op 80% haalt hij ruim
+         5:1, ook op de tegelachtergrond. */
+      --faint: oklch(0.72 0.01 100 / 80%);
       --accent: #00bcc9;
       --primary-fg: #091717;
 
@@ -315,12 +320,26 @@
       opacity: 0;
       transform: translateY(-6px) scale(0.94);
       pointer-events: none;
+      /* visibility hoort hier naast opacity: alléén opacity 0 laat de knop
+         een tabstop blijven, en omdat de focusring óp dat element getekend
+         wordt dooft opacity die ring mee. De toetsenbordgebruiker ziet zijn
+         focus dan van het scherm verdwijnen. visibility haalt hem uit de
+         tabvolgorde en uit de toegankelijkheidsboom, en is animeerbaar
+         zolang je hem in de transition meeneemt. */
+      visibility: hidden;
       transition:
         opacity var(--dur-slow) var(--ease-out),
         transform 0.55s var(--spring-snappy),
-        filter var(--dur-fast) var(--ease-out);
+        filter var(--dur-fast) var(--ease-out),
+        visibility 0s linear var(--dur-slow);
     }
-    body.is-scrolled .nav-cta { opacity: 1; transform: none; pointer-events: auto; }
+    body.is-scrolled .nav-cta {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      visibility: visible;
+      transition-delay: 0s, 0s, 0s, 0s;
+    }
     .nav-cta:hover { filter: brightness(1.08); }
     .nav-cta:active { transform: scale(0.96); transition-duration: 80ms; }
 
@@ -687,11 +706,16 @@
       padding: clamp(1.4rem, 3vw, 2rem);
     }
     .whatsnew[hidden] { display: none; }
-    .whatsnew h3 {
+    /* h2 en niet h3: dit is de eerste sectiekop na de h1, dus een h3 zou
+       niveau 2 overslaan en schermlezergebruikers die per kopniveau
+       navigeren zouden deze sectie missen. De kleinere weergave is puur
+       visueel, want dit is een kaart en geen paginabrede sectiekop. */
+    .whatsnew h2 {
       font-family: var(--font-heading);
       font-weight: 600;
       font-size: 1.1rem;
       letter-spacing: -0.015em;
+      line-height: 1.3;
       color: var(--reading);
       margin-bottom: 0.9rem;
     }
@@ -815,9 +839,15 @@
     .mock-row {
       display: flex;
       align-items: center;
-      gap: 0.55rem;
+      gap: 0.35rem 0.55rem;
       color: var(--muted);
       min-width: 0;
+      /* Wrappen is hier de enige veilige uitweg: het label en de chip dragen
+         allebei nowrap en kunnen dus niet krimpen, waardoor de rij op een
+         smal scherm breder werd dan de kaart en de chip door de afgeronde
+         rand heen stak en halverwege werd afgekapt. Nu zakt de chip naar de
+         volgende regel in plaats van eruit te lopen. */
+      flex-wrap: wrap;
     }
     .mock-row .lab { color: var(--text); white-space: nowrap; }
     .mock-row .val {
@@ -1078,6 +1108,19 @@
       footer { justify-content: center; text-align: center; }
     }
 
+    /* Onder ~26rem past de volledige navigatie niet meer: de rij werd breder
+       dan het scherm en "Releases" viel er rechts af, zonder horizontale
+       scroll om er alsnog bij te komen (body staat op overflow-x: hidden).
+       De ankers naar Functies en Vragen verdwijnen daarom als eerste: die
+       secties bereik je door te scrollen. Releases blijft staan, want dat is
+       de enige uitgang naar de losse bestanden en oudere versies. */
+    @media (max-width: 26rem) {
+      .nav-links > .nav-link[href="#functies"],
+      .nav-links > .nav-link[href="#vragen"] { display: none; }
+      .nav-brand { font-size: 1rem; }
+      .nav-cta { padding: 0.45rem 0.8rem; }
+    }
+
     /* =================================================================
        Verminderde beweging: alles wat verplaatst, schaalt, vervaagt of
        oneindig loopt gaat uit. Wat overblijft is een korte opacity-fade,
@@ -1242,7 +1285,7 @@
          ============================================================ -->
     <section class="section" data-reveal>
       <div class="whatsnew" id="whatsnew" hidden>
-        <h3 id="whatsnew-title">Nieuw in deze versie</h3>
+        <h2 id="whatsnew-title">Nieuw in deze versie</h2>
         <div id="whatsnew-body"></div>
         <p class="whatsnew-foot">
           <a href="https://github.com/Robinvliet/omnissiah-releases/releases">Volledige changelog en oudere releases</a>
@@ -1449,10 +1492,12 @@
         <h2>Er is geen server die meekijkt</h2>
         <p>
           Omnissiah draait op je eigen machine en bindt aan localhost. Er is
-          geen account, geen abonnement en geen telemetrie. Praat je met een
-          cloud-model, dan gaat alleen die ene vraag naar die ene provider, met
-          jouw eigen sleutel. Kies je een lokaal model, dan verlaat er niets je
-          computer.
+          geen account, geen abonnement en geen telemetrie: er gaat niets naar
+          ons toe, want er is geen "ons". Wat er wel naar buiten gaat, gaat
+          rechtstreeks naar de dienst die jij op dat moment gebruikt. Praat je
+          met een cloud-model, dan gaat dat gesprek naar die ene provider, met
+          jouw eigen sleutel. Kies je een lokaal model, dan blijft het gesprek
+          op je computer.
         </p>
         <dl class="band-facts">
           <div class="fact">
@@ -1469,7 +1514,7 @@
           </div>
           <div class="fact">
             <dt>Verkeer naar buiten</dt>
-            <dd>Alleen een controle op nieuwe versies, en die installeert niets zonder jouw akkoord.</dd>
+            <dd>Alleen wat jij zelf aanzet: het gekozen model, tools als websearch of een MCP-server, en de controle op nieuwe versies.</dd>
           </div>
         </dl>
       </div>
@@ -1801,10 +1846,23 @@
             byId("dl-closer-label").textContent = "Download voor Windows";
           }
 
-          // Nieuw in deze versie: alleen het deel vóór de eerste
-          // scheidingslijn. Daarachter staat de vaste installatie-uitleg
-          // die al elders op deze pagina staat.
-          var body = (release.body || "").split(/^\s*---\s*$/m)[0].trim();
+          // Nieuw in deze versie: alleen het deel vóór de vaste
+          // installatie-uitleg, want die staat al elders op deze pagina.
+          //
+          // Twee afkappunten, en het eerste dat voorkomt telt. De
+          // scheidingslijn alleen is niet genoeg: release.mjs schrijft die
+          // uitsluitend wanneer RELEASE_NOTES.md gevuld is. Bij een release
+          // zonder notities begint de body meteen met de vaste kop, en dan
+          // zou een split op "---" de héle installatie-uitleg als "nieuw in
+          // deze versie" tonen, inclusief zichtbare backticks. Daarom knipt
+          // de tweede regex ook op die kop zelf.
+          var raw = release.body || "";
+          var cut = raw.length;
+          [/^\s*---\s*$/m, /^#{1,6}\s.*Welk bestand heb ik nodig/m].forEach(function (re) {
+            var hit = raw.search(re);
+            if (hit !== -1 && hit < cut) cut = hit;
+          });
+          var body = raw.slice(0, cut).trim();
           var rendered = renderNotes(body);
           if (rendered) {
             byId("whatsnew-title").textContent = "Nieuw in " + release.tag_name;
