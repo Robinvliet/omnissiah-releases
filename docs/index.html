@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wat is Omnissiah - Omnissiah</title>
+    <meta name="description" content="Een AI-, agent- en research-workspace die volledig op je eigen machine draait." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Naar de inhoud</a>
+
+    <header class="kop">
+      <a class="merk" href="index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentatie</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Wissel tussen licht en donker"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Navigatie tonen"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentatie">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="index.html" aria-current="page">Wat is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="aan-de-slag/index.html" class="nav-kop">Aan de slag</a>
+      <ul class="nav-lijst">
+        <li><a href="aan-de-slag/installeren.html">Installeren</a></li>
+        <li><a href="aan-de-slag/eerste-stappen.html">Eerste stappen</a></li>
+        <li><a href="aan-de-slag/bijwerken.html">Bijwerken</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="gebruiken/index.html" class="nav-kop">Werken met Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="gebruiken/modellen.html">Modellen</a></li>
+        <li><a href="gebruiken/mcp-servers.html">MCP-servers</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="zelf-hosten/index.html" class="nav-kop">Zelf hosten</a>
+      <ul class="nav-lijst">
+        <li><a href="zelf-hosten/webversie.html">Webversie</a></li>
+        <li><a href="zelf-hosten/configuratie.html">Configuratie</a></li>
+        <li><a href="zelf-hosten/op-je-telefoon.html">Op je telefoon</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="data-en-backup.html">Data en backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="problemen-oplossen.html">Problemen oplossen</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="privacy.html">Privacy en veiligheid</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          
+          <h1>Wat is Omnissiah</h1>
+          <p>Omnissiah is een AI-workspace die op je eigen computer draait. Je praat met modellen van Google en Anthropic via je eigen API-sleutels, of met modellen die lokaal op je machine staan. Er is geen account, geen abonnement en geen server van iemand anders: de app start een server op je eigen machine die alleen daar bereikbaar is, en al je gesprekken staan in één bestand op je eigen schijf.</p>
+<h2 id="wat-zit-erin">Wat zit erin</h2>
+<ul>
+<li><strong>Gesprekken</strong> met meerdere modellen naast elkaar, en per gesprek een keuze uit chat, agent of deep research.</li>
+<li><strong>Projecten</strong> om samenhangende gesprekken te groeperen, met gedeelde instructies en een gedeelde kennisbank.</li>
+<li><strong>Een kennisbank</strong> waar je documenten in zet; de assistent zoekt erin en verwijst met klikbare citaties naar de bron.</li>
+<li><strong>Agent-modus</strong> met een gekoppelde map, bestandstools en een terminal, achter goedkeuringsniveaus die je zelf instelt.</li>
+<li><strong>Geplande taken</strong> die zonder jou op schema draaien.</li>
+<li><strong>Geheugen, skills, persona&#39;s en MCP-servers</strong> om de assistent aan te passen aan hoe jij werkt.</li>
+</ul>
+<h2 id="waar-begin-je">Waar begin je</h2>
+<p>Download de installer van de <a href="https://robinvliet.github.io/omnissiah-releases/">downloadpagina</a> en werk daarna <a href="aan-de-slag/index.html">Aan de slag</a> af: installeren, een sleutel of een lokaal model toevoegen, en je eerste gesprek.</p>
+<p>Wil je Omnissiah niet als desktop-app maar als webapp draaien, bijvoorbeeld om hem ook op je telefoon te gebruiken, dan staat dat onder <a href="zelf-hosten/index.html">Zelf hosten</a>.</p>
+<h2 id="wat-het-niet-is">Wat het niet is</h2>
+<p>Omnissiah is voor één persoon op één machine. Er zijn geen gebruikersaccounts, geen gedeelde werkruimtes en geen synchronisatie tussen apparaten. E-mail en agenda zitten er bewust niet in.</p>
+<p>De app praat wel met de buitenwereld, maar alleen als jij dat vraagt: naar de modelprovider van wie je een sleutel hebt ingevuld, naar de zoekmachine als je websearch aanzet, en naar de pagina&#39;s die je laat ophalen. Wat daar precies gebeurt, en waarom de opzet veilig is, staat op <a href="privacy.html">Privacy en veiligheid</a>.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="volgende" href="aan-de-slag/index.html"><span class="richting">Volgende</span>Aan de slag</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span
+        >Omnissiah, een persoonlijke AI-workspace. Gebouwd door Robin van
+        Vliet.</span
+      >
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
