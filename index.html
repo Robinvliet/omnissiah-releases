@@ -615,15 +615,28 @@
     .dl-note {
       font-size: 0.82rem;
       color: var(--faint);
-      max-width: 34rem;
+      /* 38rem en niet 34: met de documentatielink erbij past de regel er net
+         niet meer in, en dan begint de tweede regel met een losse punt. */
+      max-width: 38rem;
     }
     .dl-note a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--hairline-strong); }
     .dl-note a:hover { color: var(--reading); }
+    /* Documentatielink naast "alle bestanden". De punt komt uit CSS zodat hij
+       samen met de link verdwijnt en er geen losse scheiding achterblijft.
+       inline-block houdt de link bij elkaar: hij breekt in zijn geheel naar de
+       volgende regel in plaats van middenin ("Lees eerst de / documentatie"). */
+    .dl-note-docs { display: inline-block; }
+    .dl-note-docs::before { content: "·"; margin: 0 0.5rem; color: var(--hairline-strong); }
+    .dl-note-docs:has(a.is-hidden) { display: none; }
 
     /* Alleen zichtbaar wanneer we het OS niet kunnen bepalen, of wanneer de
        bezoeker op een telefoon of op Linux zit. Eerlijker dan een mac-knop
        aanbieden aan iemand die hem niet kan gebruiken. */
     .dl-hint { display: none; font-size: 0.82rem; color: var(--faint); }
+    /* Zelfde behandeling als de links in .dl-note; zonder deze regel valt de
+       link naar de telefoonpagina terug op het blauwe browser-standaardje. */
+    .dl-hint a { color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--hairline-strong); }
+    .dl-hint a:hover { color: var(--reading); }
     html[data-os="mobile"] .dl-hint,
     html[data-os="other"] .dl-hint,
     html[data-os="unknown"] .dl-hint { display: block; }
@@ -1018,6 +1031,27 @@
     .qa-body p + p { padding-top: 0; margin-top: -0.4rem; }
     .qa-body a { color: var(--accent); text-decoration: none; }
     .qa-body a:hover { text-decoration: underline; }
+    /* "Lees meer" onder een antwoord. De pijl staat in CSS en niet in de tekst,
+       zodat hij niet meegelezen wordt door een schermlezer. Verdwijnt de link
+       (geen documentatiesite), dan gaat de hele regel mee - anders blijft er
+       een streep witruimte onder het antwoord staan. */
+    .qa-meer a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-weight: 500;
+    }
+    .qa-meer a::after {
+      content: "";
+      width: 0.32rem;
+      height: 0.32rem;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(-45deg);
+      transition: transform var(--dur-fast) var(--ease-out);
+    }
+    .qa-meer a:hover::after { transform: rotate(-45deg) translate(1.5px, 1.5px); }
+    .qa-meer:has(a.is-hidden) { display: none; }
 
     code {
       font-family: var(--font-mono);
@@ -1045,6 +1079,24 @@
       gap: 1.5rem;
     }
     .closer h2 { max-width: 18ch; }
+    /* Tweede actie onder de downloadknop: het moment waarop iemand net
+       gedownload heeft en zich afvraagt wat nu. Bewust een tekstlink en geen
+       tweede knop - twee knoppen naast elkaar maken van één duidelijke keuze
+       twee gelijkwaardige. Negatieve marge omdat .closer al 1,5rem gap heeft. */
+    .closer-alt {
+      /* .btn-primary draagt order:1 (dat sorteert in de hero de knop van jouw
+         OS naar voren) en .closer is óók een flexbox, dus zonder een hogere
+         order landt deze link bóven de downloadknop. */
+      order: 2;
+      margin-top: -0.6rem;
+      font-size: 0.9rem;
+      color: var(--faint);
+      text-decoration: none;
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+    .closer-alt:hover { color: var(--reading); }
+    .closer-alt::after { content: " →"; }
+    .closer-alt.is-hidden { display: none; }
 
     footer {
       position: relative;
@@ -1270,10 +1322,14 @@
             }
           })();
         </script>
-        <p class="dl-hint">Omnissiah is een desktop-app voor macOS en Windows. Op je telefoon gebruik je hem via de webversie, zie de vragen onderaan.</p>
+        <!-- De link hierin staat midden in een zin en draagt daarom een echte
+             fallback-href: zonder documentatiesite wijst hij naar de vragen
+             onderaan en blijft de zin heel. -->
+        <p class="dl-hint">Omnissiah is een desktop-app voor macOS en Windows. Op je telefoon gebruik je hem via de webversie, zie <a href="#vragen" data-docs-link="zelf-hosten/op-je-telefoon.html">op je telefoon</a>.</p>
         <p class="dl-note">
           Gratis en zonder account.
           <a href="https://github.com/Robinvliet/omnissiah-releases/releases">Alle bestanden en oudere versies</a>
+          <span class="dl-note-docs"><a class="is-hidden" data-docs-link="">Lees eerst de documentatie</a></span>
         </p>
       </div>
     </section>
@@ -1529,6 +1585,12 @@
         <h2>Voor je installeert</h2>
       </div>
 
+      <!-- Elk antwoord geeft het directe antwoord en laat de uitvoering aan
+           de documentatie (besluit eigenaar 2-8-2026). Sinds die site bestaat
+           stond het xattr-commando, de updateflow en de backup-uitleg hier én
+           daar, en dan is niet meer te zeggen welke van de twee klopt. Twee
+           vragen houden hun volledige antwoord, want die worden nergens anders
+           beantwoord: wat het kost, en of het op een Intel-Mac werkt. -->
       <div class="faq">
         <details class="qa" data-reveal style="--stagger: 0ms">
           <summary>Wat kost het?</summary>
@@ -1537,6 +1599,9 @@
               De app is gratis en er is geen account. Gebruik je een cloud-model,
               dan betaal je rechtstreeks aan die provider voor wat je verbruikt,
               met je eigen sleutel. Draai je een lokaal model, dan kost het niets.
+            </p>
+            <p class="qa-meer">
+              <a class="is-hidden" data-docs-link="gebruiken/modellen.html">Cloud en lokaal naast elkaar</a>
             </p>
           </div></div>
         </details>
@@ -1548,8 +1613,10 @@
               Voor Claude of Gemini wel, die plak je een keer in het
               instellingen-scherm. Voor lokale modellen niet: installeer
               <a href="https://ollama.com">Ollama</a> of LM Studio, en Omnissiah
-              vindt ze zelf. Zonder sleutel en zonder lokale server toont de app
-              een lege staat in plaats van een invoerbalk die niets kan.
+              vindt ze zelf.
+            </p>
+            <p class="qa-meer">
+              <a class="is-hidden" data-docs-link="aan-de-slag/eerste-stappen.html">Een model toevoegen en je eerste gesprek</a>
             </p>
           </div></div>
         </details>
@@ -1558,11 +1625,12 @@
           <summary>macOS zegt dat de app beschadigd is</summary>
           <div class="qa-body"><div>
             <p>
-              Dat hoort erbij. De app is bewust niet ondertekend, dus Gatekeeper
-              blokkeert hem de eerste keer. Hij is niet echt beschadigd. Open
-              Terminal en plak <code>xattr -cr /Applications/Omnissiah.app</code>,
-              start daarna de app opnieuw. Alternatief: Systeeminstellingen,
-              Privacy en beveiliging, en dan "Toch openen". Eenmalig per versie.
+              Dat hoort erbij en hij is niet echt beschadigd: de app is bewust
+              niet ondertekend, dus Gatekeeper blokkeert hem de eerste keer. Eenmalig
+              op te heffen per versie, met een knop of met een commando.
+            </p>
+            <p class="qa-meer">
+              <a class="is-hidden" data-docs-link="aan-de-slag/installeren.html#macos">Zo hef je het op</a>
             </p>
           </div></div>
         </details>
@@ -1572,8 +1640,11 @@
           <div class="qa-body"><div>
             <p>
               SmartScreen toont "Windows heeft je pc beschermd" omdat de
-              installer niet ondertekend is. Klik "Meer informatie" en dan "Toch
-              uitvoeren". Ook dit is eenmalig per versie.
+              installer niet ondertekend is. Je kunt er langs, en ook dit is
+              eenmalig per versie.
+            </p>
+            <p class="qa-meer">
+              <a class="is-hidden" data-docs-link="aan-de-slag/installeren.html#windows">Zo kom je erlangs</a>
             </p>
           </div></div>
         </details>
@@ -1586,6 +1657,9 @@
               Mac met een M-chip. Op een Intel-Mac draai je Omnissiah als
               webversie via Docker of Node, dat werkt op dezelfde data.
             </p>
+            <p class="qa-meer">
+              <a class="is-hidden" data-docs-link="zelf-hosten/webversie.html">De webversie opzetten</a>
+            </p>
           </div></div>
         </details>
 
@@ -1594,10 +1668,11 @@
           <div class="qa-body"><div>
             <p>
               De app kijkt bij het opstarten of er een nieuwe versie is en meldt
-              dat onderin de zijbalk. Op Windows installeert hij die zelf nadat
-              jij akkoord geeft. Op macOS wijst de melding je naar de nieuwe
-              .dmg. Er wordt nooit iets gedownload of geinstalleerd zonder jouw
-              bevestiging.
+              dat onderin de zijbalk. Er wordt nooit iets gedownload of
+              geinstalleerd zonder jouw bevestiging.
+            </p>
+            <p class="qa-meer">
+              <a class="is-hidden" data-docs-link="aan-de-slag/bijwerken.html">Wat er per besturingssysteem gebeurt</a>
             </p>
           </div></div>
         </details>
@@ -1606,10 +1681,12 @@
           <summary>Kan ik hem op mijn telefoon gebruiken?</summary>
           <div class="qa-body"><div>
             <p>
-              Ja, maar niet als losse app. Je draait de webversie op je computer,
-              zet er een wachtwoord op en bereikt hem via Tailscale. Op je
-              telefoon voeg je hem toe aan het beginscherm en gedraagt hij zich
-              als een app. De data blijft op je computer staan.
+              Ja, maar niet als losse app. Je draait de webversie op je computer
+              en bereikt hem via Tailscale, een privé-netwerk tussen je eigen
+              apparaten. De data blijft op je computer staan.
+            </p>
+            <p class="qa-meer">
+              <a class="is-hidden" data-docs-link="zelf-hosten/op-je-telefoon.html">Tailscale instellen en installeren als app</a>
             </p>
           </div></div>
         </details>
@@ -1618,11 +1695,12 @@
           <summary>Waar staat mijn data, en hoe maak ik een backup?</summary>
           <div class="qa-body"><div>
             <p>
-              Alle gesprekken, documenten en instellingen staan in een enkel
-              SQLite-bestand op je eigen schijf, met daarnaast leesbare mappen
-              voor je skills en je geheugen. Een backup is dat bestand kopieren,
-              en verhuizen naar een andere computer is datzelfde bestand
-              terugzetten.
+              In één map op je eigen schijf: een SQLite-bestand met je gesprekken
+              en instellingen, plus leesbare mappen voor je skills en je geheugen.
+              Een backup is die map kopieren.
+            </p>
+            <p class="qa-meer">
+              <a class="is-hidden" data-docs-link="data-en-backup.html">Waar die map staat, per besturingssysteem</a>
             </p>
           </div></div>
         </details>
@@ -1638,6 +1716,7 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0l-4-4m4 4l4-4M4 19h16"/></svg>
         <span id="dl-closer-label">Download Omnissiah</span>
       </a>
+      <a class="closer-alt is-hidden" data-docs-link="aan-de-slag/index.html">Net gedownload? Zo begin je</a>
     </section>
 
   </main>
@@ -1660,16 +1739,24 @@
          Documentatiesite.
 
          Staat sinds 2 augustus 2026 in docs/ van deze repo, gegenereerd
-         uit docs/site/ in de hoofdrepo (npm run docs:publish). Zolang
-         DOCS_URL null is blijft de link in de navigatie en de voet
-         verborgen, dus er staat nooit een dode link op de pagina; zet
-         hem daarop terug als docs/ ooit weer leeg is.
+         uit docs/site/ in de hoofdrepo (npm run docs:publish). Zet
+         DOCS_URL terug op null als docs/ ooit weer leeg is; alle
+         verwijzingen hieronder verdwijnen dan vanzelf in plaats van dood
+         te gaan.
+
+         De waarde van data-docs-link is het pad bínnen docs/, leeg voor
+         de startpagina. Twee soorten links, en het verschil zit in de
+         opmaak, niet in een tweede attribuut:
+           - staat de link op zichzelf (menu, voet, "lees meer"), dan
+             draagt hij class="is-hidden" en is hij weg zonder docs;
+           - staat hij midden in een zin, dan draagt hij een echte
+             fallback-href en blijft hij gewoon werken.
          ============================================================== */
       var DOCS_URL = "docs/";
 
       if (DOCS_URL) {
         document.querySelectorAll("[data-docs-link]").forEach(function (el) {
-          el.href = DOCS_URL;
+          el.href = DOCS_URL + el.dataset.docsLink;
           el.classList.remove("is-hidden");
         });
       }
