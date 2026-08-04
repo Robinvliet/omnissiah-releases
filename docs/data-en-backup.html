@@ -159,7 +159,7 @@
 </thead>
 <tbody><tr>
 <td><code>data/</code></td>
-<td>de database (<code>omnissiah.db</code>) met al je gesprekken, projecten en instellingen, de geheugen-spiegel (<code>memory.md</code>) en het lokale embedding-model voor de kennisbank (<code>models/</code>)</td>
+<td>de database (<code>omnissiah.db</code>) met al je gesprekken, projecten en instellingen, de geheugen-spiegel (<code>memory.md</code>) en het lokale embedding-model dat je documenten doorzoekbaar maakt (<code>models/</code>)</td>
 </tr>
 <tr>
 <td><code>skills/</code></td>
@@ -177,7 +177,7 @@
 <h2 id="vers-beginnen">Vers beginnen</h2>
 <p>Sluit de app en verwijder de datamap. Dat wist al je gesprekken, projecten en instellingen; er is geen ongedaan maken. Maak eerst een kopie als je twijfelt.</p>
 <h2 id="het-embedding-model">Het embedding-model</h2>
-<p>Wanneer je het eerste document aan een kennisbank toevoegt, downloadt Omnissiah eenmalig een klein, lokaal embedding-model van ongeveer 100 MB naar <code>data/models</code>. Dat kan even duren; daarna is het gecachet, en het zit dus ook in je backup.</p>
+<p>Wanneer je het eerste document als bron toevoegt, downloadt Omnissiah eenmalig een lokaal embedding-model naar <code>data/models</code>. Dat is ongeveer 465 MB, dus het duurt even. Daarna is het gecachet, en het is meteen het grootste onderdeel van je backup: veel groter dan de database zelf.</p>
 <p>Alles blijft op je eigen machine: er gaat geen documenttekst naar buiten om doorzoekbaar te worden.</p>
 
         </article>

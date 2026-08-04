@@ -157,13 +157,17 @@
 <h2 id="wat-er-wel-naar-buiten-gaat">Wat er wél naar buiten gaat</h2>
 <p>Alleen wat jij in gang zet:</p>
 <ul>
-<li><strong>Naar je modelprovider</strong> gaat de inhoud van het gesprek, inclusief de kennisbank-fragmenten en bestandsinhoud die voor die beurt meegaan. Dat is inherent aan een cloud-model. Wil je dat niet, gebruik dan een lokaal model: dan verlaat er niets je machine.</li>
+<li><strong>Naar je modelprovider</strong> gaat de inhoud van het gesprek, inclusief de bronnen die voor die beurt meegaan: je documenten of fragmenten daaruit, de bestanden die je als bijlage meestuurde, en wat de assistent uit een gekoppelde map heeft gelezen. Dat is inherent aan een cloud-model. Wil je dat niet, gebruik dan een lokaal model: dan verlaat er niets je machine.</li>
 <li><strong>Naar de zoekmachine</strong> gaat je zoekopdracht, als je web search aan hebt staan.</li>
 <li><strong>Naar een webpagina</strong> gaat een verzoek, als de assistent een pagina voor je ophaalt.</li>
 <li><strong>Naar Hugging Face</strong> gaat een verzoek als je &quot;Modellen ontdekken&quot; gebruikt.</li>
 <li><strong>Naar GitHub</strong> gaat een verzoek als de desktop-app op updates controleert.</li>
 </ul>
-<p>Het lokale embedding-model dat de kennisbank doorzoekbaar maakt draait op je eigen machine. Er gaat geen documenttekst naar buiten om geïndexeerd te worden.</p>
+<p>Het lokale embedding-model dat je documenten doorzoekbaar maakt draait op je eigen machine. Er gaat geen documenttekst naar buiten om geïndexeerd te worden.</p>
+<h2 id="wat-binnenkomt-wordt-eerst-bekeken">Wat binnenkomt wordt eerst bekeken</h2>
+<p>Tekst die van buiten komt kan instructies bevatten die niet van jou zijn maar wel tegen het model praten. Omnissiah scant daarom alles wat van buiten je gesprek binnenkomt op zulke patronen voordat het model het ziet: documenten die je toevoegt, pagina&#39;s die de assistent ophaalt, zoekresultaten, wat een MCP-server terugstuurt, en de bestanden die je als bijlage meestuurt.</p>
+<p>Vindt de scan iets, dan zie je een markering bij die bron staan en krijgt het model het er expliciet bij te horen: dit is materiaal om te lezen, geen opdracht om uit te voeren. Een gemarkeerd document blijft uit het blok dat integraal meegaat, maar de assistent kan het nog steeds lezen als hij het nodig heeft; een gemarkeerde bijlage staat in je bericht en is daar niet uit weg te laten, dus die wordt bij naam genoemd. Je kunt een markering opnieuw laten beoordelen zonder de bron opnieuw toe te voegen.</p>
+<p>Wees ook hier eerlijk over wat het is: het herkent patronen, het begrijpt geen bedoelingen. Het is er om jou te waarschuwen en het model te wapenen, niet om je te beschermen tegen materiaal dat je zelf binnenhaalt.</p>
 <h2 id="wat-je-zelf-in-de-hand-hebt">Wat je zelf in de hand hebt</h2>
 <p>Agent-modus kan bestanden lezen en schrijven en commando&#39;s uitvoeren, maar alleen binnen een map die jij expliciet koppelt, en alleen op het niveau dat jij instelt met het goedkeuringsniveau. Er zitten vangnetten onder, zoals checkpoints vóór een schrijfactie en snapshots vóór een shell-commando.</p>
 <p>Wees eerlijk over wat dat wel en niet is: die lagen voorkomen ongelukken, ze zijn geen beveiligingsgrens. De echte grens is je besturingssysteem. Koppel dus geen map waarvan je de inhoud niet zou willen kwijtraken zonder backup, en voeg geen MCP-server toe die je niet vertrouwt. Zie <a href="gebruiken/mcp-servers.html#lokaal-stdio">MCP-servers</a>.</p>
