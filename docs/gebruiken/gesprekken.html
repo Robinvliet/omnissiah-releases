@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Modellen - Omnissiah</title>
-    <meta name="description" content="Cloud-modellen met je eigen sleutel, en lokale modellen via Ollama of LM Studio." />
+    <title>Gesprekken - Omnissiah</title>
+    <meta name="description" content="De drie modi, een antwoord bijsturen, en wat er gebeurt als een gesprek lang wordt." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -112,11 +112,11 @@
     <div class="nav-groep heeft-kop">
       <a href="index.html" class="nav-kop">Werken met Omnissiah</a>
       <ul class="nav-lijst">
-        <li><a href="gesprekken.html">Gesprekken</a></li>
+        <li><a href="gesprekken.html" aria-current="page">Gesprekken</a></li>
         <li><a href="projecten.html">Projecten</a></li>
         <li><a href="bronnen.html">Bronnen</a></li>
         <li><a href="agent-modus.html">Agent-modus</a></li>
-        <li><a href="modellen.html" aria-current="page">Modellen</a></li>
+        <li><a href="modellen.html">Modellen</a></li>
         <li><a href="mcp-servers.html">MCP-servers</a></li>
       </ul>
     </div>
@@ -147,35 +147,42 @@
       <main class="vlak" id="inhoud">
         <article class="prose">
           <p class="kruimel"><a href="index.html">Werken met Omnissiah</a></p>
-          <h1>Modellen</h1>
-          <p>Omnissiah heeft geen eigen modellen. Je koppelt er zelf een of meer aan, en die staan daarna in dezelfde modelkiezer, cloud en lokaal door elkaar.</p>
-<h2 id="cloud-modellen">Cloud-modellen</h2>
-<p>Ga naar <strong>Instellingen → Modellen</strong>, kies de provider (Google of Anthropic), plak je API-sleutel en klik op <strong>Opslaan</strong>. De sleutel wordt meteen bij de provider gecontroleerd, dus een typefout merk je op het moment dat je hem maakt.</p>
-<p>Je sleutels worden uitsluitend server-side gelezen en komen nooit in de browser. Je betaalt rechtstreeks aan de provider; wat een gesprek gekost heeft zie je terug in het statistieken-dashboard.</p>
-<h2 id="lokale-modellen">Lokale modellen</h2>
-<p>Naast de cloud kun je modellen op je eigen machine draaien: gratis, privé, zonder sleutel. Omnissiah praat met elke server die de OpenAI-compatibele API spreekt; de bekendste is <a href="https://ollama.com">Ollama</a>, en LM Studio werkt ook.</p>
-<p><strong>Verbinden.</strong> Installeer Ollama en meer is er meestal niet nodig. Draait hij op dezelfde machine, dan vindt Omnissiah hem zelf: Instellingen → Modellen toont dan &quot;Ollama gevonden op …&quot; met een knop <strong>Verbinden</strong>. Handmatig kan ook, door de base-URL in te vullen en op Verbinden te klikken.</p>
-<p><strong>Modellen binnenhalen.</strong> Klik op <strong>Modellen ontdekken</strong> (in Instellingen → Modellen, of onderin de modelkiezer). Daar zoek je in de GGUF-modellen van Hugging Face, bekijk je per model de details, parameters, contextlengte, capabilities en README, en download je een quant-variant rechtstreeks naar je lokale server, met voortgangsbalk. Het model verschijnt daarna vanzelf in de modelkiezer.</p>
-<p>Heb je liever de terminal, dan kan dat ook (<code>ollama pull llama3.1</code>); met <strong>Opnieuw testen</strong> ververs je daarna de lijst in de app.</p>
-<h3 id="welke-url">Welke URL</h3>
+          <h1>Gesprekken</h1>
+          <p>Een gesprek is de eenheid waarin je werkt. Het model, de modus, de aangezette tools en de bronnen gelden per gesprek, dus je kunt er twee naast elkaar hebben die zich totaal anders gedragen.</p>
+<h2 id="de-drie-modi">De drie modi</h2>
+<p>Boven de invoerbalk kies je <strong>Chat</strong>, <strong>Agent</strong> of <strong>Research</strong>. Ze verschillen in hoeveel stappen de assistent achter elkaar mag zetten en welke tools hij krijgt.</p>
 <ul>
-<li>Desktop-app, of de webversie via Node op dezelfde machine: <code>http://localhost:11434</code>. Wordt meestal automatisch gevonden.</li>
-<li>Webversie in Docker: <code>http://host.docker.internal:11434</code>, zodat de container de Ollama op je host bereikt. Op Linux moet je daarvoor <code>extra_hosts: [&quot;host.docker.internal:host-gateway&quot;]</code> toevoegen aan <code>docker-compose.yml</code>.</li>
+<li><strong>Chat</strong> is een gewoon gesprek en kan meelezen in een gekoppelde map. Maximaal acht stappen per beurt.</li>
+<li><strong>Agent</strong> werkt in meerdere stappen en mag als enige bestanden aanpassen. Twintig stappen. Zie <a href="agent-modus.html">Agent-modus</a>.</li>
+<li><strong>Research</strong> doet uitgebreid webonderzoek en sluit af met een rapport. Vierentwintig stappen, en de webtools staan daar altijd aan, ook als je ze had uitgezet.</li>
 </ul>
-<h3 id="goed-om-te-weten">Goed om te weten</h3>
+<p>Kan een modus niet, dan is hij niet kiesbaar en staat de reden in de tooltip: het model kent geen tools, er is geen sleutel voor web search, of het project staat op <strong>Antwoord alleen uit de bronnen</strong>.</p>
+<p>Hoe grondig het model nadenkt regel je apart, met <strong>Effort</strong> in de modelkiezer. Dat staat op <a href="modellen.html#hoe-diep-een-model-nadenkt">Modellen</a>.</p>
+<h2 id="een-antwoord-bijsturen">Een antwoord bijsturen</h2>
+<p>Beweeg over een bericht en er verschijnen drie manieren om verder te gaan:</p>
 <ul>
-<li>Grotere modellen, vanaf ongeveer 8B, werken het best met tools en agent-modus. Modellen zonder tool-ondersteuning kunnen gewoon chatten: Omnissiah laat de tools dan automatisch weg.</li>
-<li>Voor &quot;gated&quot; modellen zoals Meta Llama moet je eerst op huggingface.co akkoord gaan met de licentie.</li>
-<li>De officiële GGUF-repo&#39;s van sommige makers, bijvoorbeeld Mistral, zijn niet met Ollama compatibel. Kies dan een community-variant, zoals die van lmstudio-community of bartowski. De foutmelding in de app wijst je daar ook op.</li>
-<li>Lokale modellen kosten niets, en verschijnen in het statistieken-dashboard met € 0.</li>
-<li>Een token is alleen nodig als jouw lokale server achter authenticatie zit. Ollama heeft dat niet.</li>
+<li><strong>Bewerken</strong>, op je eigen berichten. Je past de tekst aan en kiest <strong>Opslaan en opnieuw versturen</strong>. Alles vanaf dat bericht vervalt en het gesprek loopt vanaf daar opnieuw.</li>
+<li><strong>Opnieuw met een ander model</strong>, op een antwoord. Je kiest een model uit de lijst en het gesprek gaat vanaf dan met dat model verder.</li>
+<li><strong>Forken naar nieuw gesprek</strong>, ook op een antwoord. Er ontstaat een nieuw gesprek met de geschiedenis tot en met dat bericht en dezelfde instellingen; het origineel blijft ongemoeid. Handig om een zijpad te verkennen zonder je hoofdlijn te vervuilen. Hoe die aftakkingen samenhangen zie je in de <strong>Grafiek</strong> op de gesprekkenpagina.</li>
 </ul>
-<h2 id="hoe-diep-een-model-nadenkt">Hoe diep een model nadenkt</h2>
-<p>In de modelkiezer staat een rij <strong>Effort</strong>, met de standen <strong>Off</strong>, <strong>Low</strong>, <strong>Medium</strong>, <strong>High</strong>, <strong>Extra</strong> en <strong>Max</strong>. Per model worden alleen de standen aangeboden die dat model echt kent, met een regel erbij als er iets ontbreekt, bijvoorbeeld &quot;Extra en Max bestaan niet bij Gemini&quot; of &quot;Dit model kent alleen denken aan of uit.&quot;</p>
-<p>Wissel je naar een model dat jouw huidige stand niet ondersteunt, dan valt hij zichtbaar terug op de dichtstbijzijnde stand die er wel is, met de melding erbij. Er wordt nooit stil iets anders gedaan dan wat er staat.</p>
+<h2 id="als-een-gesprek-lang-wordt">Als een gesprek lang wordt</h2>
+<p>Groeit een gesprek richting het contextvenster van je model, dan vat Omnissiah de oudste beurten voor het model samen. In de stroom verschijnt een scheidingsregel: &quot;Berichten hierboven zijn voor het model samengevat.&quot; Klik erop en je leest de samenvatting die het model in plaats daarvan krijgt.</p>
+<p>Voor jou verandert er niets: het volledige gesprek blijft gewoon staan en bewaard. Je kunt het niet met de hand afdwingen of terugdraaien; wel helemaal uitzetten, met <strong>Contextcompressie</strong> bij Instellingen → Hulptaken.</p>
+<h2 id="wat-een-beurt-kostte">Wat een beurt kostte</h2>
+<p>In de kop staat het tokengebruik en een schatting van de kosten van dit gesprek. Het ringetje ernaast toont welk deel van het contextvenster de laatste beurt werkelijk gebruikte. In agent- en research-modus staat het budget per run erachter.</p>
+<p>Klik op de tokenregel onder een antwoord voor <strong>Details van deze reactie</strong>: invoer, uitvoer, wat er uit de cache kwam, hoe lang het duurde, en onder &quot;Wat ging er mee&quot; welke bronnen wél en welke níét meegingen, met de reden erbij.</p>
+<h2 id="stoppen-wachten-en-verdergaan">Stoppen, wachten en verdergaan</h2>
+<p>Tijdens het genereren staat er een stopknop, en Escape doet hetzelfde. Een afgebroken antwoord blijft staan met de melding dat het onvolledig is. Loopt de assistent tegen zijn stappenlimiet of zijn tokenbudget aan, dan zegt hij dat en biedt hij <strong>Ga verder</strong> aan.</p>
+<p>Verstuur je iets terwijl er nog een antwoord loopt, dan hangt het af van de instelling <strong>Tijdens het genereren</strong>: <strong>Wachtrij</strong> laat je bericht wachten tot de beurt klaar is, <strong>Onderbreken</strong> kapt het lopende antwoord af en stuurt meteen bij. De wachtrij is één diep; stuur je nog iets, dan vervangt dat het wachtende bericht.</p>
+<h2 id="terugvinden-wat-je-al-besproken-hebt">Terugvinden wat je al besproken hebt</h2>
+<p>In het menu van een gesprek zitten <strong>Vastpinnen</strong>, <strong>Hernoemen</strong>, <strong>Labels</strong>, <strong>Verplaats naar project</strong>, <strong>Exporteer als Markdown</strong> of <strong>JSON</strong>, en <strong>Verwijderen</strong>. Een vastgepind gesprek blijft bovenaan in de zijbalk staan.</p>
+<p>Zoeken kan op twee plekken. De opdrachtenbalk (⌘K, of Ctrl+K) zoekt je gesprekken en voert meteen acties uit; de gesprekkenpagina heeft een eigen zoekvenster over titels en berichten. De assistent kan er zelf ook bij: de tool <strong>Gespreksgeschiedenis</strong> laat hem een ouder gesprek terugzoeken en teruglezen.</p>
+<h2 id="wat-je-per-gesprek-aanzet">Wat je per gesprek aanzet</h2>
+<p>Onder <strong>Toevoegen</strong> op de invoerbalk zit een lijst <strong>Tools</strong> met de ingebouwde tools en je MCP-servers, en een lijst <strong>Skills</strong>. Wat je daar aanvinkt geldt alleen voor dit gesprek; MCP-servers zelf beheer je via Instellingen. Actieve skills verschijnen als chips boven de invoerbalk.
+</content></p>
 
         </article>
-        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="agent-modus.html"><span class="richting">Vorige</span>Agent-modus</a><a class="volgende" href="mcp-servers.html"><span class="richting">Volgende</span>MCP-servers</a></nav>
+        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="index.html"><span class="richting">Vorige</span>Werken met Omnissiah</a><a class="volgende" href="projecten.html"><span class="richting">Volgende</span>Projecten</a></nav>
       </main>
     </div>
 

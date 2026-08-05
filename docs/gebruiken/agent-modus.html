@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MCP-servers - Omnissiah</title>
-    <meta name="description" content="Extra tools aan de assistent hangen via het Model Context Protocol." />
+    <title>Agent-modus - Omnissiah</title>
+    <meta name="description" content="Meerdere stappen achter elkaar, met een map, een terminal en goedkeuring vooraf." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -115,9 +115,9 @@
         <li><a href="gesprekken.html">Gesprekken</a></li>
         <li><a href="projecten.html">Projecten</a></li>
         <li><a href="bronnen.html">Bronnen</a></li>
-        <li><a href="agent-modus.html">Agent-modus</a></li>
+        <li><a href="agent-modus.html" aria-current="page">Agent-modus</a></li>
         <li><a href="modellen.html">Modellen</a></li>
-        <li><a href="mcp-servers.html" aria-current="page">MCP-servers</a></li>
+        <li><a href="mcp-servers.html">MCP-servers</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -147,23 +147,39 @@
       <main class="vlak" id="inhoud">
         <article class="prose">
           <p class="kruimel"><a href="index.html">Werken met Omnissiah</a></p>
-          <h1>MCP-servers</h1>
-          <p>Via <strong>Instellingen → Tools</strong> koppel je MCP-servers die het model extra tools geven, bijvoorbeeld toegang tot een bestandssysteem, git of een externe dienst. Per gesprek zet je daarna aan welke tools mee mogen.</p>
-<p>Er zijn twee smaken.</p>
-<h2 id="extern-http-of-sse">Extern (HTTP of SSE)</h2>
-<p>Een URL, optioneel met een Authorization-header. De server draait ergens anders; Omnissiah praat er alleen mee.</p>
-<h2 id="lokaal-stdio">Lokaal (stdio)</h2>
-<p>Een commando dat Omnissiah aan het begin van een beurt als proces start en daarna weer afsluit. Dit is het gangbaarste type voor persoonlijk gebruik: de officiële servers voor onder andere bestanden en git zijn stdio.</p>
-<p>Voorbeeld: commando <code>npx</code>, argumenten <code>-y @modelcontextprotocol/server-filesystem /pad/naar/map</code>. Omgevingsvariabelen, bijvoorbeeld een <code>GITHUB_PERSONAL_ACCESS_TOKEN</code>, vul je in als regels <code>NAAM=waarde</code>; die waarden blijven server-side en zijn in de app nergens terug te lezen.</p>
-<h3 id="wat-je-moet-weten-voordat-je-er-een-toevoegt">Wat je moet weten voordat je er een toevoegt</h3>
-<p><strong>Het commando draait op de machine waar Omnissiah draait, met de rechten van je eigen account.</strong> Een stdio-server registreren ís een lokaal commando configureren. Voeg alleen servers toe die je vertrouwt.</p>
-<p>Als vangnet controleert Omnissiah npx- en uvx-packages vóór het starten tegen de <a href="https://osv.dev">OSV-database</a> op bekende malware. Alleen bevestigde malware blokkeert, en de check is fail-open bij netwerkproblemen: hij is een extra paar ogen, geen slot.</p>
-<p><strong>Kale commando&#39;s worden gevonden.</strong> <code>npx</code> en vergelijkbaar werken ook als de desktop-app met een minimale PATH gestart is; Omnissiah kijkt ook in de Homebrew-, <code>/usr/local/bin</code>- en <code>~/.local/bin</code>-locaties. Werkt het toch niet, gebruik dan een absoluut pad naar het commando.</p>
-<p><strong>In de Docker-webversie draait het commando ín de container.</strong> <code>npx</code> is daar aanwezig, want de container draait op een Node-image; <code>uvx</code> en Python-servers niet.</p>
-<p><strong>Het kindproces krijgt een schone omgeving.</strong> Alleen PATH, HOME en vergelijkbare basisvariabelen plus wat jij zelf opgeeft. Je API-sleutels uit <code>.env</code> lekken er niet naartoe.</p>
+          <h1>Agent-modus</h1>
+          <p>In agent-modus zet de assistent meerdere stappen achter elkaar: plannen, een tool gebruiken, het resultaat bekijken en doorgaan tot de taak af is. Maximaal twintig stappen per beurt. Het is ook de enige modus waarin hij bestanden mag aanpassen.</p>
+<h2 id="eerst-een-map-koppelen">Eerst een map koppelen</h2>
+<p>Zonder gekoppelde map is agent-modus weinig meer dan chat. Koppelen doe je met <strong>Werk in een map</strong> in de balk onder de invoerbalk, of met <strong>Map toevoegen</strong> in het menu ernaast. Wat er daarbij te zien is voordat je bevestigt staat op <a href="bronnen.html#gekoppelde-mappen">Bronnen</a>.</p>
+<p>Pas met een map bestaan de tools <strong>Map bekijken</strong>, <strong>Bestand lezen</strong>, <strong>Bestand schrijven</strong>, <strong>Terminal</strong> en <strong>Script</strong>. Lezen mag trouwens in elke modus; schrijven, de terminal en scripts zijn voorbehouden aan agent-modus.</p>
+<p>Je kunt meerdere mappen tegelijk koppelen. Elke map heeft een naam, en in de actie-tijdlijn zie je per stap in wélke map hij gebeurde.</p>
+<p>De terminal werkt alleen op macOS en Linux. Op Windows meldt de assistent dat en valt hij terug op de bestandstools.</p>
+<h2 id="wat-er-zonder-vragen-gebeurt">Wat er zonder vragen gebeurt</h2>
+<p>In de balk onder de invoerbalk staat het goedkeuringsniveau. Er zijn vier standen, en ze gelden per gesprek:</p>
+<ul>
+<li><strong>Handmatig goedkeuren.</strong> &quot;De agent pauzeert zodat je elke actie kunt goedkeuren.&quot; Dit is de standaard.</li>
+<li><strong>Automatisch goedkeuren.</strong> &quot;De agent werkt zelfstandig door en pauzeert alleen bij iets riskants.&quot;</li>
+<li><strong>Slim goedkeuren.</strong> &quot;Een hulpmodel beoordeelt elke actie en pauzeert alleen wat het niet vertrouwt.&quot;</li>
+<li><strong>Goedkeuringen overslaan.</strong> &quot;De agent pauzeert nooit, ook niet bij riskante acties.&quot;</li>
+</ul>
+<p>Het niveau geldt voor bestanden schrijven, de terminal, scripts en tools van MCP-servers. Dingen die alleen in de app zelf landen, zoals iets in je bronnen of je geheugen zetten, vallen erbuiten.</p>
+<p>Pauzeert de assistent, dan verschijnt de voorgestelde actie voluit in de chat, met de zin dat er pas iets wordt opgeslagen na jouw goedkeuring, en twee knoppen: <strong>Goedkeuren</strong> en <strong>Afwijzen</strong>. Er is geen &quot;altijd toestaan&quot;; dat is wat de niveaus hierboven doen.</p>
+<p>Delegeert de assistent een deeltaak aan een sub-agent, dan wordt élke actie die goedkeuring nodig heeft daar automatisch geweigerd, en dat staat in de samenvatting die je terugkrijgt.</p>
+<h2 id="twee-vangnetten-die-altijd-meelopen">Twee vangnetten die altijd meelopen</h2>
+<p>Ze werken in elke stand, ook in <strong>Goedkeuringen overslaan</strong>.</p>
+<p><strong>Vóór een bestand overschreven wordt</strong> bewaart Omnissiah de oude versie. Onder die stap staat daarna <strong>Terugzetten</strong>, en na afloop: &quot;Teruggezet naar de versie van vóór deze wijziging.&quot; Er worden maximaal twintig versies per bestand bewaard, dertig dagen lang, en alleen voor bestanden tot 10 MB. Is een bestand te groot voor zo&#39;n kopie, dan pauzeert het niveau <strong>Automatisch</strong> juist wél voor het overschrijven.</p>
+<p><strong>Vóór het eerste ingrijpende commando van een beurt</strong> maakt Omnissiah een momentopname van de hele werkmap. Terugzetten vraagt om bevestiging, en die dialoog zegt precies wat er gebeurt: bestanden die ná de momentopname zijn aangemaakt blijven staan, en de huidige staat wordt eerst zelf ook vastgelegd, dus het terugzetten is zelf ook omkeerbaar.</p>
+<h2 id="wat-nooit-doorgaat">Wat nooit doorgaat</h2>
+<p>Sommige commando&#39;s worden onvoorwaardelijk geweigerd, in elke goedkeuringsstand, en er is geen instelling die dat opheft. Dat gaat om dingen als een bestandssysteem formatteren, een systeemmap of je home-map recursief verwijderen, de machine afsluiten, en schrijven aan de database of de <code>.env</code> van Omnissiah zelf. De melding zegt erbij dat de assistent het niet opnieuw moet proberen en er ook niet omheen moet werken. Wil je zoiets echt, dan draai je het zelf in je eigen terminal.</p>
+<p>Komen je API-sleutels toevallig in de uitvoer van een commando terecht, dan staat er <code>[GEMASKEERD]</code> in plaats van de waarde, en het kindproces krijgt ze sowieso niet mee.</p>
+<h2 id="wees-eerlijk-over-wat-dit-is">Wees eerlijk over wat dit is</h2>
+<p>Die vangnetten en niveaus voorkomen ongelukken; ze zijn geen beveiligingsgrens. De echte grens is je besturingssysteem. Koppel dus geen map waarvan je de inhoud niet zou willen kwijtraken zonder backup. Meer daarover staat op <a href="../privacy.html#wat-je-zelf-in-de-hand-hebt">Privacy en veiligheid</a>.</p>
+<h2 id="waar-agent-modus-niet-bestaat">Waar agent-modus niet bestaat</h2>
+<p>In een project met <strong>Antwoord alleen uit de bronnen</strong> is agent-modus niet kiesbaar, en kunnen er ook geen geplande taken draaien. De reden is dat een terminal en scripts inhoud opleveren die geen bron is, en die belofte valt dan niet meer waar te maken. Zie <a href="projecten.html#antwoord-alleen-uit-de-bronnen">Projecten</a>.
+</content></p>
 
         </article>
-        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="modellen.html"><span class="richting">Vorige</span>Modellen</a><a class="volgende" href="../zelf-hosten/index.html"><span class="richting">Volgende</span>Zelf hosten</a></nav>
+        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="bronnen.html"><span class="richting">Vorige</span>Bronnen</a><a class="volgende" href="modellen.html"><span class="richting">Volgende</span>Modellen</a></nav>
       </main>
     </div>
 

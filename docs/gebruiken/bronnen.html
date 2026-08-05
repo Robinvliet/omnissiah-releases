@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bronnen - Omnissiah</title>
+    <meta name="description" content="Documenten, mappen en bijlagen in één lijst, en wat het model daar per beurt van ziet." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Naar de inhoud</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentatie</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Wissel tussen licht en donker"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Navigatie tonen"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentatie">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">Wat is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../aan-de-slag/index.html" class="nav-kop">Aan de slag</a>
+      <ul class="nav-lijst">
+        <li><a href="../aan-de-slag/installeren.html">Installeren</a></li>
+        <li><a href="../aan-de-slag/eerste-stappen.html">Eerste stappen</a></li>
+        <li><a href="../aan-de-slag/bijwerken.html">Bijwerken</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Werken met Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="gesprekken.html">Gesprekken</a></li>
+        <li><a href="projecten.html">Projecten</a></li>
+        <li><a href="bronnen.html" aria-current="page">Bronnen</a></li>
+        <li><a href="agent-modus.html">Agent-modus</a></li>
+        <li><a href="modellen.html">Modellen</a></li>
+        <li><a href="mcp-servers.html">MCP-servers</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../zelf-hosten/index.html" class="nav-kop">Zelf hosten</a>
+      <ul class="nav-lijst">
+        <li><a href="../zelf-hosten/webversie.html">Webversie</a></li>
+        <li><a href="../zelf-hosten/configuratie.html">Configuratie</a></li>
+        <li><a href="../zelf-hosten/op-je-telefoon.html">Op je telefoon</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-en-backup.html">Data en backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../problemen-oplossen.html">Problemen oplossen</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy en veiligheid</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Werken met Omnissiah</a></p>
+          <h1>Bronnen</h1>
+          <p>Een bron is alles wat het model in een gesprek kan zien buiten je berichten om: een document dat je toevoegt, een map op je schijf die je koppelt, en een bestand dat je als bijlage meestuurt. Ze staan in één lijst, achter de knop <strong>Bronnen</strong> rechtsboven in een gesprek.</p>
+<p>Boven die lijst staat waarom hij zo is ingedeeld: &quot;Alles wat het model in dit gesprek kan zien, gegroepeerd naar hoe lang het meegaat.&quot;</p>
+<h2 id="drie-levensduren">Drie levensduren</h2>
+<p>De groepen zeggen hoe ver een bron reikt, en elke kop legt zichzelf uit:</p>
+<ul>
+<li><strong>Bij één bericht.</strong> &quot;Hangt aan het bericht waarmee je hem stuurde, en gaat vanaf dat moment elke beurt mee, ook in de begroting.&quot;</li>
+<li><strong>Dit gesprek.</strong> &quot;Alleen dit gesprek ziet deze bronnen; andere gesprekken niet.&quot;</li>
+<li><strong>Het hele project.</strong> &quot;Elk gesprek in project X ziet deze bronnen.&quot;</li>
+</ul>
+<p>Een lege groep verschijnt niet.</p>
+<h2 id="een-bron-toevoegen">Een bron toevoegen</h2>
+<p><strong>Vanuit het bronnenpaneel</strong> klik je op <strong>Toevoegen</strong>, met twee keuzes: <strong>Document</strong> of <strong>Map</strong>. Bij Document kies je daarna <strong>Tekst</strong> (plakken of typen), <strong>Bestand</strong> (PDF, Markdown of tekst) of <strong>URL</strong> (de leesbare inhoud van de pagina wordt opgeslagen).</p>
+<p><strong>Vanaf de invoerbalk</strong> doet <strong>Toevoegen</strong> iets anders. <strong>Bestand toevoegen</strong> maakt een bijlage bij dát ene bericht, en slepen op de invoerbalk doet hetzelfde. <strong>Map toevoegen</strong> koppelt een map aan het gesprek.</p>
+<p>Dat verschil telt: een bijlage hoort bij één bericht, een document bij het gesprek of het project. In het bronnenpaneel zelf kun je niets naartoe slepen.</p>
+<h2 id="wat-er-per-bron-staat">Wat er per bron staat</h2>
+<p>Onder de titel staat wat het is, wat er gebeurt als de bron aan de andere kant verandert, en wat hij ongeveer kost.</p>
+<p><strong>Als de bron verandert.</strong> Een document is een momentopname: &quot;Kopie van 5 augustus&quot;. Een map toont &quot;Altijd de actuele bestanden&quot;, want daar wordt gelezen wat er op dat moment staat. Een bijlage toont &quot;Blijft zoals je hem verstuurde&quot;: die zit in je bericht en verandert niet mee met het bestand op schijf.</p>
+<p><strong>Wat hij kost.</strong> Een schatting, bijvoorbeeld &quot;~1,2k tokens&quot;. Een afbeelding in je bronnen zegt &quot;kost niets&quot;, want die komt pas in beeld als het model hem opvraagt. Een map heeft een streepje: &quot;Een map staat niet in de context; het model leest de bestanden met tools.&quot; Rechts van elke groepskop staat het totaal.</p>
+<p><strong>Wanneer het model hem voor het laatst zag.</strong> &quot;Nog niet gebruikt&quot;, of &quot;Voor het laatst gebruikt op 5 augustus&quot;. Bij een projectbron staat er &quot;in dit project&quot; bij, want elk gesprek in dat project kan hem gelezen hebben.</p>
+<h2 id="aan-en-uit-en-waar-dat-geldt">Aan en uit, en waar dat geldt</h2>
+<p>Elk document heeft een schakelaar die bepaalt of hij meedoet zodra de assistent gaat zoeken. In een gesprek raakt die alléén dat gesprek, en het label zegt dat erbij. Staat een bron uit, dan is er een van drie dingen aan de hand:</p>
+<ul>
+<li><strong>uit</strong>, op de plek waar de bron thuishoort.</li>
+<li><strong>uit in dit gesprek</strong>, bij een projectbron die je hier hebt uitgezet. Het project blijft ongemoeid en andere gesprekken zien hem gewoon.</li>
+<li><strong>uit voor het hele project.</strong> Dan is de schakelaar vergrendeld, want vanuit een gesprek kun je hem niet aanzetten. Dat doe je op de projectpagina.</li>
+</ul>
+<p>Mappen, afbeeldingen en bijlagen hebben er geen: ze zitten niet in het doorzoekbare deel, dus er valt niets te schakelen.</p>
+<h2 id="vastzetten">Vastzetten</h2>
+<p>In het menu van een document staat <strong>Vastzetten</strong>: &quot;Gaat altijd volledig mee in de context, ook als de rest doorzoekbaar wordt.&quot; Op de regel verschijnt daarna het woord &quot;vastgezet&quot;.</p>
+<p>Waar vastzetten niets zou doen ontbreekt het menu-item, in plaats van dat het grijs wordt aangeboden. Dat geldt voor mappen en voor bronnen die je van een project erft.</p>
+<h2 id="volledig-mee-of-doorzocht">Volledig mee, of doorzocht</h2>
+<p>Past alles samen in de context, dan gaat het integraal mee: &quot;Gaat volledig mee in de context van het gesprek.&quot; Past het niet, dan wordt het doorzoekbaar: &quot;Wordt doorzocht zodra een vraag erom vraagt.&quot; Die keuze geldt voor je hele verzameling en valt elke beurt opnieuw, dus hij staat als één regel boven de lijst en niet per bron.</p>
+<p>De grens stel je in bij <strong>Instellingen → Algemeen → Standaarden</strong>, veld <strong>Bronnen volledig in context tot (tokens)</strong>, standaard 200.000. Er geldt altijd óók een grens van de helft van het contextvenster van het gekozen model, dus bij een klein model wint die.</p>
+<p>Passen je vastgezette bronnen daar samen niet meer onder, dan gaan ze tóch volledig mee en waarschuwt de regel: &quot;Maak er één los, of verhoog de grens in Instellingen.&quot; Passen ze niet in het model zelf, dan weigert de beurt vooraf en noemt de melding welke bronnen het zijn, in plaats van een onbegrijpelijke providerfout halverwege.</p>
+<h2 id="bijlagen">Bijlagen</h2>
+<p>Je stuurt maximaal vijf bijlagen per bericht mee, tot 10 MB per stuk, en alleen afbeeldingen en PDF&#39;s.</p>
+<p>Een bijlage heeft geen schakelaar, geen pin, en je kunt hem niet hernoemen of verwijderen. Hij staat in je bericht, en dat is geschiedenis: hij gáát mee, elke beurt opnieuw. In plaats van een leesstempel staat er bij welk bericht hij hoort, met een sprong ernaartoe: &quot;Bij je bericht van 5 augustus, 14:03&quot;.</p>
+<p>Blijvend maken doe je met <strong>Bewaren in dit gesprek</strong>, of in een projectgesprek <strong>Bewaren in project &quot;X&quot;</strong>. Daarna is het een gewoon document dat je kunt teruglezen, doorzoeken, hernoemen en vastzetten. Je bericht houdt zijn bijlage, en juist daarom gaat de tekst niet nóg een keer mee: op de regel staat dan &quot;ook in je bericht&quot;.</p>
+<p>Wordt een gesprek zo lang dat de oudste beurten worden samengevat, dan valt een bijlage daarbuiten en zegt de regel &quot;samengevat, telt niet meer mee&quot;. Het bericht blijft staan en de bijlage ook, maar hij reserveert geen ruimte meer.</p>
+<h2 id="gekoppelde-mappen">Gekoppelde mappen</h2>
+<p><strong>Vóór je koppelt zie je wat je koppelt.</strong> De bevestiging noemt hoeveel bestanden er in beeld komen inclusief submappen, hoeveel er wegvallen door de vaste uitsluitingen, en hoeveel mappen niet gelezen konden worden. Achter <strong>welke</strong> staan de vijf groepen die buiten blijven: afhankelijkheden en build-output, caches, versiebeheer, compileer-artefacten en systeembestanden. Die blijven gewoon op je schijf staan. Je kunt hier nog nee zeggen.</p>
+<p>Er is geen grens die het koppelen van een grote map tegenhoudt. Wel wordt bij een heel grote map het téllen afgebroken; dan staat er &quot;minstens&quot; voor de getallen en zegt de dialoog dat het een ondergrens is.</p>
+<p><strong>Je eigen materiaal blijft er juist wél in staan</strong>, ook video&#39;s, opnames en archieven: een map met interviews die leeg lijkt is erger dan een langere lijst.</p>
+<p><strong>Eén ding wordt nooit opengemaakt:</strong> bestanden met een punt aan het begin, en sleutelbestanden. Je ziet dát je <code>.env</code> er is, maar de assistent leest hem niet uit zichzelf.</p>
+<p>Klap je een map open in het paneel, dan zie je precies dezelfde selectie als de assistent, met eronder hoeveel er in de hele boom zit.</p>
+<p><strong>Een map die van schijf verdwenen is</strong> valt niet stil weg. Op de regel staat de reden, bijvoorbeeld &quot;Niet beschikbaar: deze map bestaat niet meer op deze computer&quot;, met <strong>Opnieuw koppelen</strong> in het menu. De andere redenen zijn dat de map niet gelezen mag worden, dat het pad geen map meer is, of dat hij buiten de toegestane locatie ligt. Het model krijgt diezelfde melding, zodat het niet zelfverzekerd uit een onvolledig beeld antwoordt.</p>
+<p>Is er sinds de laatste keer iets veranderd, dan staat er &quot;Er zijn sindsdien bestanden toegevoegd, verwijderd of hernoemd.&quot; Dat is precies wat gemeten wordt: over de ínhoud van een bestand doet die regel geen enkele uitspraak.</p>
+<h2 id="voordat-het-model-een-bron-ziet">Voordat het model een bron ziet</h2>
+<p>Alles wat van buiten je gesprek binnenkomt wordt eerst beoordeeld op instructies die niet van jou zijn. Wat er gescand wordt, wat een markering wel en niet betekent en wat je eraan doet staat op <a href="../privacy.html#wat-binnenkomt-wordt-eerst-bekeken">Privacy en veiligheid</a>.</p>
+<p>Werk je in een project met <strong>Antwoord alleen uit de bronnen</strong>, dan gelden er strengere regels en verwijst de assistent bij elke bewering naar de bron. Zie <a href="projecten.html#antwoord-alleen-uit-de-bronnen">Projecten</a>.
+</content></p>
+
+        </article>
+        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="projecten.html"><span class="richting">Vorige</span>Projecten</a><a class="volgende" href="agent-modus.html"><span class="richting">Volgende</span>Agent-modus</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span
+        >Omnissiah, een persoonlijke AI-workspace. Gebouwd door Robin van
+        Vliet.</span
+      >
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>
