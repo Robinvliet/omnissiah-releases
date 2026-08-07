@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Geplande taken - Omnissiah</title>
+    <meta name="description" content="Werk dat op schema draait terwijl jij er niet bij bent, in een eigen taakgesprek." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Naar de inhoud</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentatie</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Wissel tussen licht en donker"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Navigatie tonen"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentatie">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">Wat is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../aan-de-slag/index.html" class="nav-kop">Aan de slag</a>
+      <ul class="nav-lijst">
+        <li><a href="../aan-de-slag/installeren.html">Installeren</a></li>
+        <li><a href="../aan-de-slag/eerste-stappen.html">Eerste stappen</a></li>
+        <li><a href="../aan-de-slag/bijwerken.html">Bijwerken</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Werken met Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="gesprekken.html">Gesprekken</a></li>
+        <li><a href="projecten.html">Projecten</a></li>
+        <li><a href="bronnen.html">Bronnen</a></li>
+        <li><a href="agent-modus.html">Agent-modus</a></li>
+        <li><a href="modellen.html">Modellen</a></li>
+        <li><a href="mcp-servers.html">MCP-servers</a></li>
+        <li><a href="geplande-taken.html" aria-current="page">Geplande taken</a></li>
+        <li><a href="personas.html">Persona's</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="geheugen.html">Geheugen</a></li>
+        <li><a href="sneltoetsen.html">Sneltoetsen</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../zelf-hosten/index.html" class="nav-kop">Zelf hosten</a>
+      <ul class="nav-lijst">
+        <li><a href="../zelf-hosten/webversie.html">Webversie</a></li>
+        <li><a href="../zelf-hosten/configuratie.html">Configuratie</a></li>
+        <li><a href="../zelf-hosten/op-je-telefoon.html">Op je telefoon</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-en-backup.html">Data en backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../problemen-oplossen.html">Problemen oplossen</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy en veiligheid</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Werken met Omnissiah</a></p>
+          <h1>Geplande taken</h1>
+          <p>Een geplande taak is een opdracht die vanzelf draait: elke ochtend, elke werkdag, één keer volgende week. Je vindt ze via <strong>Geplande taken</strong> in de zijbalk.</p>
+<p>Een taak bestaat uit drie dingen: een naam, een schema, en de opdracht die elke run uitvoert. Die opdracht draait in een <strong>eigen taakgesprek</strong>, altijd in agent-modus. De dialoog zegt waarom dat uitmaakt: &quot;Een geplande taak draait automatisch in een eigen taakgesprek in Agent-modus. Schrijf de opdracht zelfstandig: de taak kent geen andere gesprekken.&quot;</p>
+<h2 id="een-taak-maken">Een taak maken</h2>
+<p>Klik op <strong>Nieuwe taak</strong> en vul in:</p>
+<ul>
+<li><strong>Naam.</strong> Kort, hij staat in de lijst en wordt de titel van het taakgesprek.</li>
+<li><strong>Opdracht.</strong> &quot;Elke run begint met deze opdracht als bericht in het taakgesprek.&quot; Schrijf hem dus zo dat hij op zichzelf leesbaar is, alsof je hem aan iemand geeft die verder niets weet.</li>
+<li><strong>Schema.</strong> Een keuzelijst met <strong>Dagelijks</strong>, <strong>Werkdagen</strong>, <strong>Wekelijks</strong>, <strong>Elk uur</strong>, <strong>Eenmalig</strong>, <strong>Elke X minuten</strong> en <strong>Cron-expressie</strong>, met daarnaast het veld dat erbij hoort: een tijdstip, een weekdag, een datum, een aantal minuten of de expressie zelf. Eronder staat meteen wat je gekozen hebt: &quot;Volgende run: 7 aug 09:00&quot;, of de reden waarom het schema nog niet klopt.</li>
+<li><strong>Model</strong> en <strong>Goedkeuring.</strong> Beide gelden voor het taakgesprek. Het goedkeuringsniveau werkt precies zoals in een gewoon agent-gesprek; zie <a href="agent-modus.html#wat-er-zonder-vragen-gebeurt">Agent-modus</a>.</li>
+</ul>
+<p>Tijden worden gelezen in de tijdzone van de machine waar Omnissiah draait, en dat is jouw eigen machine.</p>
+<h2 id="of-vraag-het-gewoon-in-een-gesprek">Of vraag het gewoon in een gesprek</h2>
+<p>Je kunt de assistent ook vragen iets in te plannen. Hij vertaalt je zin zelf naar een schema en doet een voorstel dat pauzeert tot jij het goedkeurt, net als bij een skill. De taak erft dan het model, het goedkeuringsniveau en het project van het gesprek waarin je het vroeg; bijstellen kan daarna in het overzicht.</p>
+<p>Deze tool heet <strong>Taken plannen</strong> in de lijst onder <strong>Toevoegen</strong> op de invoerbalk, en je kunt hem daar per gesprek uitzetten.</p>
+<h2 id="wat-je-terugziet">Wat je terugziet</h2>
+<p>Draait er een run af, dan verschijnt er een teller bij <strong>Geplande taken</strong> in de zijbalk en een melding: &quot;Geplande taak &#39;Ochtendbriefing&#39;: run gelukt&quot;, met een knop <strong>Bekijken</strong>. De teller dooft zodra je de takenpagina bezoekt.</p>
+<p>Op de pagina van één taak staan het schema, de volgende run, de laatste status en de opdracht zelf, met daaronder de lijst <strong>Runs</strong>. Bovenin staan <strong>Taakgesprek</strong> (spring naar het gesprek), <strong>Nu draaien</strong> (&quot;Run gestart - de uitkomst verschijnt in het taakgesprek&quot;), en in het menu <strong>Bewerken</strong>, <strong>Pauzeren</strong> of <strong>Hervatten</strong>, en <strong>Verwijderen</strong>.</p>
+<p>Elke run heeft een status:</p>
+<ul>
+<li><strong>gelukt</strong> - de run is afgerond.</li>
+<li><strong>mislukt</strong> - er ging iets mis; de reden staat erbij.</li>
+<li><strong>stil</strong> - de run is gedraaid en had niets te melden. Zie hieronder.</li>
+<li><strong>wacht op goedkeuring</strong> - de assistent wil iets doen waar jij eerst ja op moet zeggen. Dat doe je in het taakgesprek.</li>
+<li><strong>overgeslagen</strong> - deze run is niet gedraaid, met de reden erbij.</li>
+<li><strong>bezig</strong> - hij loopt nu.</li>
+</ul>
+<h2 id="in-het-taakgesprek">In het taakgesprek</h2>
+<p>Alle runs van een taak staan achter elkaar in hetzelfde gesprek, en dat wordt lang. Daarom toont de chat standaard alleen de laatste run, met bovenin een pager: <strong>Run 3 van 12</strong>, met het tijdstip erachter, pijltjes naar vorige en volgende, en <strong>Alles tonen</strong> als je toch de hele geschiedenis wilt zien. Klik je in de runlijst op een run, dan opent het gesprek meteen op die run.</p>
+<h2 id="wanneer-een-run-niets-zegt">Wanneer een run niets zegt</h2>
+<p>Een taak die elke ochtend het nieuws samenvat heeft niet elke ochtend nieuws. In zo&#39;n geval antwoordt de assistent met <code>[SILENT]</code>, en dan krijgt de run de status <strong>stil</strong> en blijft de melding weg. De beurt staat gewoon in het taakgesprek, dus je kunt altijd nakijken dát hij gedraaid heeft.</p>
+<p>Dat is ook wat de taak in zijn instructies meekrijgt: hij draait zonder aanwezige gebruiker, stelt geen vragen en wacht nergens op, want zijn laatste antwoord is wat jij later als uitkomst ziet.</p>
+<h2 id="als-de-app-uit-stond">Als de app uit stond</h2>
+<p>Een geplande taak heeft een draaiende app nodig. Stond je computer uit om negen uur, dan draait de ochtendbriefing alsnog zodra je Omnissiah weer opent.</p>
+<p>Opgestapelde gemiste runs vervallen wel: er wordt er één ingehaald, niet vijf. Dat is zichtbaar als een overgeslagen run met de reden erbij: &quot;Geplande run van 6 aug 09:00 gemist (server stond uit); één inhaal-run gedraaid, eerdere gemiste runs vervallen.&quot; Een eenmalige taak die nog niet gedraaid heeft, draait hoe laat het ook is.</p>
+<h2 id="wanneer-een-run-wordt-overgeslagen">Wanneer een run wordt overgeslagen</h2>
+<p>Twee situaties, en allebei zie je ze in de runlijst staan in plaats van dat ze stil gebeuren:</p>
+<ul>
+<li><strong>&quot;Het taakgesprek is op dit moment in gebruik; deze run is overgeslagen.&quot;</strong> Je bent zelf in dat gesprek aan het werk.</li>
+<li><strong>&quot;De vorige run wacht nog op een goedkeuring in het taakgesprek.&quot;</strong> Zolang die openstaat kan er geen nieuwe beurt overheen. Keur hem goed of wijs hem af, en het schema loopt vanzelf weer.</li>
+</ul>
+<p>In beide gevallen schuift de taak door naar zijn volgende moment.</p>
+<h2 id="als-er-iets-misgaat">Als er iets misgaat</h2>
+<p>Een mislukte run valt niet stil weg. In het taakgesprek verschijnt een bericht dat begint met &quot;De geplande run kon niet worden afgerond:&quot;, met de melding erachter, en in de runlijst staat dezelfde reden.</p>
+<p>Gaat het drie keer op rij mis, dan pauzeert de taak zichzelf en staat dat erbij: &quot;De taak is gepauzeerd na 3 mislukte runs op rij.&quot; Een kapotte taak hoort niet weken door te draaien. Los je de oorzaak op, dan zet je hem weer aan met <strong>Hervatten</strong>.</p>
+<h2 id="waar-geplande-taken-niet-bestaan">Waar geplande taken niet bestaan</h2>
+<p>In een project met <strong>Antwoord alleen uit de bronnen</strong> kun je geen taken aanmaken en draaien bestaande taken niet: ze werken in agent-modus, en die bestaat daar niet. Zie <a href="projecten.html#antwoord-alleen-uit-de-bronnen">Projecten</a>. Stond de taak er al voordat je die schakelaar aanzette, dan pauzeert hij zichzelf in plaats van elke keer opnieuw te falen.</p>
+<p>Een geplande run maakt zelf ook nooit nieuwe geplande taken aan. Dat is niet aan de goede wil van het model overgelaten: de tool zit er tijdens een run domweg niet in.</p>
+<p>Verwijderen tenslotte haalt de taak weg, niet je werk: &quot;Het taakgesprek met de eerdere runs blijft gewoon bestaan.&quot;</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="mcp-servers.html"><span class="richting">Vorige</span>MCP-servers</a><a class="volgende" href="personas.html"><span class="richting">Volgende</span>Persona's</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span
+        >Omnissiah, een persoonlijke AI-workspace. Gebouwd door Robin van
+        Vliet.</span
+      >
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

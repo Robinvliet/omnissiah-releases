@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MCP-servers - Omnissiah</title>
-    <meta name="description" content="Extra tools aan de assistent hangen via het Model Context Protocol." />
+    <meta name="description" content="Extra tools aan de assistent hangen via het Model Context Protocol, en per gesprek bepalen welke mee mogen." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -118,6 +118,11 @@
         <li><a href="agent-modus.html">Agent-modus</a></li>
         <li><a href="modellen.html">Modellen</a></li>
         <li><a href="mcp-servers.html" aria-current="page">MCP-servers</a></li>
+        <li><a href="geplande-taken.html">Geplande taken</a></li>
+        <li><a href="personas.html">Persona's</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="geheugen.html">Geheugen</a></li>
+        <li><a href="sneltoetsen.html">Sneltoetsen</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -161,9 +166,24 @@
 <p><strong>Kale commando&#39;s worden gevonden.</strong> <code>npx</code> en vergelijkbaar werken ook als de desktop-app met een minimale PATH gestart is; Omnissiah kijkt ook in de Homebrew-, <code>/usr/local/bin</code>- en <code>~/.local/bin</code>-locaties. Werkt het toch niet, gebruik dan een absoluut pad naar het commando.</p>
 <p><strong>In de Docker-webversie draait het commando ín de container.</strong> <code>npx</code> is daar aanwezig, want de container draait op een Node-image; <code>uvx</code> en Python-servers niet.</p>
 <p><strong>Het kindproces krijgt een schone omgeving.</strong> Alleen PATH, HOME en vergelijkbare basisvariabelen plus wat jij zelf opgeeft. Je API-sleutels uit <code>.env</code> lekken er niet naartoe.</p>
+<h2 id="toevoegen-is-meteen-een-test">Toevoegen is meteen een test</h2>
+<p>De knop heet niet voor niets <strong>Toevoegen (test verbinding)</strong>. Omnissiah maakt eerst verbinding en haalt de toollijst op; lukt dat niet, dan krijg je de reden te zien en wordt er niets opgeslagen. Je hebt dus nooit een server in je lijst waarvan pas midden in een gesprek blijkt dat hij niet werkt.</p>
+<p>In de lijst staat per server wat je hebt ingevuld: de URL of het commando met zijn argumenten, en of er een auth-header of omgevingsvariabelen bij horen. De waarden zelf staan er niet; die zijn na het opslaan niet meer terug te lezen.</p>
+<h2 id="per-gesprek-aanzetten">Per gesprek aanzetten</h2>
+<p>Een gekoppelde server doet nog niets uit zichzelf. Klik in een gesprek op <strong>Toevoegen</strong> op de invoerbalk en open de lijst <strong>Tools</strong>: daar staan de ingebouwde tools en onder elke MCP-server zijn eigen tools, stuk voor stuk aan of uit te zetten. Onderaan staat waar die keuze geldt: &quot;Geldt alleen voor dit gesprek. MCP-servers beheer je via Instellingen.&quot;</p>
+<p>Standaard staat alles aan. Uitzetten is nuttig als een server veel tools meebrengt: elke beschikbare tool kost ruimte in de prompt, en een kleiner model raakt eerder de weg kwijt in een lange lijst.</p>
+<h2 id="wat-je-in-een-gesprek-ziet">Wat je in een gesprek ziet</h2>
+<p>Roept de assistent een tool van een server aan, dan verschijnt die stap in de actie-tijdlijn met de naam van de tool en een klein label met de servernaam ernaast, zodat je ziet waar hij vandaan komt. Achter de schermen dragen ze een langere naam, <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>, zodat twee servers met een tool die hetzelfde heet elkaar niet in de weg zitten.</p>
+<p>Een aanroep die na vijf minuten nog geen antwoord heeft gegeven wordt afgebroken, met de melding dat de server binnen die tijd niets terugstuurde. Zonder die grens zou één trage server je hele beurt laten hangen.</p>
+<h2 id="goedkeuring">Goedkeuring</h2>
+<p>In <strong>agent-modus</strong> vallen tools van MCP-servers onder het goedkeuringsniveau van dat gesprek, net als bestanden schrijven en de terminal. Zie <a href="agent-modus.html#wat-er-zonder-vragen-gebeurt">Agent-modus</a>.</p>
+<p>Eén verschil is de moeite waard: in de stand <strong>Automatisch goedkeuren</strong> gaat een MCP-tool alleen zonder vragen door als de server hem zélf als alleen-lezen aanmerkt. Al het andere pauzeert. Dat is expres voorzichtig, want die aanmerking komt van de server en die heb je niet zelf geschreven.</p>
+<p>In chat- en research-modus is er geen goedkeuringsstap: daar draaien MCP-tools zonder te vragen. Dat is nog een reden om alleen servers toe te voegen die je vertrouwt.</p>
+<h2 id="als-een-server-het-niet-doet">Als een server het niet doet</h2>
+<p>Een server die aan het begin van een beurt niet wil verbinden wordt overgeslagen. De beurt gaat gewoon door, met de tools van de servers die het wél doen - maar je ziet dat niet in de chat. Merk je dat de assistent een tool niet gebruikt die je verwacht had, controleer dan of de server nog draait; de reden staat in de serverlogboeken. Wat de assistent van andere servers wél kreeg blijft daar los van staan.</p>
 
         </article>
-        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="modellen.html"><span class="richting">Vorige</span>Modellen</a><a class="volgende" href="../zelf-hosten/index.html"><span class="richting">Volgende</span>Zelf hosten</a></nav>
+        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="modellen.html"><span class="richting">Vorige</span>Modellen</a><a class="volgende" href="geplande-taken.html"><span class="richting">Volgende</span>Geplande taken</a></nav>
       </main>
     </div>
 

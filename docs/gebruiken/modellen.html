@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Modellen - Omnissiah</title>
-    <meta name="description" content="Cloud-modellen met je eigen sleutel, en lokale modellen via Ollama of LM Studio." />
+    <meta name="description" content="Cloud-modellen met je eigen sleutel, lokale modellen via Ollama of LM Studio, en hoe je ertussen kiest." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -118,6 +118,11 @@
         <li><a href="agent-modus.html">Agent-modus</a></li>
         <li><a href="modellen.html" aria-current="page">Modellen</a></li>
         <li><a href="mcp-servers.html">MCP-servers</a></li>
+        <li><a href="geplande-taken.html">Geplande taken</a></li>
+        <li><a href="personas.html">Persona's</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="geheugen.html">Geheugen</a></li>
+        <li><a href="sneltoetsen.html">Sneltoetsen</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -162,17 +167,44 @@
 <li>Desktop-app, of de webversie via Node op dezelfde machine: <code>http://localhost:11434</code>. Wordt meestal automatisch gevonden.</li>
 <li>Webversie in Docker: <code>http://host.docker.internal:11434</code>, zodat de container de Ollama op je host bereikt. Op Linux moet je daarvoor <code>extra_hosts: [&quot;host.docker.internal:host-gateway&quot;]</code> toevoegen aan <code>docker-compose.yml</code>.</li>
 </ul>
+<h3 id="past-dit-model-op-mijn-machine">Past dit model op mijn machine</h3>
+<p>Bij elke quant-variant in <strong>Modellen ontdekken</strong> staat een inschatting, op basis van het geheugen dat je bij Instellingen → Modellen hebt opgegeven:</p>
+<ul>
+<li><strong>Volledige GPU-offload mogelijk</strong> - past naar schatting helemaal in je GPU-geheugen, de snelste manier om te draaien.</li>
+<li><strong>Gedeeltelijke GPU-offload mogelijk</strong> - past deels; de rest draait op de CPU. Werkt vaak prima, maar is merkbaar trager.</li>
+<li><strong>Waarschijnlijk te groot</strong> - groter dan het geheugen van je machine. Laden kan mislukken of het model wordt erg traag.</li>
+</ul>
+<p>Het blijft een schatting op basis van bestandsgrootte en geheugen; de architectuur en de contextlengte van het model kunnen het beeld veranderen. Varianten die je al hebt staan als geïnstalleerd gemarkeerd, en verwijderen kan vanuit hetzelfde scherm.</p>
+<p>Twee dingen kunnen niet. Modellen met een licentie waarmee je eerst akkoord moet gaan (&quot;gated&quot;, zoals Meta Llama) haal je pas op nadat je dat op huggingface.co gedaan hebt. En varianten die uit meerdere bestanden bestaan (sharded GGUF) kan Ollama nog niet downloaden; kies dan een andere variant.</p>
 <h3 id="goed-om-te-weten">Goed om te weten</h3>
 <ul>
 <li>Grotere modellen, vanaf ongeveer 8B, werken het best met tools en agent-modus. Modellen zonder tool-ondersteuning kunnen gewoon chatten: Omnissiah laat de tools dan automatisch weg.</li>
-<li>Voor &quot;gated&quot; modellen zoals Meta Llama moet je eerst op huggingface.co akkoord gaan met de licentie.</li>
 <li>De officiële GGUF-repo&#39;s van sommige makers, bijvoorbeeld Mistral, zijn niet met Ollama compatibel. Kies dan een community-variant, zoals die van lmstudio-community of bartowski. De foutmelding in de app wijst je daar ook op.</li>
 <li>Lokale modellen kosten niets, en verschijnen in het statistieken-dashboard met € 0.</li>
 <li>Een token is alleen nodig als jouw lokale server achter authenticatie zit. Ollama heeft dat niet.</li>
 </ul>
+<h2 id="de-modelkiezer">De modelkiezer</h2>
+<p>Het model geldt <strong>per gesprek</strong>, en een nieuw gesprek begint met het model dat je het laatst koos. Er is geen instelling &quot;standaardmodel&quot;: die zou naar een provider kunnen wijzen waarvoor geen sleutel (meer) is.</p>
+<p>De kiezer heeft bovenin een zoekveld dat op naam, maker, quant-variant en model-id zoekt, en daaronder een filter <strong>Alle</strong> / <strong>Lokaal</strong>. Providers zonder sleutel of zonder verbinding staan er niet in: een model dat je toch niet kunt kiezen is ruis.</p>
+<p>Beweeg je over een model, dan verschijnt er een paneel met de details. Bij een cloud-model: provider, contextvenster, maximale uitvoer, de prijs per miljoen tokens in en uit, wanneer het uitgebracht is, en wat het kan (Extended thinking, Vision, PDF-invoer, Structured output, Code-uitvoering, Citaties). Bij een lokaal model: familie, parameters, quantisatie, contextlengte, grootte op schijf, en &quot;Prijs: gratis (eigen machine)&quot;. Weet je lokale server geen metadata te leveren, dan staat er eerlijk &quot;specificaties onbekend&quot; in plaats van een verzonnen getal.</p>
+<p><strong>Midden in een gesprek wisselen mag</strong> en het gesprek loopt gewoon door met het nieuwe model. Er staat wel een prijskaartje bij, en de kiezer noemt het: &quot;Van model wisselen maakt de prompt-cache ongeldig: de volgende beurt rekent ~12,4k tokens weer vol door.&quot; Een ander model is een andere cache, bij elke provider. Aan het begin van een gesprek valt er niets ongeldig te maken en blijft die regel weg.</p>
 <h2 id="hoe-diep-een-model-nadenkt">Hoe diep een model nadenkt</h2>
 <p>In de modelkiezer staat een rij <strong>Effort</strong>, met de standen <strong>Off</strong>, <strong>Low</strong>, <strong>Medium</strong>, <strong>High</strong>, <strong>Extra</strong> en <strong>Max</strong>. Per model worden alleen de standen aangeboden die dat model echt kent, met een regel erbij als er iets ontbreekt, bijvoorbeeld &quot;Extra en Max bestaan niet bij Gemini&quot; of &quot;Dit model kent alleen denken aan of uit.&quot;</p>
 <p>Wissel je naar een model dat jouw huidige stand niet ondersteunt, dan valt hij zichtbaar terug op de dichtstbijzijnde stand die er wel is, met de melding erbij. Er wordt nooit stil iets anders gedaan dan wat er staat.</p>
+<p>Ook een ander effort-niveau maakt de cache ongeldig, en ook daar staat het bedrag bij.</p>
+<h2 id="wat-het-kost">Wat het kost</h2>
+<p>In de kop van een gesprek staan het tokengebruik en een schatting van de kosten, gebaseerd op de prijstabel in de app. Wat één beurt precies kostte, en wat er wel en niet meeging, staat onder het antwoord zelf; zie <a href="gesprekken.html#wat-een-beurt-kostte">Gesprekken</a>.</p>
+<p>Over je hele gebruik heen kijk je in <strong>Statistieken</strong> in de zijbalk: activiteit, tokengebruik over tijd, verbruik per model, en hoe vaak je skills, persona&#39;s en bronnen zijn ingezet.</p>
+<h2 id="hulpmodellen-voor-randklussen">Hulpmodellen voor randklussen</h2>
+<p>Niet alles hoeft door je hoofdmodel te worden gedaan. Een titel verzinnen, een lang gesprek samenvatten of een voorstel beoordelen zijn randklussen, en die draaien standaard op een goedkoop model van dezelfde provider. Bij Instellingen → Algemeen → Hulptaken zet je per taak een ander model:</p>
+<ul>
+<li><strong>Titelgeneratie</strong> - de titel van een nieuw gesprek.</li>
+<li><strong>Skills-review</strong> - kijkt na een beurt of er een herbruikbare les in zat. Zie <a href="skills.html#skills-die-vanzelf-ontstaan">Skills</a>.</li>
+<li><strong>Sub-agents</strong> - deeltaken die de assistent uitbesteedt.</li>
+<li><strong>Contextcompressie</strong> - vat de oudste beurten van een lang gesprek samen. Zie <a href="gesprekken.html#als-een-gesprek-lang-wordt">Gesprekken</a>.</li>
+<li><strong>Slimme goedkeuring</strong> - beoordeelt agent-acties in de stand &quot;Slim goedkeuren&quot;. Zie <a href="agent-modus.html#wat-er-zonder-vragen-gebeurt">Agent-modus</a>.</li>
+</ul>
+<p><strong>Automatisch</strong> betekent bij vier van de vijf het goedkope model van de provider van je gesprek; bij sub-agents betekent het het model van het gesprek zelf, want dat is echt werk en geen randklus. Draai je lokaal, dan is &quot;automatisch&quot; gewoon je eigen model: er is geen apart lokaal hulpmodel, en lokaal is toch gratis.</p>
 
         </article>
         <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="agent-modus.html"><span class="richting">Vorige</span>Agent-modus</a><a class="volgende" href="mcp-servers.html"><span class="richting">Volgende</span>MCP-servers</a></nav>

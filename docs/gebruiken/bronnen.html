@@ -118,6 +118,11 @@
         <li><a href="agent-modus.html">Agent-modus</a></li>
         <li><a href="modellen.html">Modellen</a></li>
         <li><a href="mcp-servers.html">MCP-servers</a></li>
+        <li><a href="geplande-taken.html">Geplande taken</a></li>
+        <li><a href="personas.html">Persona's</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="geheugen.html">Geheugen</a></li>
+        <li><a href="sneltoetsen.html">Sneltoetsen</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -161,9 +166,11 @@
 <h2 id="een-bron-toevoegen">Een bron toevoegen</h2>
 <p><strong>Vanuit het bronnenpaneel</strong> klik je op <strong>Toevoegen</strong>, met twee keuzes: <strong>Document</strong> of <strong>Map</strong>. Bij Document kies je daarna <strong>Tekst</strong> (plakken of typen), <strong>Bestand</strong> (PDF, Markdown of tekst) of <strong>URL</strong> (de leesbare inhoud van de pagina wordt opgeslagen).</p>
 <p><strong>Vanaf de invoerbalk</strong> doet <strong>Toevoegen</strong> iets anders. <strong>Bestand toevoegen</strong> maakt een bijlage bij dát ene bericht, en slepen op de invoerbalk doet hetzelfde. <strong>Map toevoegen</strong> koppelt een map aan het gesprek.</p>
+<p><img src="../afbeeldingen/bronnen-twee-toevoegen-menus.png" alt="Boven het menu achter Toevoegen in het bronnenpaneel, met Document en Map. Onder het plus-menu op de invoerbalk, met Bestand toevoegen, Prompt invoegen, Map toevoegen, Skills en Tools." loading="lazy" decoding="async" /></p>
 <p>Dat verschil telt: een bijlage hoort bij één bericht, een document bij het gesprek of het project. In het bronnenpaneel zelf kun je niets naartoe slepen.</p>
 <h2 id="wat-er-per-bron-staat">Wat er per bron staat</h2>
 <p>Onder de titel staat wat het is, wat er gebeurt als de bron aan de andere kant verandert, en wat hij ongeveer kost.</p>
+<p><img src="../afbeeldingen/bronnen-regel-per-bron.png" alt="Eén regel in het bronnenpaneel: een speld en de titel, daaronder &quot;vastgezet · Tekst · Kopie van 6 augustus · ~75 tokens&quot; en &quot;Nog niet gebruikt&quot;, met rechts de schakelaar en het menu." loading="lazy" decoding="async" /></p>
 <p><strong>Als de bron verandert.</strong> Een document is een momentopname: &quot;Kopie van 5 augustus&quot;. Een map toont &quot;Altijd de actuele bestanden&quot;, want daar wordt gelezen wat er op dat moment staat. Een bijlage toont &quot;Blijft zoals je hem verstuurde&quot;: die zit in je bericht en verandert niet mee met het bestand op schijf.</p>
 <p><strong>Wat hij kost.</strong> Een schatting, bijvoorbeeld &quot;~1,2k tokens&quot;. Een afbeelding in je bronnen zegt &quot;kost niets&quot;, want die komt pas in beeld als het model hem opvraagt. Een map heeft een streepje: &quot;Een map staat niet in de context; het model leest de bestanden met tools.&quot; Rechts van elke groepskop staat het totaal.</p>
 <p><strong>Wanneer het model hem voor het laatst zag.</strong> &quot;Nog niet gebruikt&quot;, of &quot;Voor het laatst gebruikt op 5 augustus&quot;. Bij een projectbron staat er &quot;in dit project&quot; bij, want elk gesprek in dat project kan hem gelezen hebben.</p>
@@ -174,6 +181,7 @@
 <li><strong>uit in dit gesprek</strong>, bij een projectbron die je hier hebt uitgezet. Het project blijft ongemoeid en andere gesprekken zien hem gewoon.</li>
 <li><strong>uit voor het hele project.</strong> Dan is de schakelaar vergrendeld, want vanuit een gesprek kun je hem niet aanzetten. Dat doe je op de projectpagina.</li>
 </ul>
+<p><img src="../afbeeldingen/bronnen-schakelaarstanden.png" alt="De bronnenlijst met de groepen &quot;Dit gesprek&quot; en &quot;Het hele project&quot;. Van boven naar beneden een map zonder schakelaar, een bron die uit staat, een vastgezette bron die aan staat, een bron die uit staat voor het hele project, en een projectbron die uit staat in dit gesprek." loading="lazy" decoding="async" /></p>
 <p>Mappen, afbeeldingen en bijlagen hebben er geen: ze zitten niet in het doorzoekbare deel, dus er valt niets te schakelen.</p>
 <h2 id="vastzetten">Vastzetten</h2>
 <p>In het menu van een document staat <strong>Vastzetten</strong>: &quot;Gaat altijd volledig mee in de context, ook als de rest doorzoekbaar wordt.&quot; Op de regel verschijnt daarna het woord &quot;vastgezet&quot;.</p>
@@ -189,6 +197,7 @@
 <p>Wordt een gesprek zo lang dat de oudste beurten worden samengevat, dan valt een bijlage daarbuiten en zegt de regel &quot;samengevat, telt niet meer mee&quot;. Het bericht blijft staan en de bijlage ook, maar hij reserveert geen ruimte meer.</p>
 <h2 id="gekoppelde-mappen">Gekoppelde mappen</h2>
 <p><strong>Vóór je koppelt zie je wat je koppelt.</strong> De bevestiging noemt hoeveel bestanden er in beeld komen inclusief submappen, hoeveel er wegvallen door de vaste uitsluitingen, en hoeveel mappen niet gelezen konden worden. Achter <strong>welke</strong> staan de vijf groepen die buiten blijven: afhankelijkheden en build-output, caches, versiebeheer, compileer-artefacten en systeembestanden. Die blijven gewoon op je schijf staan. Je kunt hier nog nee zeggen.</p>
+<p><img src="../afbeeldingen/bronnen-map-koppelen.png" alt="De bevestiging vóór het koppelen: de mapnaam, het volledige pad, &quot;20 bestanden komen in beeld, inclusief submappen&quot;, &quot;28 bestanden vallen weg door de vaste uitsluitingen (welke)&quot;, en de knoppen Annuleren en Koppelen." loading="lazy" decoding="async" /></p>
 <p>Er is geen grens die het koppelen van een grote map tegenhoudt. Wel wordt bij een heel grote map het téllen afgebroken; dan staat er &quot;minstens&quot; voor de getallen en zegt de dialoog dat het een ondergrens is.</p>
 <p><strong>Je eigen materiaal blijft er juist wél in staan</strong>, ook video&#39;s, opnames en archieven: een map met interviews die leeg lijkt is erger dan een langere lijst.</p>
 <p><strong>Eén ding wordt nooit opengemaakt:</strong> bestanden met een punt aan het begin, en sleutelbestanden. Je ziet dát je <code>.env</code> er is, maar de assistent leest hem niet uit zichzelf.</p>
@@ -197,8 +206,7 @@
 <p>Is er sinds de laatste keer iets veranderd, dan staat er &quot;Er zijn sindsdien bestanden toegevoegd, verwijderd of hernoemd.&quot; Dat is precies wat gemeten wordt: over de ínhoud van een bestand doet die regel geen enkele uitspraak.</p>
 <h2 id="voordat-het-model-een-bron-ziet">Voordat het model een bron ziet</h2>
 <p>Alles wat van buiten je gesprek binnenkomt wordt eerst beoordeeld op instructies die niet van jou zijn. Wat er gescand wordt, wat een markering wel en niet betekent en wat je eraan doet staat op <a href="../privacy.html#wat-binnenkomt-wordt-eerst-bekeken">Privacy en veiligheid</a>.</p>
-<p>Werk je in een project met <strong>Antwoord alleen uit de bronnen</strong>, dan gelden er strengere regels en verwijst de assistent bij elke bewering naar de bron. Zie <a href="projecten.html#antwoord-alleen-uit-de-bronnen">Projecten</a>.
-</content></p>
+<p>Werk je in een project met <strong>Antwoord alleen uit de bronnen</strong>, dan gelden er strengere regels en verwijst de assistent bij elke bewering naar de bron. Zie <a href="projecten.html#antwoord-alleen-uit-de-bronnen">Projecten</a>.</p>
 
         </article>
         <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="projecten.html"><span class="richting">Vorige</span>Projecten</a><a class="volgende" href="agent-modus.html"><span class="richting">Volgende</span>Agent-modus</a></nav>

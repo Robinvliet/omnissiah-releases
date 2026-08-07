@@ -637,9 +637,41 @@ a.nav-kop[aria-current="page"] {
   border-bottom: 0;
 }
 
+/* Toetskapjes in de sneltoetsen-tabel, zelfde vorm als de chips in
+   Instellingen → Sneltoetsen: de eigen letterfamilie (geen mono - het zijn
+   toetsen, geen code) op het muted-vlak met een hairline eromheen. Meerdere
+   chips staan tegen elkaar aan, dus een klein tussenruimtetje. */
+.prose kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.55em;
+  padding: 0.1em 0.4em;
+  margin-right: 0.15em;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 0.8em;
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.prose kbd:last-child {
+  margin-right: 0;
+}
+
+/* Schermafdrukken zijn er in één versie, en die is donker (besluit eigenaar
+   6-8-2026). Op een lichte pagina zou zo'n blok als een gat lezen, dus krijgt
+   hij dezelfde hairline als de code- en tabelvlakken - geen nieuwe vormgeving,
+   dezelfde tokens. */
 .prose img {
+  display: block;
   max-width: 100%;
   height: auto;
+  margin-bottom: 1.1rem;
+  border: 1px solid var(--border);
   border-radius: var(--radius-xl);
 }
 

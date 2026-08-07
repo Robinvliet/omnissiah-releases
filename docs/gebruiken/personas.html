@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Projecten - Omnissiah</title>
-    <meta name="description" content="Gesprekken groeperen rond één onderwerp, met gedeelde instructies en gedeelde bronnen." />
+    <title>Persona's - Omnissiah</title>
+    <meta name="description" content="De assistent een vaste rol en toon geven, alleen of in een groep die samen of los antwoordt." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -113,13 +113,13 @@
       <a href="index.html" class="nav-kop">Werken met Omnissiah</a>
       <ul class="nav-lijst">
         <li><a href="gesprekken.html">Gesprekken</a></li>
-        <li><a href="projecten.html" aria-current="page">Projecten</a></li>
+        <li><a href="projecten.html">Projecten</a></li>
         <li><a href="bronnen.html">Bronnen</a></li>
         <li><a href="agent-modus.html">Agent-modus</a></li>
         <li><a href="modellen.html">Modellen</a></li>
         <li><a href="mcp-servers.html">MCP-servers</a></li>
         <li><a href="geplande-taken.html">Geplande taken</a></li>
-        <li><a href="personas.html">Persona's</a></li>
+        <li><a href="personas.html" aria-current="page">Persona's</a></li>
         <li><a href="skills.html">Skills</a></li>
         <li><a href="geheugen.html">Geheugen</a></li>
         <li><a href="sneltoetsen.html">Sneltoetsen</a></li>
@@ -152,44 +152,37 @@
       <main class="vlak" id="inhoud">
         <article class="prose">
           <p class="kruimel"><a href="index.html">Werken met Omnissiah</a></p>
-          <h1>Projecten</h1>
-          <p>Een project bundelt gesprekken rond één onderwerp. Wat je op projectniveau instelt geldt voor elk gesprek erin: je instructies, je bronnen en een eventueel gekoppelde map. Je maakt er een via <strong>Projecten</strong> in de zijbalk en dan <strong>Nieuw project</strong>; je hebt alleen een naam nodig.</p>
-<p>Op de projectpagina start je gesprekken met de invoerbalk bovenin. Rechts staat de kolom <strong>Over dit project</strong>, met alles wat het project deelt.</p>
-<h2 id="instructies">Instructies</h2>
-<p>Onder <strong>Instructies</strong> zet je wat in elk gesprek in dit project moet gelden: een rol, een toon, vaste richtlijnen. Maximaal 8.000 tekens.</p>
-<p>Let op de volgorde bij tegenspraak, want die is andersom dan je zou verwachten. De dialoog zegt het zelf: &quot;Gelden voor elk gesprek in dit project; het gesprek zelf (persona of system prompt) wint bij tegenspraak.&quot; Je projectinstructies zijn de brede laag; een actieve persona is de specifiekere en wint.</p>
-<h2 id="bronnen-van-een-project">Bronnen van een project</h2>
-<p>Onder <strong>Bronnen</strong> staat wat elk gesprek in dit project kan zien: documenten en gekoppelde mappen. Er is geen aparte werkmap-sectie; een map is gewoon een bron.</p>
-<p>In een gesprek verschijnen ze in de groep <strong>Het hele project</strong>. Je kunt ze daar bekijken en per gesprek uitzetten, maar hernoemen en verwijderen doe je op de projectpagina: dáár horen ze thuis. Andersom til je een bron uit een gesprek omhoog met <strong>Naar het project verplaatsen</strong>. Hoe die lijst werkt staat op <a href="bronnen.html">Bronnen</a>.</p>
-<h2 id="gesprekken-in-en-uit-een-project">Gesprekken in en uit een project</h2>
-<p>Een gesprek dat je op de projectpagina start hoort er meteen bij. Een bestaand gesprek sleep je in de zijbalk naar het project, of je kiest <strong>Verplaats naar project</strong> in het menu van dat gesprek. Eruit halen doe je met <strong>Uit project halen</strong>.</p>
-<p>Er komt geen bevestiging, dus weet wat het doet: bij loskoppelen of verplaatsen vervalt álle projectcontext. De instructies gelden niet meer, de projectbronnen en de projectmap zijn weg, en de uitzonderingen die je in dat gesprek op projectbronnen had gemaakt verdwijnen mee. Het gesprek en zijn berichten blijven volledig staan.</p>
-<p>Een héél project verwijderen vraagt wél om bevestiging, en die vertelt per geval wat er gebeurt met de gesprekken, de werkmap en de documenten.</p>
-<h2 id="antwoord-alleen-uit-de-bronnen">Antwoord alleen uit de bronnen</h2>
-<p>Boven de bronnenlijst staat een schakelaar met die naam. Zet je hem aan, dan gedraagt élk gesprek in dit project zich anders. De onderregel zegt wat hij belooft:</p>
-<blockquote>
-<p>De assistent gebruikt alleen wat in dit project staat en zegt het als het antwoord er niet in staat. Geen webzoekopdrachten, geen MCP-servers, geen Agent- of Research-modus en geen geplande taken.</p>
-</blockquote>
-<p>Daar komt bij dat de assistent niet meer in je andere gesprekken kan zoeken en zijn geheugen niet kan terugvragen. Agent en Research zijn niet kiesbaar; staat een gesprek al in een van die modi, dan valt het zichtbaar terug naar Chat met de reden erbij.</p>
-<p><strong>Wat de instelling niet belooft</strong> staat er letterlijk bij zodra je hem aanzet:</p>
-<blockquote>
-<p>Wat het model uit zijn training weet, gaat hier niet van uit; net zomin als je projectinstructies, je persona, wat er over je onthouden is en je actieve skills. Die staan gewoon in de prompt. Wat het contract wél doet is elke weg afsluiten waarlangs de assistent er tijdens het antwoorden iets bíj haalt.</p>
-</blockquote>
-<p><strong>Bij een gekoppelde map is de belofte kleiner</strong>, en het bronnenpaneel zegt dat erbij: &quot;Bij een gekoppelde map geldt de belofte voor wat er gelezen is, niet voor alles wat erin staat.&quot;</p>
-<h3 id="waar-het-antwoord-vandaan-komt">Waar het antwoord vandaan komt</h3>
-<p>De assistent verwijst bij elke bewering naar zijn bron, en die verwijzingen zijn klikbaar: een document opent op de passage zelf, een bijlage springt naar het bericht waarin je hem stuurde, een map opent het bronnenpaneel. Staat het antwoord niet in je bronnen, dan zégt hij dat, met twee uitwegen erbij: voeg een bron toe, of zet de instelling uit.</p>
-<p>Onder het bericht staat wat er van dat contract terechtkwam. Er zijn drie labels, en een antwoord dat volledig uit je bronnen komt draagt er bewust géén:</p>
+          <h1>Persona's</h1>
+          <p>Een persona is een naam plus een system prompt: een beschrijving van hoe de assistent zich in dit gesprek gedraagt. Zet je er een aan, dan <strong>vervangt</strong> die de standaardinstructies van Omnissiah, hij komt er niet bovenop.</p>
+<p>Ze wonen achter <strong>Prompts</strong> in de zijbalk, samen met je opgeslagen prompts. Die dialoog heeft drie tabbladen: <strong>Prompts</strong>, <strong>Persona&#39;s</strong> en <strong>Persona-groepen</strong>.</p>
+<h2 id="er-een-maken">Er een maken</h2>
+<p>Op het tabblad <strong>Persona&#39;s</strong> klik je op <strong>Nieuwe persona</strong>. Je vult twee velden in:</p>
 <ul>
-<li><strong>deels uit je bronnen.</strong> Een deel komt uit je bronnen; voor de rest gaf de assistent aan dat het er niet in staat.</li>
-<li><strong>niet in je bronnen.</strong> Je bronnen dekken het antwoord niet. Dit is het enige label waar de app zelf een handeling bij noemt: voeg een bron toe, of zet de instelling uit.</li>
-<li><strong>niet verankerd</strong>, in waarschuwingskleur. Het antwoord verwijst niet naar een bron, of verwijst naar iets dat er niet in zit. De app zegt er één ding bij: lees het met extra aandacht.</li>
+<li><strong>Naam</strong>, bijvoorbeeld &quot;Kritische redacteur&quot;.</li>
+<li><strong>System prompt</strong>: &quot;Beschrijf hoe deze persona zich gedraagt…&quot;</li>
 </ul>
-<p>Dat laatste label valt ook op een antwoord dat helemaal geen bewering doet, zoals een wedervraag. Dan is er niets mis; er valt alleen niets te verwijzen.</p>
-<h2 id="de-instelling-weer-uitzetten">De instelling weer uitzetten</h2>
-<p>Dezelfde schakelaar, en er blijft niets achter: de webtools en MCP-servers doen het weer, Agent en Research zijn weer kiesbaar, en geplande taken kunnen weer draaien. Antwoorden die je al hebt gekregen houden hun label, want dat gaat over de beurt waarin ze gegeven zijn.</p>
+<p>Vanuit de zijbalk start elke rij een <strong>Nieuwe chat</strong> met die persona erop. In het menu ernaast staan <strong>Bewerken</strong> en <strong>Verwijderen</strong>.</p>
+<h2 id="er-een-aanzetten-in-een-lopend-gesprek">Er een aanzetten in een lopend gesprek</h2>
+<p>Klik op <strong>Toevoegen</strong> op de invoerbalk en kies <strong>Prompt invoegen</strong>. Dat opent dezelfde dialoog; ga naar <strong>Persona&#39;s</strong>. Daar staat een compacte versie: kies een bestaande persona uit de lijst of maak er met <strong>New</strong> een nieuwe, en klik op <strong>Start Persona</strong>. Wijzig je de tekst van een bestaande persona, dan wordt die wijziging bij het starten meteen opgeslagen.</p>
+<p>Een actieve persona verschijnt als chip boven de invoerbalk, met een kruisje om hem weer uit te zetten.</p>
+<h2 id="wie-wint-bij-tegenspraak">Wie wint bij tegenspraak</h2>
+<p>Werk je in een project, dan staan je projectinstructies en je persona allebei in de prompt. De volgorde is: eerst het project, dan het gesprek. De specifiekere laag staat later en wint dus. Zie <a href="projecten.html#instructies">Projecten</a>.</p>
+<h2 id="persona-groepen">Persona-groepen</h2>
+<p>Een groep is een lijstje persona&#39;s dat je in één keer op een gesprek zet. Op het tabblad <strong>Persona-groepen</strong> maak je er een met <strong>Nieuwe groep</strong>: een naam, en daaronder de leden. Leden voeg je toe met <strong>Persona toevoegen…</strong>, versleep je met de greep om ze te ordenen (dat kan ook met het toetsenbord) en haal je er met het kruisje weer uit. Een groep zonder leden kun je niet opslaan.</p>
+<p>De <strong>modus kies je bij het starten</strong>, niet bij het maken. Naast de startknop zit een pijltje met twee keuzes:</p>
+<ul>
+<li><strong>Gezamenlijk antwoord</strong> - &quot;De persona&#39;s geven samen één antwoord.&quot; De system prompts van de leden worden in de volgorde die jij hebt gezet samengevoegd tot één opdracht: combineer die perspectieven en spreek met één stem. Je krijgt dus één antwoord, net als anders.</li>
+<li><strong>Aparte reacties</strong> - &quot;Elke persona reageert apart.&quot; Op je vraag komen meerdere antwoorden onder elkaar, elk als eigen kaartje met de naam van de persona erboven en een eigen stopknop zolang het schrijft.</li>
+</ul>
+<p>Bij aparte reacties voert elke persona zijn <strong>eigen draad</strong>: hij ziet al jouw berichten en zijn eigen eerdere antwoorden, maar niet die van de anderen. Ze beïnvloeden elkaar dus niet, en dat is het punt van de stand.</p>
+<p>De hoofdknop start altijd in <strong>Gezamenlijk antwoord</strong>; het pijltje is er voor de andere keuze.</p>
+<h2 id="verwijderen">Verwijderen</h2>
+<p>Een persona verwijderen kan altijd, ook als hij nog ergens aan staat. De bevestiging zegt wat er dan gebeurt: &quot;Actieve gesprekken met deze persona vallen terug op de standaard system prompt.&quot; Bij een groep geldt hetzelfde, en er staat bij dat de persona&#39;s zelf blijven bestaan.</p>
+<h2 id="een-persona-is-een-instructie-geen-bron">Een persona is een instructie, geen bron</h2>
+<p>Dat verschil telt in een project met <strong>Antwoord alleen uit de bronnen</strong>. Wat je in een persona schrijft staat gewoon in de prompt, maar draagt geen bronnummer en kan dus niet als bron worden aangehaald. De belofte gaat over waar het antwoord vandáán komt, niet over hoe de assistent schrijft. Zie <a href="projecten.html#antwoord-alleen-uit-de-bronnen">Projecten</a>.</p>
 
         </article>
-        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="gesprekken.html"><span class="richting">Vorige</span>Gesprekken</a><a class="volgende" href="bronnen.html"><span class="richting">Volgende</span>Bronnen</a></nav>
+        <nav class="voetnav" aria-label="Vorige en volgende pagina"><a class="vorige" href="geplande-taken.html"><span class="richting">Vorige</span>Geplande taken</a><a class="volgende" href="skills.html"><span class="richting">Volgende</span>Skills</a></nav>
       </main>
     </div>
 
