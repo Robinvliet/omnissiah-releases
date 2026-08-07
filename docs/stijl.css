@@ -469,6 +469,35 @@ a.nav-kop[aria-current="page"] {
   font-weight: 500;
 }
 
+/* De koppen van de pagina waar je nu bent, onder zijn eigen item. Derde
+   niveau, dus kleiner en zachter, en zónder een tweede hairline: de groep
+   heeft er al een en drie verticale strepen naast elkaar wordt rommelig.
+   Diepte laten we hier aan de inspringing en het contrast doen.
+
+   De selector begint bij .zijbalk om .nav-lijst a te overtreffen in plaats
+   van er gelijk aan te zijn: de lijst hangt meestal ín een .nav-lijst, maar
+   onder een groepskop niet, en dan moet dezelfde regel gelden. */
+.nav-koppen {
+  list-style: none;
+  margin: 0.15rem 0 0.5rem;
+}
+.zijbalk .nav-koppen a {
+  display: block;
+  padding: 0.15rem 0.65rem 0.15rem 1.3rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: color-mix(in oklab, var(--muted-foreground) 80%, transparent);
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  transition:
+    color var(--motion-duration-fast) var(--ease-out),
+    background-color var(--motion-duration-fast) var(--ease-out);
+}
+.zijbalk .nav-koppen a:hover {
+  color: var(--foreground);
+  background: var(--sidebar-hover);
+}
+
 .vlak {
   min-width: 0;
 }
