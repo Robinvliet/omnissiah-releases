@@ -185,9 +185,19 @@
 </ul>
 <p>Het blijft een schatting op basis van bestandsgrootte en geheugen; de architectuur en de contextlengte van het model kunnen het beeld veranderen. Varianten die je al hebt staan als geïnstalleerd gemarkeerd, en verwijderen kan vanuit hetzelfde scherm.</p>
 <p>Twee dingen kunnen niet. Modellen met een licentie waarmee je eerst akkoord moet gaan (&quot;gated&quot;, zoals Meta Llama) haal je pas op nadat je dat op huggingface.co gedaan hebt. En varianten die uit meerdere bestanden bestaan (sharded GGUF) kan Ollama nog niet downloaden; kies dan een andere variant.</p>
+<h3 id="het-contextvenster-van-je-lokale-server">Het contextvenster van je lokale server</h3>
+<p>Dit is de valkuil die de meeste mensen bijt, en hij is niet zichtbaar aan het model.</p>
+<p>Een model kan een enorm contextvenster aankunnen, maar Ollama laadt het standaard op <strong>4096 tokens</strong>. Dat is genoeg om te chatten en te krap voor agent-modus: daar komen alle beschrijvingen van de tools bij de prompt, en met een gekoppelde map erbij zit je er zo overheen. De beurt stopt dan meteen, met een melding die de tekst van je server letterlijk laat zien (&quot;request (5168 tokens) exceeds the available context size (4096 tokens)&quot;).</p>
+<p>Verhogen doe je aan de kant van de server, niet in Omnissiah:</p>
+<ul>
+<li><strong>Ollama-app</strong>: instellingen → <strong>Context length</strong> omhoog, bijvoorbeeld naar 16k of 32k.</li>
+<li><strong>Ollama via de terminal</strong>: start hem met <code>OLLAMA_CONTEXT_LENGTH=16384 ollama serve</code>.</li>
+</ul>
+<p>Een groter venster kost meer geheugen, dus zet het niet hoger dan je machine aankan. Omnissiah meet zelf welk venster je server gebruikt en rekent daarmee: de context-ring in de kop toont het echte percentage, en de kennisbank-drempel houdt er rekening mee. Je hoeft dus niets in de app in te stellen, alleen je server opnieuw te starten na de wijziging.</p>
 <h3 id="goed-om-te-weten">Goed om te weten</h3>
 <ul>
 <li>Grotere modellen, vanaf ongeveer 8B, werken het best met tools en agent-modus. Modellen zonder tool-ondersteuning kunnen gewoon chatten: Omnissiah laat de tools dan automatisch weg.</li>
+<li>Loopt een antwoord halverwege dood, dan meldt Omnissiah dat met &quot;Antwoord afgekapt: de uitvoerlimiet van dit model is bereikt&quot;. Bij lokale modellen is die limiet afgeleid van het contextvenster, dus ook dat lost een groter venster op.</li>
 <li>De officiële GGUF-repo&#39;s van sommige makers, bijvoorbeeld Mistral, zijn niet met Ollama compatibel. Kies dan een community-variant, zoals die van lmstudio-community of bartowski. De foutmelding in de app wijst je daar ook op.</li>
 <li>Lokale modellen kosten niets, en verschijnen in het statistieken-dashboard met € 0.</li>
 <li>Een token is alleen nodig als jouw lokale server achter authenticatie zit. Ollama heeft dat niet.</li>
@@ -203,7 +213,7 @@
 <p>Ook een andere stand van Inspanning maakt de cache ongeldig, en ook daar staat het bedrag bij.</p>
 <h2 id="wat-het-kost">Wat het kost</h2>
 <p>In de kop van een gesprek staan het tokengebruik en een schatting van de kosten, gebaseerd op de prijstabel in de app. Wat één beurt precies kostte, en wat er wel en niet meeging, staat onder het antwoord zelf; zie <a href="gesprekken.html#wat-een-beurt-kostte">Gesprekken</a>.</p>
-<p>Over je hele gebruik heen kijk je in <strong>Statistieken</strong> in de zijbalk: activiteit, tokengebruik over tijd, verbruik per model, en hoe vaak je skills, persona&#39;s en bronnen zijn ingezet.</p>
+<p>Over je hele gebruik heen kijk je in <strong>Statistieken</strong> in de zijbalk: activiteit, tokengebruik over tijd, verbruik per model, en hoe vaak je skills, persona&#39;s en bronnen zijn ingezet. Verder naar beneden staat wat er misging - mislukte tools, beurten zonder eindantwoord, afgekapte antwoorden, geweigerde acties - uit te splitsen per model en per modus, plus hoe vaak je opgeslagen herinneringen en goedgekeurde skills daadwerkelijk gebruikt zijn. Bij elke teller staat vanaf wanneer hij gemeten is; een laag getal is niet vanzelf een goed cijfer.</p>
 <h2 id="hulpmodellen-voor-randklussen">Hulpmodellen voor randklussen</h2>
 <p>Niet alles hoeft door je hoofdmodel te worden gedaan. Een titel verzinnen, een lang gesprek samenvatten of een voorstel beoordelen zijn randklussen, en die draaien standaard op een goedkoop model van dezelfde provider. Bij Instellingen → Algemeen → Hulptaken zet je per taak een ander model:</p>
 <ul>

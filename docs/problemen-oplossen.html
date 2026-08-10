@@ -148,6 +148,8 @@
             <li><a href="#er-staat-geen-enkel-model-in-de-kiezer">Er staat geen enkel model in de kiezer</a></li>
             <li><a href="#de-provider-geeft-een-foutmelding">De provider geeft een foutmelding</a></li>
             <li><a href="#een-lokaal-model-blijft-zoeken-en-geeft-geen-antwoord">Een lokaal model blijft zoeken en geeft geen antwoord</a></li>
+            <li><a href="#de-prompt-past-niet-in-het-contextvenster-van-de-lokale-server">&quot;De prompt past niet in het contextvenster van de lokale server&quot;</a></li>
+            <li><a href="#het-antwoord-stopt-halverwege">Het antwoord stopt halverwege</a></li>
             <li><a href="#vers-beginnen">Vers beginnen</a></li>
             <li><a href="#webversie-poort-3000-is-al-bezet">Webversie: poort 3000 is al bezet</a></li>
             <li><a href="#webversie-wat-doet-de-app-eigenlijk">Webversie: wat doet de app eigenlijk</a></li>
@@ -186,6 +188,11 @@
 <p>De praktische oplossing is telkens dezelfde: wissel van model of van provider en probeer het opnieuw. Het gesprek blijft gewoon staan, en een ander model kan verder waar het vorige gebleven was.</p>
 <h2 id="een-lokaal-model-blijft-zoeken-en-geeft-geen-antwoord">Een lokaal model blijft zoeken en geeft geen antwoord</h2>
 <p>Kleinere modellen kunnen bij tools in een lus belanden en hun beurt beëindigen zonder eindantwoord. De stappenlimiet kapt dat af. Kies een groter model, vanaf ongeveer 8B, of zet de tools uit voor dat gesprek. Zie <a href="gebruiken/modellen.html#goed-om-te-weten">Modellen</a>.</p>
+<h2 id="de-prompt-past-niet-in-het-contextvenster-van-de-lokale-server">&quot;De prompt past niet in het contextvenster van de lokale server&quot;</h2>
+<p>Dit is bijna altijd agent-modus op een Ollama met het standaard contextvenster van 4096 tokens. De beschrijvingen van de tools tellen mee in de prompt, en met een gekoppelde map erbij past het niet meer. De melding toont er de tekst van je server letterlijk bij, inclusief hoeveel tokens er gevraagd werden.</p>
+<p>Twee oplossingen. Verhoog het venster van je server (in de Ollama-app onder <strong>Context length</strong>, of start hem met <code>OLLAMA_CONTEXT_LENGTH=16384</code>) en start hem opnieuw. Of maak de prompt kleiner: koppel de map of bronnen los, of begin een nieuw gesprek. Zie <a href="gebruiken/modellen.html#het-contextvenster-van-je-lokale-server">Modellen</a>.</p>
+<h2 id="het-antwoord-stopt-halverwege">Het antwoord stopt halverwege</h2>
+<p>Staat er &quot;Antwoord afgekapt: de uitvoerlimiet van dit model is bereikt&quot;, dan wilde het model meer schrijven dan er ruimte was. Bij een lokaal model hangt die ruimte aan het contextvenster van je server, dus een groter venster geeft ook langere antwoorden. Je kunt ook gewoon vragen om verder te gaan.</p>
 <h2 id="vers-beginnen">Vers beginnen</h2>
 <p>Sluit de app en verwijder de datamap. Dat wist al je gesprekken en instellingen. Zie <a href="data-en-backup.html#vers-beginnen">Data en backup</a>.</p>
 <h2 id="webversie-poort-3000-is-al-bezet">Webversie: poort 3000 is al bezet</h2>
