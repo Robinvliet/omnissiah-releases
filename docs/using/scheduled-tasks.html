@@ -177,7 +177,7 @@
 <li><strong>Fallback model.</strong> Optional, and off by default (&quot;No fallback&quot;). &quot;Runs the task when the task model fails for good; the run reports that in the task conversation.&quot; Useful for a task that has to keep running when your usual provider is having a bad day; the task model itself never changes along with it.</li>
 </ul>
 <p>Times are read in the time zone of the machine where Omnissiah runs, and that is your own machine.</p>
-<p>One thing to know about <strong>Every X minutes</strong>: the interval is counted from the <em>end</em> of the previous run, while the app checks for due tasks once a minute. So &quot;every minute&quot; is in practice roughly every two minutes, and the longer the interval, the smaller that difference gets. Cron expressions do not have this: they are tied to the clock rather than to the previous run.</p>
+<p>One thing to know about <strong>Every X minutes</strong>: the moments lie on a fixed grid that starts when you save the task - &quot;every 30 minutes&quot; means moments exactly 30 minutes apart, no matter how long each run takes. The app checks for due tasks once a minute, so a run can start up to a minute after its moment, but the next moment does not shift along with that. If a run is still going when its next moment arrives, that moment is skipped and the run list says so. Editing the schedule, or resuming a paused task, starts a fresh grid from that point. Cron expressions work the same way, tied to the clock.</p>
 <h2 id="or-just-ask-in-a-conversation">Or just ask in a conversation</h2>
 <p>You can also ask the assistant to schedule something. It translates your sentence into a schedule itself and makes a proposal that pauses until you approve it, just like with a skill. The task then inherits the model, the approval level and the project of the conversation you asked it in; adjusting comes afterwards in the overview.</p>
 <p>This tool is called <strong>Schedule tasks</strong> in the list behind the <strong>+</strong> on the input bar, and you can switch it off there per conversation.</p>
@@ -201,14 +201,15 @@
 <p>That is also what the task is given in its instructions: it runs without a user present, asks no questions and waits for nothing, because its last answer is what you see later as the outcome. If it uses the protocol word <em>and</em> writes content anyway, the run row says &quot;[SILENT] protocol violated&quot; - a warning, not a status.</p>
 <h2 id="if-the-app-was-off">If the app was off</h2>
 <p>A scheduled task needs a running app. If your computer was off at nine o&#39;clock, the morning briefing still runs as soon as you open Omnissiah again.</p>
-<p>Piled-up missed runs do lapse: one is caught up, not five. That is visible as a skipped run with the reason: &quot;Scheduled run of Aug 6, 09:00 AM was missed (the server was off); one catch-up run was made, earlier missed runs are dropped.&quot; A one-off task that has not run yet runs whatever time it is.</p>
+<p>Piled-up missed runs do lapse: one is caught up, not five. That is visible as a skipped run that counts exactly what fell away: &quot;Scheduled run of Aug 6, 09:00 AM was missed (the server was off); one catch-up run was made, 2 later moments lapsed.&quot; A one-off task that has not run yet runs whatever time it is.</p>
 <h2 id="when-a-run-is-skipped">When a run is skipped</h2>
-<p>Two situations, and in both you see them in the run list instead of them happening quietly:</p>
+<p>Three situations, and in all of them you see them in the run list instead of them happening quietly:</p>
 <ul>
 <li><strong>&quot;The task conversation is in use right now; this run was skipped.&quot;</strong> You are working in that conversation yourself.</li>
 <li><strong>&quot;The previous run is still waiting for an approval in the task conversation.&quot;</strong> As long as that is open, no new turn can go over it. Approve or reject it, and the schedule picks up again by itself.</li>
+<li><strong>&quot;2 scheduled moments passed while the previous run was still going; the schedule continues at the next moment.&quot;</strong> A run took longer than its interval; the moments that passed during it are skipped, never stacked up and run in a burst afterwards.</li>
 </ul>
-<p>In both cases the task moves on to its next moment.</p>
+<p>In all three cases the task moves on to its next scheduled moment.</p>
 <h2 id="if-something-goes-wrong">If something goes wrong</h2>
 <p>A failed run does not fall away quietly. In the task conversation a message appears starting with &quot;The scheduled run could not be completed:&quot;, with the reason behind it, and the run list shows the same reason.</p>
 <p>Not every failure is final. A run that fails cleanly on something temporary - a rate limit, a provider that is briefly unreachable - is retried within the same run, up to three attempts, waiting longer each time. Work that was already done is never blindly repeated.</p>
