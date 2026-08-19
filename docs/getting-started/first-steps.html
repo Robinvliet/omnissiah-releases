@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>First steps - Omnissiah</title>
+    <meta name="description" content="Add a model, pick the right one and have your first conversation." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="installation.html">Installation</a></li>
+        <li><a href="first-steps.html" aria-current="page">First steps</a>
+          <ul class="nav-koppen">
+            <li><a href="#the-interface-is-in-english">The interface is in English</a></li>
+            <li><a href="#adding-a-model">Adding a model</a></li>
+            <li><a href="#your-first-conversation">Your first conversation</a></li>
+            <li><a href="#how-deeply-the-model-thinks">How deeply the model thinks</a></li>
+            <li><a href="#what-you-can-turn-on-later">What you can turn on later</a></li>
+          </ul>
+        </li>
+        <li><a href="updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../using/index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="../using/conversations.html">Conversations</a></li>
+        <li><a href="../using/projects.html">Projects</a></li>
+        <li><a href="../using/sources.html">Sources</a></li>
+        <li><a href="../using/agent-mode.html">Agent mode</a></li>
+        <li><a href="../using/models.html">Models</a></li>
+        <li><a href="../using/mcp-servers.html">MCP servers</a></li>
+        <li><a href="../using/scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="../using/personas.html">Personas</a></li>
+        <li><a href="../using/skills.html">Skills</a></li>
+        <li><a href="../using/memory.html">Memory</a></li>
+        <li><a href="../using/shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Getting started</a></p>
+          <h1>First steps</h1>
+          <p>Omnissiah arrives empty. There is no model inside the app: you connect your own key from a cloud provider, or you run a model on your own machine. As long as there is neither, the app shows &quot;No model available yet&quot; instead of an input bar that cannot do anything.</p>
+<h2 id="the-interface-is-in-english">The interface is in English</h2>
+<p>Omnissiah starts in English. Would you rather read Dutch? Go to <strong>Settings → General → Language</strong> and click <strong>&quot;Nederlands&quot;</strong>. It sits right under your name, as two buttons side by side, and each language is written in its own language (&quot;English&quot;, &quot;Nederlands&quot;), so you can point at the right one without reading the rest. The whole interface follows immediately, including the desktop app&#39;s menu.</p>
+<p>Two things do not follow that setting. The language the model answers in follows the language <em>you</em> write in: write Dutch in an English interface and you get a Dutch answer. And jargon stays in the language it works in, so a tool keeps the name it has in every other tool.</p>
+<h2 id="adding-a-model">Adding a model</h2>
+<p>Click <strong>Settings</strong> at the bottom left of the sidebar and go to <strong>Models</strong>. There are three ways in.</p>
+<p><strong>Cloud provider.</strong> Under &quot;Add an API (cloud) model&quot;, pick Google or Anthropic, paste your API key and click <strong>Add</strong>. Omnissiah checks the key with the provider right away, so you know immediately whether it works. You only need one; two is fine too, and then you can switch per conversation. Keys stay server-side and never reach the browser.</p>
+<p><strong>Local model.</strong> If a local server is already running on your machine, Omnissiah usually finds it by itself and you see &quot;Ollama found at …&quot; with a <strong>Connect</strong> button. If you have nothing yet, click <strong>Discover models</strong>: that searches the models on Hugging Face and downloads one straight to your local server. Free, private and without a key. There is more about this on <a href="../using/models.html">Models</a>.</p>
+<p><strong>Your own endpoint.</strong> Under &quot;Your own endpoint&quot; you connect OpenRouter, Groq or your own gateway: a name, the base URL, and the <strong>API format</strong> that endpoint speaks. Pick that format by what the endpoint speaks, not by the brand name of the model, because a gateway often serves models from another provider.</p>
+<h2 id="your-first-conversation">Your first conversation</h2>
+<p>Start a new conversation and type your question. In the bottom row of the input bar you choose two things.</p>
+<p><strong>The model.</strong> The model picker shows everything you have access to, cloud and local mixed together. A new conversation starts with the model you used last, so that choice remembers itself.</p>
+<p><strong>The mode.</strong> There are three, and they apply per conversation:</p>
+<ul>
+<li><strong>Chat</strong> is simply talking, with the tools you have turned on.</li>
+<li><strong>Agent</strong> lets the assistant take several steps in a row and, if you link a folder, read and write files. What it may do without asking is set by the approval level in the bar under the input bar.</li>
+<li><strong>Research</strong> is for longer investigations and ends with a report that cites its sources.</li>
+</ul>
+<p>Start with Chat. Agent and Research are there when you need them. One exception: in a project set to <strong>Answer only from the sources</strong> only Chat exists, see <a href="../using/projects.html#answer-only-from-the-sources">Projects</a>.</p>
+<h2 id="how-deeply-the-model-thinks">How deeply the model thinks</h2>
+<p>The model picker has an <strong>Effort</strong> row: how thoroughly the model may think before it answers. More means a better considered answer, but also longer waiting and more tokens. The chosen level is shown next to the model name.</p>
+<p>The levels are called <strong>Off</strong>, <strong>Low</strong>, <strong>Medium</strong>, <strong>High</strong>, <strong>Extra high</strong> and <strong>Max</strong>, and which ones exist differs per model: Omnissiah only offers what that model actually knows, with a line explaining anything that is missing. Switch to a model that does not support your level and you will see it fall back.</p>
+<h2 id="what-you-can-turn-on-later">What you can turn on later</h2>
+<p>None of this is required, but it is there if you want it:</p>
+<ul>
+<li><strong>Web search</strong> in Settings, so the assistant can look up current information. That needs a key of its own.</li>
+<li><strong>Sources</strong> per conversation or per project. The Sources button at the top right (the one with the counter) opens the list; there you add text, a file or a URL, or link a folder. Everything the model can see in this conversation is in that one list. Drag a file onto the input bar and it goes along as an attachment with <em>that</em> message, and appears in the same list. See <a href="../using/sources.html">Sources</a>.</li>
+<li><strong>Memory</strong>, so the assistant remembers things about you and your work between conversations. See <a href="../using/memory.html">Memory</a>.</li>
+<li><strong>Personas and skills</strong> to fix its role and its way of working. See <a href="../using/personas.html">Personas</a> and <a href="../using/skills.html">Skills</a>.</li>
+<li><strong>MCP servers</strong> to attach tools that Omnissiah does not have itself. See <a href="../using/mcp-servers.html">MCP servers</a>.</li>
+</ul>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="installation.html"><span class="richting">Previous</span>Installation</a><a class="volgende" href="updating.html"><span class="richting">Next</span>Updating</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

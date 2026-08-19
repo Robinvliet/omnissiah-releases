@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Models - Omnissiah</title>
+    <meta name="description" content="Cloud models with your own key, local models through Ollama or LM Studio, your own endpoints, and how you choose between them." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="conversations.html">Conversations</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="sources.html">Sources</a></li>
+        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="models.html" aria-current="page">Models</a>
+          <ul class="nav-koppen">
+            <li><a href="#cloud-models">Cloud models</a></li>
+            <li><a href="#your-own-endpoint">Your own endpoint</a></li>
+            <li><a href="#local-models">Local models</a></li>
+            <li><a href="#the-model-picker">The model picker</a></li>
+            <li><a href="#how-deeply-a-model-thinks">How deeply a model thinks</a></li>
+            <li><a href="#what-it-costs">What it costs</a></li>
+            <li><a href="#helper-models-for-side-jobs">Helper models for side jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="mcp-servers.html">MCP servers</a></li>
+        <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="memory.html">Memory</a></li>
+        <li><a href="shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <h1>Models</h1>
+          <p>Omnissiah has no models of its own. You link one or more yourself, and after that they sit in the same model picker, cloud and local mixed together.</p>
+<h2 id="cloud-models">Cloud models</h2>
+<p>Go to <strong>Settings → Models</strong>, pick the provider under <strong>Add an API (cloud) model</strong>, paste your API key and click <strong>Add</strong>. The key is checked with the provider right away, so a typo shows up at the moment you make it.</p>
+<p>Your keys are read server-side only and never reach the browser. You pay the provider directly; what a conversation cost is shown in the statistics dashboard.</p>
+<h2 id="your-own-endpoint">Your own endpoint</h2>
+<p>If the service you want is not in the list above, you link it yourself. That works for OpenRouter, Groq, DeepSeek, a gateway at work, or anything else that speaks one of the two common API formats.</p>
+<p>Go to <strong>Settings → Models → Your own endpoint</strong> and fill in:</p>
+<ul>
+<li>a <strong>name</strong> you recognise, for example &quot;OpenRouter&quot;;</li>
+<li>the <strong>base URL</strong>, for example <code>https://openrouter.ai/api/v1</code>. Mind the path: with most services the <code>/v1</code> belongs to it;</li>
+<li>the <strong>API format</strong>: <em>OpenAI-compatible (default)</em> (by far the most common) or <em>Anthropic</em>;</li>
+<li>optionally an <strong>API key</strong>. That one is optional: a server on your own network without a login works just as well without.</li>
+</ul>
+<p>With <strong>Test</strong> you check whether the endpoint is reachable and how many models it offers, <em>before</em> you save anything. After that those models appear in the model picker under the tab <strong>Endpoints</strong>, with the name of your endpoint underneath.</p>
+<p><strong>Pick the format the endpoint speaks, not the brand name of the model.</strong> The app says it right there: &quot;Choose what the endpoint speaks, not the brand name of the model.&quot; That sounds obvious and is not: OpenRouter offers models called <code>anthropic/claude-…</code>, for instance, but they simply talk in the OpenAI format. The brand name in the model name says nothing about the format of the service offering it.</p>
+<p>If your gateway speaks both formats, you add it twice, once per format.</p>
+<h3 id="what-your-own-endpoint-does-not-get">What your own endpoint does not get</h3>
+<ul>
+<li><strong>Costs are not calculated.</strong> Omnissiah does not know the rates of your endpoint, and an amount of 0 would suggest it was free. Instead it says &quot;not calculated&quot;, in Statistics too. Tokens are still counted.</li>
+<li><strong>No adjustable thinking phase.</strong> The Effort row is missing: which levels your endpoint knows and how you drive them differs per service, and offering something that might do nothing is worse than leaving it out.</li>
+<li><strong>No prompt caching.</strong> If your endpoint points at Anthropic, the same turn is cheaper there through the ordinary Anthropic link above. Your own endpoints are for what is not in there yet, not as a detour to what already is.</li>
+<li>If you point your own endpoint at a <strong>local server</strong> you could also link directly (Ollama, LM Studio), that is allowed, but the app says so: through this route it misses measuring the context window, loading a model and managing models.</li>
+</ul>
+<h3 id="what-a-model-promises-and-what-it-proves">What a model promises, and what it proves</h3>
+<p>Of the models in the list above, Omnissiah knows what they can do; that is maintained by hand. With your own endpoint it depends on what the service publishes itself, and you see that back in the detail panel:</p>
+<ul>
+<li><strong>&quot;Properties read from this endpoint&quot;</strong> - the service reports per model what it can handle. If a model does not support tools, Agent and Research are greyed out, with the reason.</li>
+<li><strong>&quot;Properties not reported; these are assumptions&quot;</strong> - the service says nothing. Then nothing is blocked, but nothing is promised either: you see &quot;Tool support unknown - this server does not report what the model can do&quot; instead of a tick that merely looks like certainty.</li>
+</ul>
+<h2 id="local-models">Local models</h2>
+<p>Besides the cloud you can run models on your own machine: free, private, no key. Omnissiah talks to any server that speaks the OpenAI-compatible API; the best known is <a href="https://ollama.com">Ollama</a>, and LM Studio works too.</p>
+<p><strong>Connecting.</strong> Install Ollama and usually that is all. If it runs on the same machine, Omnissiah finds it by itself: Settings → Models then shows &quot;Ollama found at …&quot; with a <strong>Connect</strong> button. By hand works too, by filling in the base URL and clicking Connect.</p>
+<p><strong>Fetching models.</strong> Click <strong>Discover models</strong> (in Settings → Models, or at the bottom of the model picker). There you search the GGUF models on Hugging Face, look at the details, parameters, context length, capabilities and README per model, and download a quant variant straight to your local server, with a progress bar. The model then appears in the model picker by itself. A 4-bit variant such as Q4_K_M is usually the best balance between size and quality, and the app says so with the choice.</p>
+<p>If you prefer the terminal, that works too (<code>ollama pull llama3.1</code>); with <strong>Test again</strong> you then refresh the list in the app.</p>
+<h3 id="which-url">Which URL</h3>
+<ul>
+<li>Desktop app, or the web version through Node on the same machine: <code>http://localhost:11434</code>. Usually found automatically.</li>
+<li>Web version in Docker: <code>http://host.docker.internal:11434</code>, so the container reaches the Ollama on your host. On Linux you need to add <code>extra_hosts: [&quot;host.docker.internal:host-gateway&quot;]</code> to <code>docker-compose.yml</code> for that.</li>
+</ul>
+<h3 id="will-this-model-fit-on-my-machine">Will this model fit on my machine</h3>
+<p>With every quant variant in <strong>Discover models</strong> there is an estimate, based on the memory you entered under Settings → Models:</p>
+<ul>
+<li><strong>Full GPU offload possible</strong> - estimated to fit entirely in your GPU memory, the fastest way to run.</li>
+<li><strong>Partial GPU offload possible</strong> - fits partly; the rest runs on the CPU. Often works fine, but is noticeably slower.</li>
+<li><strong>Probably too large</strong> - larger than the memory of your machine. Loading may fail or the model becomes very slow.</li>
+</ul>
+<p>It stays an estimate based on file size and memory; the architecture and the context length of the model can change the picture. Variants you already have are marked as installed, and deleting can be done from the same screen.</p>
+<p>Two things are not possible. Models with a licence you have to agree to first (&quot;gated&quot;, such as Meta Llama) you can only fetch after doing that on huggingface.co. And variants consisting of several files (sharded GGUF) cannot be downloaded by Ollama yet; they carry the label &quot;split&quot;, so pick another variant.</p>
+<h3 id="the-context-window-of-your-local-server">The context window of your local server</h3>
+<p>This is the pitfall that bites most people, and it is not visible on the model.</p>
+<p>A model may handle an enormous context window, but Ollama loads it at <strong>4096 tokens</strong> by default. That is enough to chat and too tight for agent mode: there all the descriptions of the tools join the prompt, and with a linked folder you are over it in no time. The turn then stops immediately, with a message that shows the text of your server literally (&quot;request (5168 tokens) exceeds the available context size (4096 tokens)&quot;).</p>
+<p>You raise it on the server side, not in Omnissiah:</p>
+<ul>
+<li><strong>Ollama app</strong>: settings → <strong>Context length</strong> up, for example to 16k or 32k.</li>
+<li><strong>Ollama through the terminal</strong>: start it with <code>OLLAMA_CONTEXT_LENGTH=16384 ollama serve</code>.</li>
+</ul>
+<p>A bigger window costs more memory, so do not set it higher than your machine can take. Omnissiah measures for itself which window your server uses and reckons with that: the context ring in the header shows the real percentage, and the sources threshold takes it into account. So you do not have to set anything in the app, only restart your server after the change.</p>
+<h3 id="good-to-know">Good to know</h3>
+<ul>
+<li>Bigger models, from roughly 8B, work best with tools and agent mode. Models without tool support can simply chat: Omnissiah then leaves the tools out automatically.</li>
+<li>If an answer dies halfway, Omnissiah reports it with &quot;Answer truncated: this model&#39;s output limit was reached&quot;. With local models that limit is derived from the context window, so a bigger window solves that too.</li>
+<li>The official GGUF repos of some makers, Mistral for instance, are not compatible with Ollama. Pick a community variant then, such as those from lmstudio-community or bartowski. The error message in the app points you there as well.</li>
+<li>Local models cost nothing, and appear in the statistics dashboard at $0.</li>
+<li>A token is only needed if your local server sits behind authentication. Ollama does not have that.</li>
+</ul>
+<h2 id="the-model-picker">The model picker</h2>
+<p>The model applies <strong>per conversation</strong>, and a new conversation starts with the model you picked last. There is no &quot;default model&quot; setting: that could point at a provider you no longer have a key for.</p>
+<p>At the top the picker has a search field that searches on name, maker, quant variant and model id, and below it the filters <strong>All</strong>, <strong>Local</strong>, <strong>API</strong> and <strong>Endpoints</strong>. Providers without a key or without a connection are not in it: a model you cannot pick anyway is noise.</p>
+<p>Move over a model and a panel with the details appears. With a cloud model: provider, context window, maximum output, the price per million tokens in and out, when it was released, and what it can do (Extended thinking, Vision, PDF input, Structured output, Code execution, Citations). With a local model: family, parameters, quantization, context length, size on disk, and &quot;Price: free (your own machine)&quot;. If your local server cannot supply metadata, it honestly says &quot;specifications unknown&quot; instead of an invented number. With a model from your own endpoint the name of that endpoint is shown, plus &quot;Price: not calculated&quot;.</p>
+<p><strong>Switching mid-conversation is allowed</strong> and the conversation simply carries on with the new model. There is a price tag, and the picker names it: &quot;Switching models invalidates the prompt cache: the next turn charges ~12.4k tokens in full again.&quot; Another model is another cache, with every provider. At the start of a conversation there is nothing to invalidate and that line stays away.</p>
+<h2 id="how-deeply-a-model-thinks">How deeply a model thinks</h2>
+<p>In the model picker is a row <strong>Effort</strong>, with the levels <strong>Off</strong>, <strong>Low</strong>, <strong>Medium</strong>, <strong>High</strong>, <strong>Extra high</strong> and <strong>Max</strong>. Per model only the levels that model really knows are offered, with a line underneath when something is missing, for example &quot;Extra high and Max do not exist on Gemini&quot; or &quot;This model only knows thinking on or off.&quot; The level that is the model&#39;s own default is marked <strong>Default</strong>.</p>
+<p>Switch to a model that does not support your current level and it visibly falls back to the nearest one that does exist, with the message alongside. Nothing quietly different from what it says is ever done.</p>
+<p>A different Effort level also invalidates the cache, and there too the amount is shown.</p>
+<h2 id="what-it-costs">What it costs</h2>
+<p>The header of a conversation shows the token usage and an estimate of the costs, based on the price table in the app. If the conversation runs on your own endpoint, only the token usage is there: the app does not know those rates, and inventing an amount would be worse than showing none. What one turn cost exactly, and what did and did not go along, is under the answer itself; see <a href="conversations.html#what-a-turn-cost">Conversations</a>.</p>
+<p>Across your whole usage you look in <strong>Statistics</strong> in the sidebar: activity, token usage over time, consumption per model, and how often your skills, personas and sources were brought in. Further down is what went wrong - failed tools, turns without a final answer, truncated answers, refused actions - broken down per model and per mode, plus how often your stored memories and approved skills were actually used. With every counter it says from when it has been measured; a low number is not automatically a good score.</p>
+<h2 id="helper-models-for-side-jobs">Helper models for side jobs</h2>
+<p>Not everything has to be done by your main model. Inventing a title, summarising a long conversation or judging a suggestion are side jobs, and by default they run on a cheap model from the same provider. Under Settings → General → Helper tasks you set a different model per task:</p>
+<ul>
+<li><strong>Model for title generation</strong> - the title of a new conversation.</li>
+<li><strong>Model for skills review</strong> - checks after a turn whether there was a reusable lesson in it. This is also the pass that looks at your memory. See <a href="skills.html#skills-that-arise-by-themselves">Skills</a>.</li>
+<li><strong>Model for sub-agents</strong> - subtasks the assistant farms out.</li>
+<li><strong>Model for context compression</strong> - summarises the oldest turns of a long conversation. See <a href="conversations.html#when-a-conversation-gets-long">Conversations</a>.</li>
+<li><strong>Model for smart approval</strong> - judges agent actions in the &quot;Approve smartly&quot; setting. See <a href="agent-mode.html#what-happens-without-asking">Agent mode</a>.</li>
+</ul>
+<p><strong>Automatic</strong> means, for four of the five, the cheap model of the provider of your conversation; with sub-agents it means the model of the conversation itself, because that is real work and not a side job. If you run locally, &quot;automatic&quot; is simply your own model: there is no separate local helper model, and local is free anyway.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="agent-mode.html"><span class="richting">Previous</span>Agent mode</a><a class="volgende" href="mcp-servers.html"><span class="richting">Next</span>MCP servers</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

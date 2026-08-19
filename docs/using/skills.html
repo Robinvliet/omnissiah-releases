@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Skills - Omnissiah</title>
+    <meta name="description" content="Reusable instructions you switch on per conversation, written yourself or fetched from elsewhere." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="conversations.html">Conversations</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="sources.html">Sources</a></li>
+        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="mcp-servers.html">MCP servers</a></li>
+        <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="skills.html" aria-current="page">Skills</a>
+          <ul class="nav-koppen">
+            <li><a href="#where-a-skill-lives">Where a skill lives</a></li>
+            <li><a href="#writing-a-skill-yourself">Writing a skill yourself</a></li>
+            <li><a href="#getting-a-skill-from-elsewhere">Getting a skill from elsewhere</a></li>
+            <li><a href="#switching-a-skill-on">Switching a skill on</a></li>
+            <li><a href="#what-the-model-does-with-your-skills">What the model does with your skills</a></li>
+            <li><a href="#skills-that-arise-by-themselves">Skills that arise by themselves</a></li>
+            <li><a href="#editing-and-deleting">Editing and deleting</a></li>
+          </ul>
+        </li>
+        <li><a href="memory.html">Memory</a></li>
+        <li><a href="shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <h1>Skills</h1>
+          <p>A skill is a piece of instruction you keep and use again. The page sums it up: &quot;Skills are reusable instructions. An active skill colours the answers in the conversation.&quot; You find them behind <strong>Skills</strong> in the sidebar; that button takes you to the page <strong>Skills</strong>.</p>
+<p>Unlike a persona, a skill replaces nothing: it comes on top of what is already there, and you can have several on at once.</p>
+<h2 id="where-a-skill-lives">Where a skill lives</h2>
+<p>Every skill is a folder with a <code>SKILL.md</code> in it, in the <code>skills/</code> folder of your data folder. That is ordinary markdown with a name and a description at the top, so you can just as well open it in your own editor. It is the same format Claude uses, so skills are interchangeable. See <a href="../data-and-backup.html#what-is-in-it">Data and backup</a>.</p>
+<h2 id="writing-a-skill-yourself">Writing a skill yourself</h2>
+<p>Click <strong>Add skill</strong> at the top right and choose <strong>New skill</strong>. Then you fill in:</p>
+<ul>
+<li><strong>Name.</strong> &quot;Lower case letters, digits and hyphens. This is also the folder name.&quot;</li>
+<li><strong>Description.</strong> &quot;One line: what is this skill for?&quot; That line does more work than you think, see below.</li>
+<li><strong>Instructions.</strong> The markdown the model gets. Write them as directions to the assistant.</li>
+</ul>
+<h2 id="getting-a-skill-from-elsewhere">Getting a skill from elsewhere</h2>
+<p>In the same <strong>Add skill</strong> menu are two other ways in:</p>
+<p><strong>Import…</strong> reads a <code>SKILL.md</code> file from your disk and opens it in the editor. Nothing is stored until you click <strong>Save</strong>.</p>
+<p><strong>From a URL…</strong> fetches a skill from the internet. You paste a GitHub folder (&quot;github.com/anthropics/skills/tree/main/…&quot;) or the direct URL of a <code>SKILL.md</code>. Omnissiah fetches the skill, checks it over and puts it in the editor for review: where it came from, the files that came with it and what the scan found. Only then does the <strong>Install</strong> button appear.</p>
+<p>If the scan found something, it is stated as a warning: &quot;External skills are untrusted. Read the instructions above before you install.&quot; Installing then asks for an extra confirmation. A flag is a reason to look, not a lock; what exactly is scanned is on <a href="../privacy.html#what-comes-in-is-looked-at-first">Privacy and security</a>. Skills you fetch this way carry the label <strong>imported</strong> in the list.</p>
+<h2 id="switching-a-skill-on">Switching a skill on</h2>
+<p>Two ways, both per conversation:</p>
+<ul>
+<li>Click the <strong>+</strong> on the input bar and open the list <strong>Skills</strong>. Ticking switches it on.</li>
+<li>Type a <code>/</code> in the input bar. A menu with your skills appears, filtering on whatever you type next; Enter or a click switches it on and removes the <code>/</code> word from your text. Skills that are already on have &quot;· active&quot; after them.</li>
+</ul>
+<p>An active skill appears as a chip above the input bar, with a cross to switch it off again.</p>
+<h2 id="what-the-model-does-with-your-skills">What the model does with your skills</h2>
+<p>Not everything goes along every turn, and that is deliberate: skills that sit fully in the prompt cost room in every turn.</p>
+<ul>
+<li><strong>Skills you switched on</strong> are in there in full.</li>
+<li><strong>Their extra files</strong> (a <code>references/</code> folder for instance) are in there only as a list of paths. The assistant reads one when the task calls for it.</li>
+<li><strong>The skills you did <em>not</em> switch on</strong> are in there as an index: name and description, one line per skill. If one fits your question, the assistant fetches the full instructions itself.</li>
+</ul>
+<p>That last part is why that one description line counts: it is the only thing the model can see whether a skill is relevant by.</p>
+<p>If you run a local model that does not support tools, that fetching cannot happen. The active skills then go along in full including their extra files, and the index stays away: the prompt never promises something that is not there.</p>
+<h2 id="skills-that-arise-by-themselves">Skills that arise by themselves</h2>
+<p>Two things can propose a skill. With both, you approve, and until that moment nothing is stored.</p>
+<p><strong>The assistant, during a conversation.</strong> Ask for it, or ask repeatedly for the same kind of help, and it can propose a skill. That proposal appears in the chat and waits for <strong>Approve</strong> or <strong>Reject</strong>. This tool is called <strong>Propose skills</strong> and sits behind the <strong>+</strong> on the input bar, where you can switch it off per conversation.</p>
+<p><strong>A helper model, after a turn.</strong> That checks whether the conversation holds a reusable lesson - the same post-turn review that also looks at your <a href="memory.html#suggestions-from-conversations">memory</a>. Such proposals pile up under <strong>Proposals from conversations</strong> on the Skills page, with a counter on the button in the sidebar: &quot;The assistant saw a reusable lesson here. Nothing is saved until you approve.&quot; Per proposal the reason is stated, with a quote from the message it rests on, and with <strong>View text</strong> you can read the whole skill first.</p>
+<p>If you do not want that, switch <strong>Self-learning skills</strong> off under Settings → General → Helper tasks. Which model does this you set there too; see <a href="models.html#helper-models-for-side-jobs">Models</a>.</p>
+<p>Skill and memory proposals share one ceiling per conversation - <strong>Suggestions per conversation</strong>, 3 by default. Once that is reached the review stops for the rest of that conversation, even if there was more to learn. Approving does not free up a slot: the ceiling counts every proposal that was made, whether you approved it or rejected it.</p>
+<p>A scheduled task makes no proposals at all: a run without anyone watching would only pile them up.</p>
+<h2 id="editing-and-deleting">Editing and deleting</h2>
+<p>Click a skill in the list to open it, or use the pencil. Deleting asks for confirmation and is final: &quot;This cannot be undone.&quot; The folder disappears from your disk, so your backup is your only way back.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="personas.html"><span class="richting">Previous</span>Personas</a><a class="volgende" href="memory.html"><span class="richting">Next</span>Memory</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

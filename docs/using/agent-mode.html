@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent mode - Omnissiah</title>
+    <meta name="description" content="Several steps in a row, with a folder, a terminal and approval up front." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="conversations.html">Conversations</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="sources.html">Sources</a></li>
+        <li><a href="agent-mode.html" aria-current="page">Agent mode</a>
+          <ul class="nav-koppen">
+            <li><a href="#first-link-a-folder">First link a folder</a></li>
+            <li><a href="#what-happens-without-asking">What happens without asking</a></li>
+            <li><a href="#two-safety-nets-that-always-run">Two safety nets that always run</a></li>
+            <li><a href="#what-never-goes-through">What never goes through</a></li>
+            <li><a href="#be-honest-about-what-this-is">Be honest about what this is</a></li>
+            <li><a href="#where-agent-mode-does-not-exist">Where agent mode does not exist</a></li>
+          </ul>
+        </li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="mcp-servers.html">MCP servers</a></li>
+        <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="memory.html">Memory</a></li>
+        <li><a href="shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <h1>Agent mode</h1>
+          <p>In agent mode the assistant takes several steps in a row: plan, use a tool, look at the result and carry on until the task is done. Twenty steps per turn at most. It is also the only mode in which it may change files.</p>
+<h2 id="first-link-a-folder">First link a folder</h2>
+<p>Without a linked folder, agent mode is little more than chat. You link one with <strong>Work in a folder</strong> in the bar under the input bar, or with <strong>Add folder</strong> in the menu next to it. What you get to see before you confirm is on <a href="sources.html#linked-folders">Sources</a>.</p>
+<p>Only with a folder do the tools <strong>View folder</strong>, <strong>Read file</strong>, <strong>Write file</strong>, <strong>Terminal</strong> and <strong>Script</strong> exist. Reading, by the way, is allowed in every mode; writing, the terminal and scripts are reserved for agent mode.</p>
+<p>You can link several folders at once. Every folder has a name, and in the action timeline you see per step <em>which</em> folder it happened in.</p>
+<p>The terminal only works on macOS and Linux. On Windows the assistant says so and falls back to the file tools.</p>
+<h2 id="what-happens-without-asking">What happens without asking</h2>
+<p>The bar under the input bar holds the approval level. There are four settings, and they apply per conversation:</p>
+<ul>
+<li><strong>Approve manually.</strong> &quot;The agent pauses so you can approve every action.&quot; This is the default.</li>
+<li><strong>Approve automatically.</strong> &quot;The agent works on its own and only pauses for something risky.&quot;</li>
+<li><strong>Approve smartly.</strong> &quot;A helper model reviews every action and only pauses what it does not trust.&quot;</li>
+<li><strong>Skip approvals.</strong> &quot;The agent never pauses, not even for risky actions.&quot;</li>
+</ul>
+<p>The level applies to writing files, the terminal, scripts and tools from MCP servers. Things that only land in the app itself, such as putting something in your sources or your memory, fall outside it.</p>
+<p>When the assistant pauses, the proposed action appears in full in the chat, with the line that nothing is saved until you approve, and two buttons: <strong>Approve</strong> and <strong>Reject</strong>. There is no &quot;always allow&quot;; that is what the levels above are for.</p>
+<p>An identical call you already approved in this conversation does not pause a second time. The timeline says so on that step, so an action that goes through without a question is never silent about why.</p>
+<p>If the assistant delegates a subtask to a sub-agent, <em>every</em> action that needs approval is automatically refused there, and that is stated in the summary you get back.</p>
+<h2 id="two-safety-nets-that-always-run">Two safety nets that always run</h2>
+<p>They work in every setting, including <strong>Skip approvals</strong>.</p>
+<p><strong>Before a file is overwritten</strong> Omnissiah keeps the old version. Under that step you then find <strong>Restore</strong>, and afterwards: &quot;Restored to the version from before this change.&quot; At most twenty versions per file are kept, for thirty days, and only for files up to 10 MB. If a file is too large for such a copy, the <strong>Automatic</strong> level pauses for the overwrite after all.</p>
+<p><strong>Before the first far-reaching command of a turn</strong> Omnissiah takes a snapshot of the whole working folder. Restoring asks for confirmation, and that dialog says exactly what happens: &quot;Files created after the snapshot stay. Before restoring, the current state is captured too, so the action is reversible.&quot;</p>
+<h2 id="what-never-goes-through">What never goes through</h2>
+<p>Some commands are refused unconditionally, in every approval setting, and no setting lifts that. Think of formatting a file system, recursively deleting a system folder or your home folder, shutting the machine down, and writing to the database or the <code>.env</code> of Omnissiah itself. The message says the assistant should not try again and should not work around it either. If you really want such a thing, you run it yourself in your own terminal.</p>
+<p>If your API keys happen to end up in the output of a command, a placeholder takes their place - <code>[GEMASKEERD]</code>, one of the few strings that is still Dutch - and the child process does not get them in the first place.</p>
+<h2 id="be-honest-about-what-this-is">Be honest about what this is</h2>
+<p>Those safety nets and levels prevent accidents; they are not a security boundary. The real boundary is your operating system. So do not link a folder whose contents you would not want to lose without a backup. More about that is on <a href="../privacy.html#what-you-control-yourself">Privacy and security</a>.</p>
+<h2 id="where-agent-mode-does-not-exist">Where agent mode does not exist</h2>
+<p>In a project with <strong>Answer only from the sources</strong>, agent mode cannot be picked and scheduled tasks cannot run either. The reason is that a terminal and scripts produce content that is not a source, and that promise can then no longer be kept. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="sources.html"><span class="richting">Previous</span>Sources</a><a class="volgende" href="models.html"><span class="richting">Next</span>Models</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

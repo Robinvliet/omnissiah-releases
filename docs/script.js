@@ -40,7 +40,7 @@
       navKnop.setAttribute("aria-expanded", open ? "true" : "false");
       navKnop.setAttribute(
         "aria-label",
-        open ? "Navigatie verbergen" : "Navigatie tonen",
+        open ? "Hide navigation" : "Show navigation",
       );
     });
   }

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sources - Omnissiah</title>
+    <meta name="description" content="Documents, folders and attachments in one list, and what the model sees of them each turn." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="conversations.html">Conversations</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="sources.html" aria-current="page">Sources</a>
+          <ul class="nav-koppen">
+            <li><a href="#three-lifespans">Three lifespans</a></li>
+            <li><a href="#adding-a-source">Adding a source</a></li>
+            <li><a href="#what-each-source-shows">What each source shows</a></li>
+            <li><a href="#on-and-off-and-where-that-applies">On and off, and where that applies</a></li>
+            <li><a href="#pinning">Pinning</a></li>
+            <li><a href="#fully-in-context-or-searched">Fully in context, or searched</a></li>
+            <li><a href="#attachments">Attachments</a></li>
+            <li><a href="#linked-folders">Linked folders</a></li>
+            <li><a href="#before-the-model-sees-a-source">Before the model sees a source</a></li>
+          </ul>
+        </li>
+        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="mcp-servers.html">MCP servers</a></li>
+        <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="memory.html">Memory</a></li>
+        <li><a href="shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <h1>Sources</h1>
+          <p>A source is everything the model can see in a conversation apart from your messages: a document you add, a folder on your disk that you link, and a file you send along as an attachment. They live in one list, behind the <strong>Sources</strong> button at the top right of a conversation. That button is an icon only.</p>
+<p>Above that list is why it is grouped the way it is: &quot;Everything the model can see in this conversation, grouped by how long it stays.&quot;</p>
+<h2 id="three-lifespans">Three lifespans</h2>
+<p>The groups say how far a source reaches, and every heading explains itself:</p>
+<ul>
+<li><strong>With one message.</strong> &quot;Attached to the message you sent it with, and from then on it goes along every turn, budget included.&quot;</li>
+<li><strong>This conversation.</strong> &quot;Only this conversation sees these sources; other conversations do not.&quot;</li>
+<li><strong>The whole project.</strong> &quot;Every conversation in project X sees these sources.&quot;</li>
+</ul>
+<p>An empty group does not appear.</p>
+<h2 id="adding-a-source">Adding a source</h2>
+<p><strong>From the sources panel</strong> you click <strong>Add</strong>, with two choices: <strong>Document</strong> or <strong>Folder</strong>. Under Document you then pick <strong>Text</strong> (paste or type), <strong>File</strong> (&quot;Upload a PDF, Markdown or text file. The text is extracted and made searchable.&quot;) or <strong>URL</strong> (&quot;Give a URL; the readable content of the page is stored.&quot;).</p>
+<p><strong>From the input bar</strong> the <strong>+</strong> does something else. <strong>Add file</strong> makes an attachment to that one message, and dragging onto the input bar does the same. <strong>Add folder</strong> links a folder to the conversation.</p>
+<p><img src="../afbeeldingen/bronnen-twee-toevoegen-menus.png" alt="At the top the menu behind Add in the sources panel, with Document and Folder. Below it the plus menu on the input bar, with Add file, Insert prompt, Add folder, Skills and Tools." loading="lazy" decoding="async" /></p>
+<p>That difference counts: an attachment belongs to one message, a document to the conversation or the project. You cannot drag anything into the sources panel itself.</p>
+<p>The first document you add takes noticeably longer than the ones after it. Omnissiah downloads a local embedding model once to make your documents searchable; see <a href="../data-and-backup.html#the-embedding-model">Data and backup</a>.</p>
+<h2 id="what-each-source-shows">What each source shows</h2>
+<p>Under the title is what it is, what happens when the source changes on the other end, and roughly what it costs.</p>
+<p><img src="../afbeeldingen/bronnen-regel-per-bron.png" alt="One row in the sources panel: a pin and the title, below it &quot;pinned · Text · Copy of August 6 · ~75 tokens&quot; and &quot;Not used yet&quot;, with the switch and the menu on the right." loading="lazy" decoding="async" /></p>
+<p><strong>When the source changes.</strong> A document is a snapshot: &quot;Copy of August 5&quot;. A folder shows &quot;Always the current files&quot;, because what is there at that moment is what gets read. An attachment shows &quot;Stays as you sent it&quot;: it sits in your message and does not change along with the file on disk.</p>
+<p><strong>What it costs.</strong> An estimate, for example &quot;~1.2k tokens&quot;. An image in your sources says &quot;costs nothing&quot;, because it only comes into view when the model asks for it. A folder gets a dash: &quot;A folder is not in the context; the model reads the files with tools.&quot; To the right of every group heading is the total.</p>
+<p><strong>When the model last saw it.</strong> &quot;Not used yet&quot;, or &quot;Last used on August 5&quot;. With a project source it says &quot;in this project&quot;, because every conversation in that project may have read it.</p>
+<h2 id="on-and-off-and-where-that-applies">On and off, and where that applies</h2>
+<p>Every document has a switch that decides whether it joins in once the assistant starts searching; the label is <strong>Include in search</strong>. In a conversation it touches that conversation only, and the label says so. If a source is off, one of three things is going on:</p>
+<ul>
+<li><strong>off</strong>, in the place where the source belongs.</li>
+<li><strong>off in this conversation</strong>, with a project source you switched off here. The project stays untouched and other conversations still see it.</li>
+<li><strong>off for the whole project.</strong> Then the switch is locked, because you cannot turn it on from a conversation. You do that on the project page.</li>
+</ul>
+<p><img src="../afbeeldingen/bronnen-schakelaarstanden.png" alt="The sources list with the groups &quot;This conversation&quot; and &quot;The whole project&quot;. From top to bottom a folder without a switch, a source that is off, a pinned source that is on, a source that is off for the whole project, and a project source that is off in this conversation." loading="lazy" decoding="async" /></p>
+<p>Folders, images and attachments have none: they are not in the searchable part, so there is nothing to switch.</p>
+<h2 id="pinning">Pinning</h2>
+<p>In the menu of a document is <strong>Pin</strong>: &quot;Always goes along in full in the context, even when the rest becomes searchable.&quot; The word &quot;pinned&quot; then appears on the row.</p>
+<p>Where pinning would do nothing the menu item is missing, instead of being offered greyed out. That applies to folders and to sources you inherit from a project.</p>
+<h2 id="fully-in-context-or-searched">Fully in context, or searched</h2>
+<p>If everything fits into the context together, it goes along whole: &quot;Goes along in full in the conversation&#39;s context.&quot; If it does not fit, it becomes searchable: &quot;Gets searched as soon as a question calls for it.&quot; That choice applies to your whole collection and is made again every turn, so it sits as one line above the list and not per source.</p>
+<p>You set the limit under <strong>Settings → General → Defaults</strong>, field <strong>Sources fully in context up to (tokens)</strong>, 200,000 by default. There is always a second limit of half the context window of the chosen model as well, so with a small model that one wins.</p>
+<p>If your pinned sources together no longer fit under it, they go along in full anyway and the line warns you: &quot;Unpin one, or raise the limit in Settings.&quot; If they do not fit in the model itself, the turn refuses up front and the message names which sources they are, instead of an incomprehensible provider error halfway through.</p>
+<h2 id="attachments">Attachments</h2>
+<p>You send at most five attachments per message, up to 10 MB each, and images and PDFs only.</p>
+<p>An attachment has no switch, no pin, and you cannot rename or delete it. It sits in your message, and that is history: it <em>does</em> go along, every turn again. Instead of a read stamp it says which message it belongs to, with a jump to it: &quot;With your message of August 5 at 02:03 PM&quot;.</p>
+<p>You make it lasting with <strong>Keep in this conversation</strong>, or in a project conversation <strong>Keep in project &quot;X&quot;</strong>. After that it is an ordinary document you can read back, search, rename and pin. Your message keeps its attachment, and precisely for that reason the text does not go along a second time: the row then says &quot;also in your message&quot;.</p>
+<p>If a conversation gets so long that the oldest turns are summarised, an attachment falls outside it and the row says &quot;summarised, no longer counts&quot;. The message stays and so does the attachment, but it no longer reserves any room.</p>
+<h2 id="linked-folders">Linked folders</h2>
+<p><strong>Before you link, you see what you link.</strong> The confirmation names how many files come into view including subfolders, how many fall away because of the fixed exclusions, and how many folders could not be read. Behind <strong>which</strong> are the five groups that stay out: dependencies and build output, caches, version control, compilation artifacts and system files. Those simply stay on your disk. You can still say no here.</p>
+<p><img src="../afbeeldingen/bronnen-map-koppelen.png" alt="The confirmation before linking: the folder name, the full path, &quot;20 files come into view, including subfolders&quot;, &quot;28 files fall away because of the fixed exclusions (which)&quot;, and the buttons Cancel and Link." loading="lazy" decoding="async" /></p>
+<p>There is no limit that stops you from linking a large folder. With a very large one the <em>counting</em> is cut short; then the numbers say &quot;At least&quot; and the dialog says they are a lower bound.</p>
+<p><strong>Your own material does stay in</strong>, including videos, recordings and archives: a folder of interviews that looks empty is worse than a longer list.</p>
+<p><strong>One thing is never opened:</strong> files with a dot at the start, and key files. You see <em>that</em> your <code>.env</code> is there, but the assistant does not read it of its own accord.</p>
+<p>Expand a folder in the panel and you see exactly the same selection as the assistant, with how much is in the whole tree underneath.</p>
+<p><strong>A folder that has disappeared from disk</strong> does not fall away quietly. The row states the reason, for example &quot;Not available: this folder no longer exists on this computer&quot;, with <strong>Link again</strong> in the menu. The other reasons are that the folder may not be read, that the path is no longer a folder, or that it lies outside the allowed location. The model gets that same message, so it does not answer confidently from an incomplete picture.</p>
+<p>If something changed since the last time, it says &quot;Files have been added, removed or renamed since then.&quot; That is exactly what is measured: about the <em>content</em> of a file that line makes no claim at all.</p>
+<h2 id="before-the-model-sees-a-source">Before the model sees a source</h2>
+<p>Everything that comes in from outside your conversation is first assessed for instructions that are not yours. What gets scanned, what a flag does and does not mean and what you do about it is on <a href="../privacy.html#what-comes-in-is-looked-at-first">Privacy and security</a>.</p>
+<p>If you work in a project with <strong>Answer only from the sources</strong>, stricter rules apply and the assistant refers to the source for every claim. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="projects.html"><span class="richting">Previous</span>Projects</a><a class="volgende" href="agent-mode.html"><span class="richting">Next</span>Agent mode</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

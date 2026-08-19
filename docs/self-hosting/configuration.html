@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Configuration - Omnissiah</title>
+    <meta name="description" content="The settings in .env, and which folder the assistant may read and write." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../using/index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="../using/conversations.html">Conversations</a></li>
+        <li><a href="../using/projects.html">Projects</a></li>
+        <li><a href="../using/sources.html">Sources</a></li>
+        <li><a href="../using/agent-mode.html">Agent mode</a></li>
+        <li><a href="../using/models.html">Models</a></li>
+        <li><a href="../using/mcp-servers.html">MCP servers</a></li>
+        <li><a href="../using/scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="../using/personas.html">Personas</a></li>
+        <li><a href="../using/skills.html">Skills</a></li>
+        <li><a href="../using/memory.html">Memory</a></li>
+        <li><a href="../using/shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="web-version.html">Web version</a></li>
+        <li><a href="configuration.html" aria-current="page">Configuration</a>
+          <ul class="nav-koppen">
+            <li><a href="#the-variables">The variables</a></li>
+            <li><a href="#setting-api-keys">Setting API keys</a></li>
+            <li><a href="#which-folder-the-assistant-may-see">Which folder the assistant may see</a></li>
+          </ul>
+        </li>
+        <li><a href="on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Self-hosting</a></p>
+          <h1>Configuration</h1>
+          <p>All settings for the web version live in <code>.env</code>, copied from <code>.env.example</code>. Most of them you never need to touch.</p>
+<p>The desktop app manages its own <code>.env</code> in the app data folder and handles this through Settings; this page is about self-hosting.</p>
+<h2 id="the-variables">The variables</h2>
+<div class="tabel-scroll"><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>APP_BIND</code></td>
+<td><code>127.0.0.1</code></td>
+<td>(Docker) Which host address the port is published on. Localhost only by default.</td>
+</tr>
+<tr>
+<td><code>APP_PORT</code></td>
+<td><code>3000</code></td>
+<td>(Docker) The port on your computer. Set it to <code>3001</code>, for example, if 3000 is taken.</td>
+</tr>
+<tr>
+<td><code>OMNISSIAH_AUTH_SECRET</code></td>
+<td>empty</td>
+<td>Secret for signing your login session. Leave it empty: Omnissiah generates one and stores it here.</td>
+</tr>
+<tr>
+<td><code>GOOGLE_GENERATIVE_AI_API_KEY</code></td>
+<td>empty</td>
+<td>Google Gemini key.</td>
+</tr>
+<tr>
+<td><code>ANTHROPIC_API_KEY</code></td>
+<td>empty</td>
+<td>Anthropic Claude key.</td>
+</tr>
+<tr>
+<td><code>TAVILY_API_KEY</code></td>
+<td>empty</td>
+<td>Tavily key for web search.</td>
+</tr>
+<tr>
+<td><code>LOCAL_AI_BASE_URL</code></td>
+<td>empty</td>
+<td>Base URL of a local, OpenAI-compatible server. See <a href="../using/models.html">Models</a>.</td>
+</tr>
+<tr>
+<td><code>LOCAL_AI_API_KEY</code></td>
+<td>empty</td>
+<td>Optional token for that local server. Only needed with authentication; Ollama does not have it.</td>
+</tr>
+<tr>
+<td><code>WORKING_DIR_ROOT</code></td>
+<td>your home folder</td>
+<td>The folder within which you can link a local folder to a conversation. See below.</td>
+</tr>
+<tr>
+<td><code>OMNISSIAH_DATA_DIR</code></td>
+<td>the project dir</td>
+<td>Base folder for <code>data/</code>, <code>skills/</code> and <code>.env</code>. Leave it empty, in Docker too.</td>
+</tr>
+</tbody></table></div>
+<h2 id="setting-api-keys">Setting API keys</h2>
+<p>There are two ways. Pick one.</p>
+<p><strong>In the app</strong>, which is the easiest: go to Settings → Models and paste your keys there. Omnissiah checks them live and writes them to <code>.env</code>. This works immediately, without a restart.</p>
+<p><strong>Up front in <code>.env</code></strong>: fill in the values before starting. If you edit <code>.env</code> by hand later, restart the app, in Docker with <code>docker compose up -d</code>, so the new values are read.</p>
+<p>Keys are read server-side only and never reach the browser.</p>
+<h2 id="which-folder-the-assistant-may-see">Which folder the assistant may see</h2>
+<p>With &quot;Add folder&quot; in the plus menu of the input bar you link a folder to a conversation. The assistant can then read the files in that folder, and in agent mode edit them too.</p>
+<p>How you point at that folder differs per way of running:</p>
+<ul>
+<li><strong>Desktop app:</strong> your system&#39;s normal folder picker, Finder or Explorer. Whatever you point at is allowed, including an external drive.</li>
+<li><strong>Web version:</strong> a browser cannot open such a picker, so you browse in a dialog of our own starting at <code>WORKING_DIR_ROOT</code>, your home folder by default. Anything outside it is not reachable. Set a specific path to narrow it down, or <code>*</code> for no limit.</li>
+<li><strong>Docker:</strong> the container only sees your host folders if you mount them. Add a volume in <code>docker-compose.yml</code>, for example <code>- /Users/you/projects:/work</code>, and set <code>WORKING_DIR_ROOT=/work</code> in <code>.env</code>.</li>
+</ul>
+<p>What the model may touch does not change here: the file tools always work inside the chosen working folder itself, not inside the root. <code>WORKING_DIR_ROOT</code> only decides what you <em>can</em> pick.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="web-version.html"><span class="richting">Previous</span>Web version</a><a class="volgende" href="on-your-phone.html"><span class="richting">Next</span>On your phone</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

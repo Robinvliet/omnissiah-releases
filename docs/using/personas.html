@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Personas - Omnissiah</title>
+    <meta name="description" content="Giving the assistant a fixed role and tone, alone or in a group that answers together or separately." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="conversations.html">Conversations</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="sources.html">Sources</a></li>
+        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="mcp-servers.html">MCP servers</a></li>
+        <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="personas.html" aria-current="page">Personas</a>
+          <ul class="nav-koppen">
+            <li><a href="#making-one">Making one</a></li>
+            <li><a href="#switching-one-on-in-a-running-conversation">Switching one on in a running conversation</a></li>
+            <li><a href="#who-wins-in-a-conflict">Who wins in a conflict</a></li>
+            <li><a href="#persona-groups">Persona groups</a></li>
+            <li><a href="#deleting">Deleting</a></li>
+            <li><a href="#a-persona-is-an-instruction-not-a-source">A persona is an instruction, not a source</a></li>
+          </ul>
+        </li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="memory.html">Memory</a></li>
+        <li><a href="shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <h1>Personas</h1>
+          <p>A persona is a name plus a system prompt: a description of how the assistant behaves in this conversation. Switch one on and it <strong>replaces</strong> the standard instructions of Omnissiah; it does not come on top of them.</p>
+<p>They live behind <strong>Prompts</strong> in the sidebar, together with your saved prompts. That button takes you to the page <strong>Prompts</strong>, with three tabs: <strong>Prompts</strong>, <strong>Personas</strong> and <strong>Persona groups</strong>. The tab is in the address, so <code>/prompts?tab=personas</code> opens this one right away.</p>
+<h2 id="making-one">Making one</h2>
+<p>On the <strong>Personas</strong> tab you click <strong>New persona</strong>. You fill in two fields:</p>
+<ul>
+<li><strong>Name</strong>, for example &quot;Critical editor&quot;.</li>
+<li><strong>System prompt</strong>: &quot;Describe how this persona behaves…&quot;</li>
+</ul>
+<p>On the page every row starts a <strong>New chat</strong> with that persona on it. In the menu next to it are <strong>Edit</strong> and <strong>Delete</strong>.</p>
+<h2 id="switching-one-on-in-a-running-conversation">Switching one on in a running conversation</h2>
+<p>Click the <strong>+</strong> on the input bar and choose <strong>Insert prompt</strong>. That opens a window with the same three sections in a list on the left - deliberately no navigation, because you are in the middle of a conversation. Go to <strong>Personas</strong> there. What you get is a compact version: pick an existing persona from the dropdown or make one with <strong>New</strong>, and click <strong>Start persona</strong>. If you change the text of an existing persona, that change is saved as soon as you start it.</p>
+<p>An active persona appears as a chip above the input bar, with a cross to switch it off again.</p>
+<h2 id="who-wins-in-a-conflict">Who wins in a conflict</h2>
+<p>If you work in a project, your project instructions and your persona are both in the prompt. The order is: project first, then the conversation. The more specific layer comes later and therefore wins. See <a href="projects.html#instructions">Projects</a>.</p>
+<h2 id="persona-groups">Persona groups</h2>
+<p>A group is a list of personas you put on a conversation in one go. On the <strong>Persona groups</strong> tab you make one with <strong>New group</strong>: a name, and the members underneath. You add members with <strong>Add persona…</strong>, drag them by the handle to order them (the keyboard works too) and take them out again with the cross. A group without members cannot be saved.</p>
+<p>You <strong>pick the mode when starting</strong>, not when making it. Next to the start button is an arrow with two choices:</p>
+<ul>
+<li><strong>Joint answer</strong> - &quot;The personas give one answer together.&quot; The system prompts of the members are merged, in the order you set, into one instruction: combine those perspectives and speak with one voice. So you get one answer, just as usual.</li>
+<li><strong>Separate replies</strong> - &quot;Every persona replies on its own.&quot; Your question gets several answers underneath each other, each as its own card with the name of the persona above it and its own stop button while it writes.</li>
+</ul>
+<p>With separate replies every persona runs <strong>its own thread</strong>: it sees all your messages and its own earlier answers, but not those of the others. So they do not influence each other, and that is the point of the setting.</p>
+<p>The main button always starts in <strong>Joint answer</strong>; the arrow is there for the other choice.</p>
+<h2 id="deleting">Deleting</h2>
+<p>A persona can always be deleted, even when it is still switched on somewhere. The confirmation says what happens then: &quot;Active conversations with this persona fall back to the default system prompt.&quot; With a group the same applies, and it says that the personas themselves stay.</p>
+<h2 id="a-persona-is-an-instruction-not-a-source">A persona is an instruction, not a source</h2>
+<p>That difference counts in a project with <strong>Answer only from the sources</strong>. What you write in a persona is simply in the prompt, but it carries no source number and can therefore not be cited as a source. The promise is about where the answer comes <em>from</em>, not about how the assistant writes. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="scheduled-tasks.html"><span class="richting">Previous</span>Scheduled tasks</a><a class="volgende" href="skills.html"><span class="richting">Next</span>Skills</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

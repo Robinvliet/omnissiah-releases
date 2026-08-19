@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Memory - Omnissiah</title>
+    <meta name="description" content="What the assistant remembers about you between conversations, where it lives and how you clear it." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="conversations.html">Conversations</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="sources.html">Sources</a></li>
+        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="mcp-servers.html">MCP servers</a></li>
+        <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="memory.html" aria-current="page">Memory</a>
+          <ul class="nav-koppen">
+            <li><a href="#two-lists">Two lists</a></li>
+            <li><a href="#how-it-fills-up">How it fills up</a></li>
+            <li><a href="#suggestions-from-conversations">Suggestions from conversations</a></li>
+            <li><a href="#the-room-per-list">The room per list</a></li>
+            <li><a href="#on-and-off">On and off</a></li>
+            <li><a href="#what-the-model-sees-exactly">What the model sees exactly</a></li>
+            <li><a href="#where-it-does-not-count">Where it does not count</a></li>
+            <li><a href="#clearing">Clearing</a></li>
+            <li><a href="#and-privacy">And privacy</a></li>
+          </ul>
+        </li>
+        <li><a href="shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <h1>Memory</h1>
+          <p>A conversation knows nothing of another conversation. Memory is the exception: a small list of things about you that goes along in <em>every</em> conversation, so you do not have to explain who you are and how you work every time.</p>
+<p>You manage it under <strong>Settings → Memory</strong>: &quot;What the assistant remembers about you. Also readable as <code>data/memory.md</code>; you edit it here.&quot;</p>
+<h2 id="two-lists">Two lists</h2>
+<ul>
+<li><strong>User profile</strong> - &quot;Who you are: role, preferences, style, how you want to be addressed.&quot;</li>
+<li><strong>Facts</strong> - &quot;Loose lasting facts from earlier conversations.&quot;</li>
+</ul>
+<p>They stand apart, each with its own switch and its own room. An item moves to the other list with <strong>To Facts</strong> or <strong>To Profile</strong>.</p>
+<h2 id="how-it-fills-up">How it fills up</h2>
+<p>Mostly by itself. If the assistant learns something lasting about you during a conversation, or a clear preference, it writes it down. It is supposed to be restrained about that: no temporary conversation details and no task progress. If something is out of date it updates the existing item instead of putting a second version next to it.</p>
+<p>You can do it yourself too: at the bottom of each list is an input field with <strong>Add</strong>. Click an existing item to edit it (Enter saves, Escape cancels), or use <strong>Delete</strong>.</p>
+<p>Ask in a conversation what the assistant knows about you and it can call up its whole memory and read it back to you.</p>
+<h2 id="suggestions-from-conversations">Suggestions from conversations</h2>
+<p>Besides what the assistant stores directly during a conversation, a helper model looks back after every turn to see whether something lasting about you came up. If it finds something, a suggestion appears at the top of the Memory tab: the fact, the reason, and a quote from your own message that it rests on - so approving is not a matter of blind trust. Nothing is stored until you click <strong>Approve</strong>; <strong>Reject</strong> drops it, and the assistant will not suggest that same text again for two weeks.</p>
+<p>If a list is already full, the suggestion comes with a proposal attached: which existing item it would replace. That item is shown struck through with the suggestion.</p>
+<p>This is the same post-turn review that also looks at your <a href="skills.html#skills-that-arise-by-themselves">skills</a>, with at most one memory suggestion at a time and a ceiling that skill and memory suggestions share: <strong>Suggestions per conversation</strong> under Settings → General → Helper tasks, 3 by default. If you would rather have no memory suggestions at all, that is what <strong>Self-learning memory</strong> in the same place is for.</p>
+<p>With a scheduled task none of this happens: there is nobody to put anything to.</p>
+<h2 id="the-room-per-list">The room per list</h2>
+<p>Under each list it says &quot;In use: 1,850/2,200 characters&quot;. By default that is 1,375 characters for your profile and 2,200 for the facts; the <strong>Limit</strong> field next to it changes that.</p>
+<p>Characters, not tokens, and that is deliberate: it makes the limit mean the same thing on every model. If a list is full the assistant cannot add anything and is told to clear up first. The counter then turns warning-coloured.</p>
+<p>It is a small budget, and that is how it should be. Memory goes along in <em>every</em> turn in <em>every</em> conversation; it is a short summary of who you are, not an archive. For documents and longer notes you have <a href="sources.html">Sources</a>.</p>
+<h2 id="on-and-off">On and off</h2>
+<p>Each list has a switch, with underneath it what switching off does: &quot;Off = not in the assistant&#39;s context.&quot; A list that is off is also invisible when the assistant calls up its memory, and nothing can be stored in it.</p>
+<p>This is the only place where memory goes on or off. Unlike tools and skills there is no switch per conversation.</p>
+<h2 id="what-the-model-sees-exactly">What the model sees exactly</h2>
+<p>If there is anything in it, the assistant gets one block in its instructions: first your profile, then the remembered facts. If you filled in a name under <strong>What should Omnissiah call you?</strong>, that is in there too, with the instruction to address you that way.</p>
+<p>Nothing else. Your conversations are not searched to fill the block; what is in it is exactly what you see in Settings.</p>
+<h2 id="where-it-does-not-count">Where it does not count</h2>
+<p>In a project with <strong>Answer only from the sources</strong> the assistant cannot call up its memory, and the block that <em>is</em> in the prompt does not count as a source there: it carries no source number, so you cannot base a claim on it. The contract is about where an answer comes from. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
+<h2 id="clearing">Clearing</h2>
+<p>Per item with <strong>Delete</strong>; clearing everything is deleting every item. There is no undo, but there is your backup.</p>
+<p>Memory itself lives in the database in your data folder, with <code>data/memory.md</code> as a readable copy next to it: edit that copy and nothing changes, because the database is the source. To start completely fresh with everything, you delete the whole data folder; see <a href="../data-and-backup.html#starting-fresh">Data and backup</a>.</p>
+<h2 id="and-privacy">And privacy</h2>
+<p>Memory sits on your own machine and goes nowhere except, as part of the prompt, to the model provider you linked yourself. Switch the lists off and even that stops. See <a href="../privacy.html#what-does-leave-your-machine">Privacy and security</a>.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="skills.html"><span class="richting">Previous</span>Skills</a><a class="volgende" href="shortcuts.html"><span class="richting">Next</span>Shortcuts</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

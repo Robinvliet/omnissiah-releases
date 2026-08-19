@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>What is Omnissiah - Omnissiah</title>
-    <meta name="description" content="An AI, agent and research workspace that runs entirely on your own machine." />
+    <title>Data and backup - Omnissiah</title>
+    <meta name="description" content="Where your conversations and settings live, and how to make a copy." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -98,13 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="index.html" aria-current="page">What is Omnissiah</a>
-          <ul class="nav-koppen">
-            <li><a href="#what-is-in-it">What is in it</a></li>
-            <li><a href="#where-to-start">Where to start</a></li>
-            <li><a href="#what-it-is-not">What it is not</a></li>
-          </ul>
-        </li>
+        <li><a href="index.html">What is Omnissiah</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -141,7 +135,14 @@
     </div>
     <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="data-and-backup.html">Data and backup</a></li>
+        <li><a href="data-and-backup.html" aria-current="page">Data and backup</a>
+          <ul class="nav-koppen">
+            <li><a href="#what-is-in-it">What is in it</a></li>
+            <li><a href="#making-a-backup">Making a backup</a></li>
+            <li><a href="#starting-fresh">Starting fresh</a></li>
+            <li><a href="#the-embedding-model">The embedding model</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
     <div class="nav-groep">
@@ -158,26 +159,45 @@
       <main class="vlak" id="inhoud">
         <article class="prose">
           
-          <h1>What is Omnissiah</h1>
-          <p>Omnissiah is an AI workspace that runs on your own computer. You talk to models from Google and Anthropic through your own API keys, to an endpoint you connect yourself (OpenRouter, Groq or your own gateway), or to models that live locally on your machine. There is no account, no subscription and no server owned by someone else: the app starts a server on your own machine that is only reachable there, and all your conversations live in a single file on your own disk.</p>
-<h2 id="what-is-in-it">What is in it</h2>
+          <h1>Data and backup</h1>
+          <p>Everything lives in one data folder. Where that is depends on how you run Omnissiah:</p>
 <ul>
-<li><strong><a href="using/conversations.html">Conversations</a></strong> with multiple models side by side, and per conversation a choice of chat, agent or deep research.</li>
-<li><strong><a href="using/projects.html">Projects</a></strong> to group related conversations, with shared instructions and shared sources. A project can be set to <strong>Answer only from the sources</strong>, and then it only knows chat.</li>
-<li><strong><a href="using/sources.html">Sources</a></strong> per conversation or per project: documents, linked folders and attached files in one list, each showing roughly what it costs and when the model last used it. If everything fits in the context it goes along in full; otherwise the assistant searches it and points to the source with clickable citations.</li>
-<li><strong><a href="using/agent-mode.html">Agent mode</a></strong> with a linked folder, file tools and a terminal, behind approval levels you set yourself.</li>
-<li><strong><a href="using/scheduled-tasks.html">Scheduled tasks</a></strong> that run on a schedule without you, in their own task conversation.</li>
-<li><strong><a href="using/memory.html">Memory</a></strong>, <strong><a href="using/skills.html">skills</a></strong>, <strong><a href="using/personas.html">personas</a></strong> and <strong><a href="using/mcp-servers.html">MCP servers</a></strong> to adapt the assistant to how you work.</li>
+<li><strong>Desktop app:</strong> your operating system&#39;s app data folder. macOS: <code>~/Library/Application Support/Omnissiah</code>. Windows: <code>%APPDATA%\Omnissiah</code>.</li>
+<li><strong>Web version (Docker or Node):</strong> folders next to the project.</li>
 </ul>
-<h2 id="where-to-start">Where to start</h2>
-<p>Download the installer from the <a href="https://robinvliet.github.io/omnissiah-releases/">download page</a> and then work through <a href="getting-started/index.html">Getting started</a>: install, add a key or a local model, and have your first conversation.</p>
-<p>If you would rather run Omnissiah as a web app instead of the desktop app, for example to use it on your phone too, that lives under <a href="self-hosting/index.html">Self-hosting</a>.</p>
-<h2 id="what-it-is-not">What it is not</h2>
-<p>Omnissiah is for one person on one machine. There are no user accounts, no shared workspaces and no sync between devices. Email and calendar are deliberately not part of it.</p>
-<p>The app does talk to the outside world, but only when you ask it to: to the model provider you added a key for, to the search engine when you turn on web search, and to the pages you have it fetch. What exactly happens there, and why the setup is safe, is on <a href="privacy.html">Privacy and security</a>.</p>
+<h2 id="what-is-in-it">What is in it</h2>
+<div class="tabel-scroll"><table>
+<thead>
+<tr>
+<th>Path in the data folder</th>
+<th>Contents</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>data/</code></td>
+<td>the database (<code>omnissiah.db</code>) with all your conversations, projects, sources and settings, the memory mirror (<code>memory.md</code>), the folder snapshots (<code>snapshots/</code>) and the local embedding model that makes your documents searchable (<code>models/</code>)</td>
+</tr>
+<tr>
+<td><code>skills/</code></td>
+<td>your own skills, each as <code>&lt;name&gt;/SKILL.md</code>. Empty at the start; everything you save lands here</td>
+</tr>
+<tr>
+<td><code>.env</code></td>
+<td>your keys and the session secret</td>
+</tr>
+</tbody></table></div>
+<p>The database is a single file and the rest is ordinary markdown. There is no export step: what you see on disk <em>is</em> your data. Original files you added as a source (PDFs and images) live inside the database as well, so they travel with that one file.</p>
+<h2 id="making-a-backup">Making a backup</h2>
+<p>Copy the data folder while the app is not running. Restoring is putting the copy back. There is nothing more to it.</p>
+<p>Do it with the app closed. A database still being written to while you copy it can leave you with a half-finished file.</p>
+<h2 id="starting-fresh">Starting fresh</h2>
+<p>Close the app and delete the data folder. That wipes all your conversations, projects and settings; there is no undo. Make a copy first if you are in doubt.</p>
+<h2 id="the-embedding-model">The embedding model</h2>
+<p>When you add your first document as a source, Omnissiah downloads a local embedding model to <code>data/models</code> once. That is roughly 465 MB, so it takes a moment. After that it is cached, and it is immediately the largest part of your backup: much bigger than the database itself.</p>
+<p>Everything stays on your own machine: no document text goes out to be made searchable.</p>
 
         </article>
-        <nav class="voetnav" aria-label="Previous and next page"><a class="volgende" href="getting-started/index.html"><span class="richting">Next</span>Getting started</a></nav>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="self-hosting/on-your-phone.html"><span class="richting">Previous</span>On your phone</a><a class="volgende" href="troubleshooting.html"><span class="richting">Next</span>Troubleshooting</a></nav>
       </main>
     </div>
 

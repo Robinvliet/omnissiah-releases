@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Projects - Omnissiah</title>
+    <meta name="description" content="Grouping conversations around one subject, with shared instructions and shared sources." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="conversations.html">Conversations</a></li>
+        <li><a href="projects.html" aria-current="page">Projects</a>
+          <ul class="nav-koppen">
+            <li><a href="#instructions">Instructions</a></li>
+            <li><a href="#the-sources-of-a-project">The sources of a project</a></li>
+            <li><a href="#conversations-in-and-out-of-a-project">Conversations in and out of a project</a></li>
+            <li><a href="#answer-only-from-the-sources">Answer only from the sources</a></li>
+            <li><a href="#turning-the-setting-off-again">Turning the setting off again</a></li>
+          </ul>
+        </li>
+        <li><a href="sources.html">Sources</a></li>
+        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="mcp-servers.html">MCP servers</a></li>
+        <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="memory.html">Memory</a></li>
+        <li><a href="shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <h1>Projects</h1>
+          <p>A project bundles conversations around one subject. What you set at project level applies to every conversation in it: your instructions, your sources and any linked folder. You make one through <strong>Projects</strong> in the sidebar and then <strong>New project</strong>; a name is all you need.</p>
+<p>On the project page you start conversations with the input bar at the top. On the right is the column <strong>About this project</strong>, with everything the project shares.</p>
+<h2 id="instructions">Instructions</h2>
+<p>Under <strong>Instructions</strong> you put what should apply in every conversation in this project: a role, a tone, fixed guidelines. 8,000 characters at most.</p>
+<p>Watch the order when they contradict, because it is the other way round from what you might expect. The dialog says so itself: &quot;Apply to every conversation in this project; the conversation itself (persona or system prompt) wins when they contradict.&quot; Your project instructions are the broad layer; an active persona is the more specific one and wins.</p>
+<h2 id="the-sources-of-a-project">The sources of a project</h2>
+<p>Under <strong>Sources</strong> is what every conversation in this project can see: documents and linked folders. There is no separate working-folder section; a folder is simply a source.</p>
+<p>In a conversation they appear in the group <strong>The whole project</strong>. You can look at them there and switch them off per conversation, but renaming and deleting you do on the project page: that is where they belong. The other way round, you lift a source out of a conversation with <strong>Move to the project</strong>. How that list works is on <a href="sources.html">Sources</a>.</p>
+<h2 id="conversations-in-and-out-of-a-project">Conversations in and out of a project</h2>
+<p>A conversation you start on the project page belongs to it right away. An existing conversation you drag onto the project in the sidebar, or you pick <strong>Move to project</strong> in the menu of that conversation. Getting it out again you do with <strong>Remove from project</strong>.</p>
+<p>There is no confirmation, so know what it does: unlinking or moving makes <em>all</em> project context lapse. The instructions no longer apply, the project sources and the project folder are gone, and the exceptions you had made on project sources in that conversation disappear with them. The conversation and its messages stay in full.</p>
+<p>Deleting a whole project <em>does</em> ask for confirmation, and it tells you case by case what happens to the conversations, the working folder and the documents.</p>
+<h2 id="answer-only-from-the-sources">Answer only from the sources</h2>
+<p>Above the sources list is a switch with that name. Turn it on and <em>every</em> conversation in this project behaves differently. The line underneath says what it promises:</p>
+<blockquote>
+<p>The assistant uses only what is in this project and says so when the answer is not in there. No web searches, no MCP servers, no Agent or Research mode and no scheduled tasks.</p>
+</blockquote>
+<p>On top of that, the assistant can no longer search your other conversations and cannot consult its memory. Agent and Research cannot be picked; if a conversation is already in one of those modes it visibly falls back to Chat with the reason.</p>
+<p><strong>What the setting does not promise</strong> is stated literally as soon as you turn it on:</p>
+<blockquote>
+<p>What the model knows from its training is not switched off here; no more than your project instructions, your persona, what has been remembered about you and your active skills. Those are simply in the prompt. What the contract does do is close off every route along which the assistant fetches something extra while answering.</p>
+</blockquote>
+<p><strong>With a linked folder the promise is smaller</strong>, and the sources panel says so: &quot;With a linked folder the promise covers what has been read, not everything in it.&quot;</p>
+<h3 id="where-the-answer-comes-from">Where the answer comes from</h3>
+<p>The assistant refers to its source for every claim, and those references are clickable: a document opens on the passage itself, an attachment jumps to the message you sent it with, a folder opens the sources panel. If the answer is not in your sources, it <em>says</em> so, with two ways out: add a source, or turn the setting off.</p>
+<p>Under the message is what came of that contract. There are three labels, and an answer that comes entirely from your sources deliberately carries none:</p>
+<ul>
+<li><strong>partly from your sources.</strong> Part of it comes from your sources; for the rest the assistant said it is not in there.</li>
+<li><strong>not in your sources.</strong> Your sources do not cover the answer. This is the only label where the app names an action itself: add a source, or turn the setting off on the project page.</li>
+<li><strong>not grounded</strong>, in warning colour. The answer does not refer to a source, or refers to something that is not in there. The app says one thing about it: read it with extra care.</li>
+</ul>
+<p>That last label also lands on an answer that makes no claim at all, such as a counter-question. Then nothing is wrong; there is simply nothing to refer to.</p>
+<h2 id="turning-the-setting-off-again">Turning the setting off again</h2>
+<p>The same switch, and nothing is left behind: the web tools and MCP servers work again, Agent and Research can be picked again, and scheduled tasks can run again. Answers you already got keep their label, because that is about the turn they were given in.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="conversations.html"><span class="richting">Previous</span>Conversations</a><a class="volgende" href="sources.html"><span class="richting">Next</span>Sources</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MCP servers - Omnissiah</title>
+    <meta name="description" content="Hanging extra tools on the assistant through the Model Context Protocol, and deciding per conversation which may join." />
+    <meta name="color-scheme" content="light dark" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stijl.css" />
+
+    <script>
+      // Anti-flits: het opgeslagen thema staat op <html> vóór de eerste paint.
+      // Zelfde patroon als src/components/pre-paint-init.tsx in de app. Zonder
+      // JavaScript valt de site terug op prefers-color-scheme; de stylesheet
+      // dekt dat geval apart af, dus dan is er niets stuk.
+      (function () {
+        // .js vertelt de stylesheet dat de nav-knop bruikbaar is; zonder deze
+        // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
+        document.documentElement.classList.add("js");
+        try {
+          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          if (keuze === "donker")
+            document.documentElement.classList.add("dark");
+          if (keuze === "licht")
+            document.documentElement.classList.add("licht");
+        } catch {
+          /* localStorage geblokkeerd: prefers-color-scheme doet de rest. */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="overslaan" href="#inhoud">Skip to content</a>
+
+    <header class="kop">
+      <a class="merk" href="../index.html">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="52"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M256 140 L170 372" />
+            <path d="M256 140 L342 372" />
+            <path d="M205 300 L307 300" />
+          </g>
+        </svg>
+        <span>Omnissiah</span>
+        <span class="merk-sectie">Documentation</span>
+      </a>
+
+      <div class="kop-acties">
+        <a
+          class="kop-link"
+          href="https://robinvliet.github.io/omnissiah-releases/"
+          >Download</a
+        >
+        <button
+          class="kop-knop"
+          type="button"
+          id="thema-knop"
+          aria-label="Switch between light and dark"
+        >
+          <svg class="icoon-zon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            />
+          </svg>
+          <svg class="icoon-maan" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+          </svg>
+        </button>
+        <button
+          class="kop-knop kop-knop-nav"
+          type="button"
+          id="nav-knop"
+          aria-expanded="false"
+          aria-controls="zijbalk"
+          aria-label="Show navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="raster">
+      <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../index.html">What is Omnissiah</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../getting-started/index.html" class="nav-kop">Getting started</a>
+      <ul class="nav-lijst">
+        <li><a href="../getting-started/installation.html">Installation</a></li>
+        <li><a href="../getting-started/first-steps.html">First steps</a></li>
+        <li><a href="../getting-started/updating.html">Updating</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <ul class="nav-lijst">
+        <li><a href="conversations.html">Conversations</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="sources.html">Sources</a></li>
+        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="models.html">Models</a></li>
+        <li><a href="mcp-servers.html" aria-current="page">MCP servers</a>
+          <ul class="nav-koppen">
+            <li><a href="#remote-http-or-sse">Remote (HTTP or SSE)</a></li>
+            <li><a href="#local-stdio">Local (stdio)</a></li>
+            <li><a href="#adding-is-a-test">Adding is a test</a></li>
+            <li><a href="#switching-on-per-conversation">Switching on per conversation</a></li>
+            <li><a href="#what-you-see-in-a-conversation">What you see in a conversation</a></li>
+            <li><a href="#approval">Approval</a></li>
+            <li><a href="#when-a-server-does-not-work">When a server does not work</a></li>
+          </ul>
+        </li>
+        <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="memory.html">Memory</a></li>
+        <li><a href="shortcuts.html">Shortcuts</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep heeft-kop">
+      <a href="../self-hosting/index.html" class="nav-kop">Self-hosting</a>
+      <ul class="nav-lijst">
+        <li><a href="../self-hosting/web-version.html">Web version</a></li>
+        <li><a href="../self-hosting/configuration.html">Configuration</a></li>
+        <li><a href="../self-hosting/on-your-phone.html">On your phone</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../data-and-backup.html">Data and backup</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../troubleshooting.html">Troubleshooting</a></li>
+      </ul>
+    </div>
+    <div class="nav-groep">
+      <ul class="nav-lijst">
+        <li><a href="../privacy.html">Privacy and security</a></li>
+      </ul>
+    </div></nav>
+
+      <main class="vlak" id="inhoud">
+        <article class="prose">
+          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <h1>MCP servers</h1>
+          <p>Through <strong>Settings → Tools</strong> you link MCP servers that give the model extra tools, for example access to a file system, git or an external service. Per conversation you then switch on which tools may join. The page says it in one line: &quot;MCP servers give the model extra tools: remotely over HTTP/SSE, or locally over stdio (a command that runs as a process each turn). Switchable per conversation.&quot;</p>
+<p>There are two flavours.</p>
+<h2 id="remote-http-or-sse">Remote (HTTP or SSE)</h2>
+<p>A URL, optionally with an Authorization header. The server runs somewhere else; Omnissiah only talks to it.</p>
+<h2 id="local-stdio">Local (stdio)</h2>
+<p>A command that Omnissiah starts as a process at the beginning of a turn and shuts down again afterwards. This is the most common type for personal use: the official servers for files and git, among others, are stdio.</p>
+<p>Example: command <code>npx</code>, arguments <code>-y @modelcontextprotocol/server-filesystem /path/to/folder</code>. Environment variables, a <code>GITHUB_PERSONAL_ACCESS_TOKEN</code> for instance, you fill in as lines <code>NAME=value</code>; those values stay server-side and cannot be read back anywhere in the app.</p>
+<h3 id="what-you-should-know-before-you-add-one">What you should know before you add one</h3>
+<p><strong>The command runs on the machine where Omnissiah runs, with the rights of your own account.</strong> Registering a stdio server <em>is</em> configuring a local command. Only add servers you trust.</p>
+<p>As a safety net Omnissiah checks npx and uvx packages against the <a href="https://osv.dev">OSV database</a> for known malware before starting. Only confirmed malware blocks, and the check is fail-open on network trouble: it is an extra pair of eyes, not a lock.</p>
+<p><strong>Bare commands are found.</strong> <code>npx</code> and the like also work when the desktop app was started with a minimal PATH; Omnissiah also looks in the Homebrew, <code>/usr/local/bin</code> and <code>~/.local/bin</code> locations. If it still does not work, use an absolute path to the command.</p>
+<p><strong>In the Docker web version the command runs <em>inside</em> the container.</strong> <code>npx</code> is present there, because the container runs on a Node image; <code>uvx</code> and Python servers are not.</p>
+<p><strong>The child process gets a clean environment.</strong> Only PATH, HOME and similar basics plus what you supply yourself. Your API keys from <code>.env</code> do not leak into it.</p>
+<h2 id="adding-is-a-test">Adding is a test</h2>
+<p>The button is called <strong>Add (test connection)</strong> for a reason. Omnissiah first connects and fetches the tool list; if that fails you get the reason and nothing is stored. So you never have a server in your list that turns out mid-conversation not to work.</p>
+<p>The list shows per server what you filled in: the URL or the command with its arguments, and whether an auth header or environment variables belong to it. The values themselves are not there; those cannot be read back after saving.</p>
+<h2 id="switching-on-per-conversation">Switching on per conversation</h2>
+<p>A linked server does nothing by itself yet. In a conversation click the <strong>+</strong> on the input bar and open the list <strong>Tools</strong>: there are the built-in tools and under each MCP server its own tools, each one to switch on or off. At the bottom it says where that choice applies: &quot;Applies to this conversation only. You manage MCP servers in Settings.&quot;</p>
+<p>Everything is on by default. Switching things off is useful when a server brings many tools: every available tool costs room in the prompt, and a smaller model loses its way sooner in a long list.</p>
+<h2 id="what-you-see-in-a-conversation">What you see in a conversation</h2>
+<p>When the assistant calls a tool from a server, that step appears in the action timeline with the name of the tool and a small label with the server name next to it, so you see where it comes from. Behind the scenes they carry a longer name, <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>, so that two servers with a tool of the same name do not get in each other&#39;s way.</p>
+<p>A call that has given no answer after five minutes is aborted, with the message that the server sent nothing back within that time. Without that limit one slow server would leave your whole turn hanging.</p>
+<h2 id="approval">Approval</h2>
+<p>In <strong>agent mode</strong> tools from MCP servers fall under the approval level of that conversation, just like writing files and the terminal. See <a href="agent-mode.html#what-happens-without-asking">Agent mode</a>.</p>
+<p>One difference is worth the trouble: in the <strong>Approve automatically</strong> setting an MCP tool only goes through without asking if the server marks it as read-only <em>itself</em>. Everything else pauses. That is deliberately cautious, because that marking comes from the server and you did not write it.</p>
+<p>In chat and research mode there is no approval step: MCP tools run there without asking. That is another reason to add only servers you trust.</p>
+<h2 id="when-a-server-does-not-work">When a server does not work</h2>
+<p>A server that will not connect at the start of a turn is skipped. The turn simply goes on, with the tools of the servers that <em>do</em> work, and you see it in the chat: above the answer it says <strong>&quot;1 server unavailable&quot;</strong>, and if you unfold that block, the name of the server with the reason behind it. That message belongs to <em>that</em> answer and therefore stays with it after a reload.</p>
+<p>The assistant gets exactly the same message in its instructions, plus the note that the turn continued with the tools of the servers that did work. It can therefore say that it could not reach something, instead of answering confidently from an incomplete picture. One broken server never stops the turn; it is only no longer kept quiet.</p>
+<p>The reason is the error message of the server itself, shortened and with any keys filtered out. If it says too little, the full error is in the server logs. What the assistant did get from other servers stands apart from that.</p>
+
+        </article>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="models.html"><span class="richting">Previous</span>Models</a><a class="volgende" href="scheduled-tasks.html"><span class="richting">Next</span>Scheduled tasks</a></nav>
+      </main>
+    </div>
+
+    <footer class="voet">
+      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span class="voet-links">
+        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+          >Releases</a
+        >
+      </span>
+    </footer>
+
+    <script src="../script.js" defer></script>
+  </body>
+</html>
