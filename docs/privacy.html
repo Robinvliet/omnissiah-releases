@@ -115,7 +115,7 @@
         <li><a href="using/conversations.html">Conversations</a></li>
         <li><a href="using/projects.html">Projects</a></li>
         <li><a href="using/sources.html">Sources</a></li>
-        <li><a href="using/agent-mode.html">Agent mode</a></li>
+        <li><a href="using/working-in-a-folder.html">Working in a folder</a></li>
         <li><a href="using/models.html">Models</a></li>
         <li><a href="using/mcp-servers.html">MCP servers</a></li>
         <li><a href="using/scheduled-tasks.html">Scheduled tasks</a></li>
@@ -189,7 +189,7 @@
 <p>If the scan finds something, you see a flag on that source and the model is told explicitly: this is material to read, not an instruction to carry out. A flagged document stays out of the block that goes along in full, but the assistant can still read it when it needs it; a flagged attachment is inside your message and cannot be left out of it, so it is named. You can have a flag reassessed with <strong>Reassess</strong>, without adding the source again.</p>
 <p>Be honest here too about what this is: it recognises patterns, it does not understand intent. It is there to warn you and to arm the model, not to protect you from material you bring in yourself.</p>
 <h2 id="what-you-control-yourself">What you control yourself</h2>
-<p>Agent mode can read and write files and run commands, but only inside a folder you link explicitly, and only at the level you set with the approval level. There are safety nets underneath, such as checkpoints before a write and snapshots before a shell command.</p>
+<p>The assistant can read and write files and run commands, but only inside a folder you link explicitly, only when that folder is not set to read-only, and only at the level you set with the approval level. There are safety nets underneath, such as checkpoints before a write and snapshots before a shell command.</p>
 <p>Be honest about what that is and is not: those layers prevent accidents, they are not a security boundary. The real boundary is your operating system. So do not link a folder whose contents you would not want to lose without a backup, and do not add an MCP server you do not trust. See <a href="using/mcp-servers.html#local-stdio">MCP servers</a>.</p>
 <h2 id="your-data-is-yours">Your data is yours</h2>
 <p>Everything lives in one data folder, in a database you can open with any SQLite tool, plus ordinary markdown files. No proprietary format, no export step, no service that has to give permission first. See <a href="data-and-backup.html">Data and backup</a>.</p>

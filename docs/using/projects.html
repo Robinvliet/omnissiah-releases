@@ -123,7 +123,7 @@
           </ul>
         </li>
         <li><a href="sources.html">Sources</a></li>
-        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="working-in-a-folder.html">Working in a folder</a></li>
         <li><a href="models.html">Models</a></li>
         <li><a href="mcp-servers.html">MCP servers</a></li>
         <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
@@ -176,9 +176,11 @@
 <h2 id="answer-only-from-the-sources">Answer only from the sources</h2>
 <p>Above the sources list is a switch with that name. Turn it on and <em>every</em> conversation in this project behaves differently. The line underneath says what it promises:</p>
 <blockquote>
-<p>The assistant uses only what is in this project and says so when the answer is not in there. No web searches, no MCP servers, no Agent or Research mode and no scheduled tasks.</p>
+<p>The assistant uses only what is in this project and says so when the answer is not in there. No web searches, no MCP servers, no file changes or shell, no research runs and no scheduled tasks.</p>
 </blockquote>
-<p>On top of that, the assistant can no longer search your other conversations and cannot consult its memory. Agent and Research cannot be picked; if a conversation is already in one of those modes it visibly falls back to Chat with the reason.</p>
+<p>On top of that, the assistant can no longer search your other conversations, and of what it remembers about you only your profile stays in the prompt; the remembered facts are answer material and stay out.</p>
+<p>Since there are no modes to fall back from, the contract simply takes those capabilities away: nothing on your disk can change, and the deep research action is greyed out with the reason &quot;A research run does not work with “Answer only from the sources” on.&quot; Reading a linked folder is still allowed, and it is one of the ways an answer gets its source reference.</p>
+<p>While it is on, a pill sits in the bar under the input bar: <strong>Sources only</strong>. Click it and it lists exactly what lapses, so the promise is readable where you work instead of only on the project page.</p>
 <p><strong>What the setting does not promise</strong> is stated literally as soon as you turn it on:</p>
 <blockquote>
 <p>What the model knows from its training is not switched off here; no more than your project instructions, your persona, what has been remembered about you and your active skills. Those are simply in the prompt. What the contract does do is close off every route along which the assistant fetches something extra while answering.</p>
@@ -194,7 +196,7 @@
 </ul>
 <p>That last label also lands on an answer that makes no claim at all, such as a counter-question. Then nothing is wrong; there is simply nothing to refer to.</p>
 <h2 id="turning-the-setting-off-again">Turning the setting off again</h2>
-<p>The same switch, and nothing is left behind: the web tools and MCP servers work again, Agent and Research can be picked again, and scheduled tasks can run again. Answers you already got keep their label, because that is about the turn they were given in.</p>
+<p>The same switch, and nothing is left behind: the web tools and MCP servers work again, writing and research runs are possible again, and scheduled tasks can run again. Answers you already got keep their label, because that is about the turn they were given in.</p>
 
         </article>
         <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="conversations.html"><span class="richting">Previous</span>Conversations</a><a class="volgende" href="sources.html"><span class="richting">Next</span>Sources</a></nav>

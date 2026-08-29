@@ -115,7 +115,7 @@
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="sources.html">Sources</a></li>
-        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="working-in-a-folder.html">Working in a folder</a></li>
         <li><a href="models.html">Models</a></li>
         <li><a href="mcp-servers.html">MCP servers</a></li>
         <li><a href="scheduled-tasks.html" aria-current="page">Scheduled tasks</a>
@@ -126,6 +126,7 @@
             <li><a href="#in-the-task-conversation">In the task conversation</a></li>
             <li><a href="#when-a-run-says-nothing">When a run says nothing</a></li>
             <li><a href="#if-the-app-was-off">If the app was off</a></li>
+            <li><a href="#only-run-when-something-changed">Only run when something changed</a></li>
             <li><a href="#when-a-run-is-skipped">When a run is skipped</a></li>
             <li><a href="#if-something-goes-wrong">If something goes wrong</a></li>
             <li><a href="#where-scheduled-tasks-do-not-exist">Where scheduled tasks do not exist</a></li>
@@ -166,23 +167,25 @@
           <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
           <h1>Scheduled tasks</h1>
           <p>A scheduled task is an instruction that runs by itself: every morning, every weekday, once next week. You find them through <strong>Scheduled tasks</strong> in the sidebar.</p>
-<p>A task consists of three things: a name, a schedule, and the instruction every run carries out. That instruction runs in a <strong>task conversation of its own</strong>, always in agent mode. The dialog says why that matters: &quot;A scheduled task runs automatically in its own task conversation in Agent mode. Write the instruction so it stands on its own: the task knows no other conversations.&quot;</p>
+<p>A task consists of three things: a name, a schedule, and the instruction every run carries out. That instruction runs in a <strong>task conversation of its own</strong>. The dialog says why that matters: write the instruction so it stands on its own, because the task knows no other conversations.</p>
 <h2 id="making-a-task">Making a task</h2>
 <p>Click <strong>New task</strong> and fill in:</p>
 <ul>
 <li><strong>Name.</strong> Short; it appears in the list and becomes the title of the task conversation.</li>
 <li><strong>Instruction.</strong> &quot;Every run starts with this instruction as a message in the task conversation.&quot; So write it to be readable on its own, as if you were handing it to someone who knows nothing else.</li>
 <li><strong>Schedule.</strong> A dropdown with <strong>Daily</strong>, <strong>Weekdays</strong>, <strong>Weekly</strong>, <strong>Hourly</strong>, <strong>Once</strong>, <strong>Every X minutes</strong> and <strong>Cron expression</strong>, with the matching field next to it: a time, a weekday, a date, a number of minutes or the expression itself. Right below it you see what you chose: &quot;Next run: Aug 19, 09:00 AM&quot;, or the reason the schedule is not valid yet.</li>
-<li><strong>Model</strong> and <strong>Approval.</strong> Both apply to the task conversation. The approval level works exactly as in an ordinary agent conversation; see <a href="agent-mode.html#what-happens-without-asking">Agent mode</a>.</li>
+<li><strong>Monitor.</strong> Optional, and off by default (&quot;Run at every scheduled moment&quot;). See <a href="#only-run-when-something-changed">Only run when something changed</a> below.</li>
+<li><strong>Model</strong> and <strong>Approval.</strong> Both apply to the task conversation. The approval level works exactly as in a conversation you have yourself; see <a href="working-in-a-folder.html#what-happens-without-asking">Working in a folder</a>.</li>
 <li><strong>Fallback model.</strong> Optional, and off by default (&quot;No fallback&quot;). &quot;Runs the task when the task model fails for good; the run reports that in the task conversation.&quot; Useful for a task that has to keep running when your usual provider is having a bad day; the task model itself never changes along with it.</li>
 </ul>
 <p>Times are read in the time zone of the machine where Omnissiah runs, and that is your own machine.</p>
 <p>One thing to know about <strong>Every X minutes</strong>: the moments lie on a fixed grid that starts when you save the task - &quot;every 30 minutes&quot; means moments exactly 30 minutes apart, no matter how long each run takes. The app checks for due tasks once a minute, so a run can start up to a minute after its moment, but the next moment does not shift along with that. If a run is still going when its next moment arrives, that moment is skipped and the run list says so. Editing the schedule, or resuming a paused task, starts a fresh grid from that point. Cron expressions work the same way, tied to the clock.</p>
 <h2 id="or-just-ask-in-a-conversation">Or just ask in a conversation</h2>
 <p>You can also ask the assistant to schedule something. It translates your sentence into a schedule itself and makes a proposal that pauses until you approve it, just like with a skill. The task then inherits the model, the approval level and the project of the conversation you asked it in; adjusting comes afterwards in the overview.</p>
-<p>This tool is called <strong>Schedule tasks</strong> in the list behind the <strong>+</strong> on the input bar, and you can switch it off there per conversation.</p>
+<p>This tool is called <strong>Schedule tasks</strong>; it is always available in a normal conversation, and creating a task waits for your approval. Inside a scheduled run it does not exist at all - a task cannot plan tasks.</p>
 <h2 id="what-you-get-back">What you get back</h2>
-<p>When a run finishes, a counter appears at <strong>Scheduled tasks</strong> in the sidebar and a notification: &quot;Scheduled task &quot;Morning briefing&quot;: run succeeded&quot;, with a <strong>View</strong> button. The counter fades as soon as you visit the tasks page.</p>
+<p>When a run finishes, a counter appears at <strong>Scheduled tasks</strong> in the sidebar and a notification: &quot;Scheduled task &quot;Morning briefing&quot;: run succeeded&quot;, with a <strong>View</strong> button. The task conversation also gets a dot in the sidebar, in <strong>Conversations</strong> and in the conversation list of its project: this task has something you have not read yet. A silent run does not light the dot, so a task that found something looks different from one that had nothing to report.</p>
+<p>Opening the conversation clears the dot, and the counter drops with it. Visiting the tasks page does not clear either of them - seeing that a run happened is not the same as having read it.</p>
 <p>The page of a single task shows the schedule, the next run, the last status and the instruction itself, with the list <strong>Runs</strong> underneath. At the top are <strong>Task conversation</strong> (jump to the conversation), <strong>Run now</strong> (&quot;Run started - the outcome appears in the task conversation&quot;), and in the menu <strong>Edit</strong>, <strong>Pause</strong> or <strong>Resume</strong>, and <strong>Delete</strong>.</p>
 <p>Every run has a status:</p>
 <ul>
@@ -202,12 +205,28 @@
 <h2 id="if-the-app-was-off">If the app was off</h2>
 <p>A scheduled task needs a running app. If your computer was off at nine o&#39;clock, the morning briefing still runs as soon as you open Omnissiah again.</p>
 <p>Piled-up missed runs do lapse: one is caught up, not five. That is visible as a skipped run that counts exactly what fell away: &quot;Scheduled run of Aug 6, 09:00 AM was missed (the server was off); one catch-up run was made, 2 later moments lapsed.&quot; A one-off task that has not run yet runs whatever time it is.</p>
+<h2 id="only-run-when-something-changed">Only run when something changed</h2>
+<p>A task that checks a page every fifteen minutes does not need to write a report every fifteen minutes. Give it a <strong>monitor</strong> and it looks first, and only does the actual work when what it sees has changed.</p>
+<p>In the form you pick what it watches:</p>
+<ul>
+<li><strong>Only when a web page changes.</strong> Fill in a full http or https address. For a normal web page the comparison runs on the readable text, not on the raw markup, because raw markup changes on almost every request (hidden tokens, timestamps, ad slots) and then every check would look like a change. For anything that is not a web page (a JSON API, a feed, a text file) the comparison runs on exactly what the server sends, and those are the best sources for a monitor: they give stable output.</li>
+<li><strong>Only when a command&#39;s output changes.</strong> A command needs a folder to run in, since a linked folder is what gives a task access to a shell at all. When you create the task you pick that folder right there, with <strong>Choose working folder</strong>, and it is linked to the task conversation as its working folder. When you edit an existing task the folder comes from the task conversation itself, so this option only opens up once that conversation has one. Either way the command runs in that folder, with a time limit of a minute.</li>
+</ul>
+<p>A monitor command may only <strong>look</strong>. A command that writes, deletes, moves or checks out something is refused, when you save it and again on every run, and the message says what it objected to. That is stricter than the terminal in an ordinary conversation, on purpose: this runs unattended, over and over, with nobody there to approve anything and no snapshot to fall back on. <code>curl</code>, <code>wget</code>, <code>git status</code>, <code>git log</code>, <code>ls</code>, <code>grep</code> and <code>jq</code> are all fine. If you want to keep the result somewhere, pipe it instead of writing it to a file.</p>
+<p>The first check always runs the task: there is nothing to compare against yet. After that:</p>
+<ul>
+<li><strong>Nothing changed.</strong> No run, no notification, no dot on the conversation. The run list shows a single skipped row that counts along quietly: &quot;12 checks without a change, last Aug 22, 2:45 PM&quot;. As long as nothing changes it stays one row, so the runs that did something stay visible.</li>
+<li><strong>Something changed.</strong> The task runs as usual, and the instruction is joined by a block showing what changed: a diff of the previous against the current output, plus the current output itself. In the task conversation it sits folded under &quot;Monitor: the source changed&quot;, so you can open it if you want to see exactly what the assistant was given.</li>
+<li><strong>The source itself failed.</strong> An unreachable page, a 404, a command that exits with an error: that counts as a failed run and not as a change. You see it in the task conversation and in the run list, and after three in a row the task pauses itself, exactly as with any other failure. What was last seen is kept, so a source that recovers to its old content does not raise a false alarm.</li>
+</ul>
+<p>Two things worth knowing. A monitor needs a recurring schedule, so it does not go with <strong>Once</strong>. And a page that builds its content with JavaScript cannot be watched this way; you get an honest error saying so rather than a monitor that silently never reports anything. Point it at an API, a feed or a text file instead.</p>
 <h2 id="when-a-run-is-skipped">When a run is skipped</h2>
 <p>Three situations, and in all of them you see them in the run list instead of them happening quietly:</p>
 <ul>
 <li><strong>&quot;The task conversation is in use right now; this run was skipped.&quot;</strong> You are working in that conversation yourself.</li>
 <li><strong>&quot;The previous run is still waiting for an approval in the task conversation.&quot;</strong> As long as that is open, no new turn can go over it. Approve or reject it, and the schedule picks up again by itself.</li>
 <li><strong>&quot;2 scheduled moments passed while the previous run was still going; the schedule continues at the next moment.&quot;</strong> A run took longer than its interval; the moments that passed during it are skipped, never stacked up and run in a burst afterwards.</li>
+<li><strong>A monitor that found nothing.</strong> Shown as the counting row described above, rather than as a reason per check.</li>
 </ul>
 <p>In all three cases the task moves on to its next scheduled moment.</p>
 <h2 id="if-something-goes-wrong">If something goes wrong</h2>
@@ -215,8 +234,9 @@
 <p>Not every failure is final. A run that fails cleanly on something temporary - a rate limit, a provider that is briefly unreachable - is retried within the same run, up to three attempts, waiting longer each time. Work that was already done is never blindly repeated.</p>
 <p>If it goes wrong three times in a row, the task pauses itself and says so: &quot;The task was paused after 3 failed runs in a row.&quot; A broken task should not keep running for weeks. Fix the cause and you switch it on again with <strong>Resume</strong>.</p>
 <h2 id="where-scheduled-tasks-do-not-exist">Where scheduled tasks do not exist</h2>
-<p>In a project with <strong>Answer only from the sources</strong> you cannot create tasks and existing ones do not run: they work in agent mode, and that does not exist there. See <a href="projects.html#answer-only-from-the-sources">Projects</a>. If the task was already there before you turned that switch on, it pauses itself instead of failing again every time.</p>
+<p>In a project with <strong>Answer only from the sources</strong> you cannot create tasks and existing ones do not run: a task changes things, and that is exactly what the contract closes off. See <a href="projects.html#answer-only-from-the-sources">Projects</a>. If the task was already there before you turned that switch on, it pauses itself instead of failing again every time.</p>
 <p>A scheduled run never creates new scheduled tasks itself. That is not left to the good will of the model: the tool is simply not in there during a run.</p>
+<p>Two more things a run deliberately cannot do. It <strong>reads</strong> what you had it remember, but never writes to your memory: nobody is there to see a suggestion, so the writing tool is absent as well. And it does not ask you anything, for the same reason - a question with no one to answer it would stall the run.</p>
 <p>Deleting, finally, removes the task, not your work: &quot;The task conversation with the earlier runs simply stays.&quot;</p>
 
         </article>

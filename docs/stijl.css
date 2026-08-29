@@ -35,6 +35,7 @@
   --secondary: color-mix(in oklab, oklch(0.955 0.007 95), var(--accent-seed) var(--tint-mix));
   --secondary-foreground: #2b2925;
   --muted: color-mix(in oklab, oklch(0.955 0.007 95), var(--accent-seed) var(--tint-mix));
+  --muted-raised: color-mix(in oklch, var(--muted), var(--foreground) 8%);
   --muted-foreground: oklch(0.556 0.008 95);
   --composer-shelf: color-mix(in oklab, #eeede7, var(--accent-seed) var(--tint-mix));
   --composer-surface: color-mix(in oklab, #f9f7f3, var(--accent-seed) var(--tint-mix));
@@ -78,6 +79,7 @@
   --update-border: oklch(from var(--accent-seed) 0.98 min(c, 0.015) h / 0.2);
   --update-ink: oklch(from var(--accent-seed-light) 0.34 min(c, 0.09) h);
   --shadow-focus: 0 2px 6px -2px oklch(0.35 0.02 95 / 0.04), 0 6px 24px -8px oklch(0.35 0.02 95 / 0.075);
+  --glow-focus: 0 0 9px 1px oklch(from var(--ring) l calc(c * 0.45) h / 0.3);
   --shadow-lift: 0 1px 2px oklch(0.35 0.02 95 / 0.08), 0 4px 14px -2px oklch(0.35 0.02 95 / 0.14);
   --shadow-overlay: 0 12px 32px -12px oklch(0.35 0.02 95 / 0.16), 0 2px 8px -4px oklch(0.35 0.02 95 / 0.1);
   --shadow-surface: 0 1px 2px oklch(0.35 0.02 95 / 0.05), 0 8px 24px -14px oklch(0.35 0.02 95 / 0.07);
@@ -112,6 +114,7 @@
   --secondary: oklch(from var(--accent-seed) 0.28 calc(0.012 * var(--tint-chroma)) h);
   --secondary-foreground: #e0dfd9;
   --muted: oklch(from var(--accent-seed) 0.28 calc(0.012 * var(--tint-chroma)) h);
+  --muted-raised: color-mix(in oklch, var(--muted), var(--foreground) 8%);
   --muted-foreground: oklch(0.72 0.01 100);
   --composer-shelf: oklch(from var(--accent-seed) 0.17 calc(0.016 * var(--tint-chroma)) h);
   --composer-surface: oklch(from var(--accent-seed) 0.215 calc(0.015 * var(--tint-chroma)) h);
@@ -146,6 +149,7 @@
   --shadow-lift: 0 1px 2px oklch(0.02 0.01 200 / 0.4), 0 4px 14px -2px oklch(0.02 0.01 200 / 0.5);
   --shadow-composer: 0 1px 2px oklch(0.02 0.01 200 / 0.2), 0 10px 28px -16px oklch(0.02 0.01 200 / 0.26);
   --shadow-focus: 0 2px 8px -2px oklch(0.02 0.01 200 / 0.2), 0 8px 28px -8px oklch(0.02 0.01 200 / 0.27);
+  --glow-focus: 0 0 9px 1px oklch(from var(--ring) l calc(c * 0.45) h / 0.26);
   --sidebar: oklch(from var(--accent-seed) 0.235 calc(0.014 * var(--tint-chroma)) h);
   --sidebar-foreground: #e0dfd9;
   --sidebar-primary: var(--accent-seed-dark);
@@ -175,6 +179,7 @@
     --secondary: oklch(from var(--accent-seed) 0.28 calc(0.012 * var(--tint-chroma)) h);
     --secondary-foreground: #e0dfd9;
     --muted: oklch(from var(--accent-seed) 0.28 calc(0.012 * var(--tint-chroma)) h);
+    --muted-raised: color-mix(in oklch, var(--muted), var(--foreground) 8%);
     --muted-foreground: oklch(0.72 0.01 100);
     --composer-shelf: oklch(from var(--accent-seed) 0.17 calc(0.016 * var(--tint-chroma)) h);
     --composer-surface: oklch(from var(--accent-seed) 0.215 calc(0.015 * var(--tint-chroma)) h);
@@ -209,6 +214,7 @@
     --shadow-lift: 0 1px 2px oklch(0.02 0.01 200 / 0.4), 0 4px 14px -2px oklch(0.02 0.01 200 / 0.5);
     --shadow-composer: 0 1px 2px oklch(0.02 0.01 200 / 0.2), 0 10px 28px -16px oklch(0.02 0.01 200 / 0.26);
     --shadow-focus: 0 2px 8px -2px oklch(0.02 0.01 200 / 0.2), 0 8px 28px -8px oklch(0.02 0.01 200 / 0.27);
+    --glow-focus: 0 0 9px 1px oklch(from var(--ring) l calc(c * 0.45) h / 0.26);
     --sidebar: oklch(from var(--accent-seed) 0.235 calc(0.014 * var(--tint-chroma)) h);
     --sidebar-foreground: #e0dfd9;
     --sidebar-primary: var(--accent-seed-dark);

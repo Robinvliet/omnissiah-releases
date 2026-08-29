@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MCP servers - Omnissiah</title>
-    <meta name="description" content="Hanging extra tools on the assistant through the Model Context Protocol, and deciding per conversation which may join." />
+    <meta name="description" content="Hanging extra tools on the assistant through the Model Context Protocol, and deciding which of them join." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -115,14 +115,14 @@
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="sources.html">Sources</a></li>
-        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="working-in-a-folder.html">Working in a folder</a></li>
         <li><a href="models.html">Models</a></li>
         <li><a href="mcp-servers.html" aria-current="page">MCP servers</a>
           <ul class="nav-koppen">
             <li><a href="#remote-http-or-sse">Remote (HTTP or SSE)</a></li>
             <li><a href="#local-stdio">Local (stdio)</a></li>
             <li><a href="#adding-is-a-test">Adding is a test</a></li>
-            <li><a href="#switching-on-per-conversation">Switching on per conversation</a></li>
+            <li><a href="#switching-a-server-on-and-off">Switching a server on and off</a></li>
             <li><a href="#what-you-see-in-a-conversation">What you see in a conversation</a></li>
             <li><a href="#approval">Approval</a></li>
             <li><a href="#when-a-server-does-not-work">When a server does not work</a></li>
@@ -163,7 +163,7 @@
         <article class="prose">
           <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
           <h1>MCP servers</h1>
-          <p>Through <strong>Settings → Tools</strong> you link MCP servers that give the model extra tools, for example access to a file system, git or an external service. Per conversation you then switch on which tools may join. The page says it in one line: &quot;MCP servers give the model extra tools: remotely over HTTP/SSE, or locally over stdio (a command that runs as a process each turn). Switchable per conversation.&quot;</p>
+          <p>Through <strong>Settings → Tools</strong> you link MCP servers that give the model extra tools, for example access to a file system, git or an external service. A server you switch on there joins every conversation. The page says it in one line: &quot;MCP servers give the model extra tools: remotely over HTTP/SSE, or locally over stdio (a command that runs as a process each turn). A server you switch on here joins every conversation.&quot;</p>
 <p>There are two flavours.</p>
 <h2 id="remote-http-or-sse">Remote (HTTP or SSE)</h2>
 <p>A URL, optionally with an Authorization header. The server runs somewhere else; Omnissiah only talks to it.</p>
@@ -178,17 +178,18 @@
 <p><strong>The child process gets a clean environment.</strong> Only PATH, HOME and similar basics plus what you supply yourself. Your API keys from <code>.env</code> do not leak into it.</p>
 <h2 id="adding-is-a-test">Adding is a test</h2>
 <p>The button is called <strong>Add (test connection)</strong> for a reason. Omnissiah first connects and fetches the tool list; if that fails you get the reason and nothing is stored. So you never have a server in your list that turns out mid-conversation not to work.</p>
-<p>The list shows per server what you filled in: the URL or the command with its arguments, and whether an auth header or environment variables belong to it. The values themselves are not there; those cannot be read back after saving.</p>
-<h2 id="switching-on-per-conversation">Switching on per conversation</h2>
-<p>A linked server does nothing by itself yet. In a conversation click the <strong>+</strong> on the input bar and open the list <strong>Tools</strong>: there are the built-in tools and under each MCP server its own tools, each one to switch on or off. At the bottom it says where that choice applies: &quot;Applies to this conversation only. You manage MCP servers in Settings.&quot;</p>
-<p>Everything is on by default. Switching things off is useful when a server brings many tools: every available tool costs room in the prompt, and a smaller model loses its way sooner in a long list.</p>
+<p>The list shows per server what you filled in: the URL or the command with its arguments, and whether an auth header or environment variables belong to it. The values themselves are not there; those cannot be read back after saving. A server that is switched off is shown as <strong>switched off</strong> under Connections in the Command Center - not as a fault, because it is not broken, it simply is not taking part.</p>
+<h2 id="switching-a-server-on-and-off">Switching a server on and off</h2>
+<p>Each server in the list has its own switch, and it applies to the whole app: on means the server joins every conversation, off means it is not contacted at all. There is no per-conversation choice any more, and no switch per individual tool.</p>
+<p>Next to the switch the row says what the server costs: something like <strong>2 tools · ~4,200 tokens per turn</strong>. That is an estimate of what its tool definitions take up in the prompt of every turn, whether or not the model actually calls them - which is exactly why the switch is worth using when a server brings many tools. The tilde is honest: it is a calculation on characters, not a tokeniser. The number is measured when you add the server; <strong>Measure again</strong> in the row menu refreshes it.</p>
+<p>A server that is switched off keeps its last measurement, so you can see what turning it back on would cost.</p>
 <h2 id="what-you-see-in-a-conversation">What you see in a conversation</h2>
 <p>When the assistant calls a tool from a server, that step appears in the action timeline with the name of the tool and a small label with the server name next to it, so you see where it comes from. Behind the scenes they carry a longer name, <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>, so that two servers with a tool of the same name do not get in each other&#39;s way.</p>
 <p>A call that has given no answer after five minutes is aborted, with the message that the server sent nothing back within that time. Without that limit one slow server would leave your whole turn hanging.</p>
 <h2 id="approval">Approval</h2>
-<p>In <strong>agent mode</strong> tools from MCP servers fall under the approval level of that conversation, just like writing files and the terminal. See <a href="agent-mode.html#what-happens-without-asking">Agent mode</a>.</p>
+<p>Tools from MCP servers fall under the approval level of that conversation, just like writing files and the terminal, and they do so in <strong>every</strong> conversation. See <a href="working-in-a-folder.html#what-happens-without-asking">Working in a folder</a>.</p>
+<p>That last part changed: until version 0.21.0 an MCP tool ran without asking in a chat or research conversation, because the approval levels only existed in agent mode. Now there is one lane and one consent layer, so a server you switch on is subject to your approval level everywhere.</p>
 <p>One difference is worth the trouble: in the <strong>Approve automatically</strong> setting an MCP tool only goes through without asking if the server marks it as read-only <em>itself</em>. Everything else pauses. That is deliberately cautious, because that marking comes from the server and you did not write it.</p>
-<p>In chat and research mode there is no approval step: MCP tools run there without asking. That is another reason to add only servers you trust.</p>
 <h2 id="when-a-server-does-not-work">When a server does not work</h2>
 <p>A server that will not connect at the start of a turn is skipped. The turn simply goes on, with the tools of the servers that <em>do</em> work, and you see it in the chat: above the answer it says <strong>&quot;1 server unavailable&quot;</strong>, and if you unfold that block, the name of the server with the reason behind it. That message belongs to <em>that</em> answer and therefore stays with it after a reload.</p>
 <p>The assistant gets exactly the same message in its instructions, plus the note that the turn continued with the tools of the servers that did work. It can therefore say that it could not reach something, instead of answering confidently from an incomplete picture. One broken server never stops the turn; it is only no longer kept quiet.</p>

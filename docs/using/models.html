@@ -115,7 +115,7 @@
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="sources.html">Sources</a></li>
-        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="working-in-a-folder.html">Working in a folder</a></li>
         <li><a href="models.html" aria-current="page">Models</a>
           <ul class="nav-koppen">
             <li><a href="#cloud-models">Cloud models</a></li>
@@ -166,7 +166,7 @@
           <p>Omnissiah has no models of its own. You link one or more yourself, and after that they sit in the same model picker, cloud and local mixed together.</p>
 <h2 id="cloud-models">Cloud models</h2>
 <p>Go to <strong>Settings → Models</strong>, pick the provider under <strong>Add an API (cloud) model</strong>, paste your API key and click <strong>Add</strong>. The key is checked with the provider right away, so a typo shows up at the moment you make it.</p>
-<p>Your keys are read server-side only and never reach the browser. You pay the provider directly; what a conversation cost is shown in the statistics dashboard.</p>
+<p>Your keys are read server-side only and never reach the browser. You pay the provider directly; what a conversation cost is shown in the Command Center.</p>
 <h2 id="your-own-endpoint">Your own endpoint</h2>
 <p>If the service you want is not in the list above, you link it yourself. That works for OpenRouter, Groq, DeepSeek, a gateway at work, or anything else that speaks one of the two common API formats.</p>
 <p>Go to <strong>Settings → Models → Your own endpoint</strong> and fill in:</p>
@@ -181,11 +181,15 @@
 <p>If your gateway speaks both formats, you add it twice, once per format.</p>
 <h3 id="what-your-own-endpoint-does-not-get">What your own endpoint does not get</h3>
 <ul>
-<li><strong>Costs are not calculated.</strong> Omnissiah does not know the rates of your endpoint, and an amount of 0 would suggest it was free. Instead it says &quot;not calculated&quot;, in Statistics too. Tokens are still counted.</li>
+<li><strong>Costs are not calculated.</strong> Omnissiah does not know the rates of your endpoint, and an amount of 0 would suggest it was free. Instead it says &quot;not calculated&quot;, in the Command Center too. Tokens are still counted.</li>
 <li><strong>No adjustable thinking phase.</strong> The Effort row is missing: which levels your endpoint knows and how you drive them differs per service, and offering something that might do nothing is worse than leaving it out.</li>
 <li><strong>No prompt caching.</strong> If your endpoint points at Anthropic, the same turn is cheaper there through the ordinary Anthropic link above. Your own endpoints are for what is not in there yet, not as a detour to what already is.</li>
 <li>If you point your own endpoint at a <strong>local server</strong> you could also link directly (Ollama, LM Studio), that is allowed, but the app says so: through this route it misses measuring the context window, loading a model and managing models.</li>
 </ul>
+<h3 id="telling-it-what-your-endpoint-does-not-say">Telling it what your endpoint does not say</h3>
+<p>Bare servers (vLLM, llama.cpp behind an OpenAI-compatible layer) often publish no context window at all, and then Omnissiah has to guess conservatively. You can tell it instead: unfold the endpoint in Settings and fill in a <strong>context window</strong>, and optionally a maximum answer length, either for one model or for the whole endpoint.</p>
+<p>A value on a single model wins from what the endpoint publishes; a value for the whole endpoint only fills a gap. So you can declare one window for everything and still correct a single model that differs.</p>
+<p>What you declare is marked as such. In the detail panel the sources of a capability are kept apart per fact: guaranteed, detected, assumed, and now declared. A window you filled in yourself does not turn an assumption about tool support into a certainty.</p>
 <h3 id="what-a-model-promises-and-what-it-proves">What a model promises, and what it proves</h3>
 <p>Of the models in the list above, Omnissiah knows what they can do; that is maintained by hand. With your own endpoint it depends on what the service publishes itself, and you see that back in the detail panel:</p>
 <ul>
@@ -213,7 +217,7 @@
 <p>Two things are not possible. Models with a licence you have to agree to first (&quot;gated&quot;, such as Meta Llama) you can only fetch after doing that on huggingface.co. And variants consisting of several files (sharded GGUF) cannot be downloaded by Ollama yet; they carry the label &quot;split&quot;, so pick another variant.</p>
 <h3 id="the-context-window-of-your-local-server">The context window of your local server</h3>
 <p>This is the pitfall that bites most people, and it is not visible on the model.</p>
-<p>A model may handle an enormous context window, but Ollama loads it at <strong>4096 tokens</strong> by default. That is enough to chat and too tight for agent mode: there all the descriptions of the tools join the prompt, and with a linked folder you are over it in no time. The turn then stops immediately, with a message that shows the text of your server literally (&quot;request (5168 tokens) exceeds the available context size (4096 tokens)&quot;).</p>
+<p>A model may handle an enormous context window, but Ollama loads it at <strong>4096 tokens</strong> by default. That is enough for a plain conversation and too tight as soon as there are tools: all their descriptions join the prompt, and with a linked folder you are over it in no time. The turn then stops immediately, with a message that shows the text of your server literally (&quot;request (5168 tokens) exceeds the available context size (4096 tokens)&quot;).</p>
 <p>You raise it on the server side, not in Omnissiah:</p>
 <ul>
 <li><strong>Ollama app</strong>: settings → <strong>Context length</strong> up, for example to 16k or 32k.</li>
@@ -222,10 +226,10 @@
 <p>A bigger window costs more memory, so do not set it higher than your machine can take. Omnissiah measures for itself which window your server uses and reckons with that: the context ring in the header shows the real percentage, and the sources threshold takes it into account. So you do not have to set anything in the app, only restart your server after the change.</p>
 <h3 id="good-to-know">Good to know</h3>
 <ul>
-<li>Bigger models, from roughly 8B, work best with tools and agent mode. Models without tool support can simply chat: Omnissiah then leaves the tools out automatically.</li>
+<li>Bigger models, from roughly 8B, work best with tools and with work in a folder. Models without tool support can simply chat: Omnissiah then leaves the tools out automatically and says so.</li>
 <li>If an answer dies halfway, Omnissiah reports it with &quot;Answer truncated: this model&#39;s output limit was reached&quot;. With local models that limit is derived from the context window, so a bigger window solves that too.</li>
 <li>The official GGUF repos of some makers, Mistral for instance, are not compatible with Ollama. Pick a community variant then, such as those from lmstudio-community or bartowski. The error message in the app points you there as well.</li>
-<li>Local models cost nothing, and appear in the statistics dashboard at $0.</li>
+<li>Local models cost nothing, and appear in the Command Center at $0.</li>
 <li>A token is only needed if your local server sits behind authentication. Ollama does not have that.</li>
 </ul>
 <h2 id="the-model-picker">The model picker</h2>
@@ -239,7 +243,10 @@
 <p>A different Effort level also invalidates the cache, and there too the amount is shown.</p>
 <h2 id="what-it-costs">What it costs</h2>
 <p>The header of a conversation shows the token usage and an estimate of the costs, based on the price table in the app. If the conversation runs on your own endpoint, only the token usage is there: the app does not know those rates, and inventing an amount would be worse than showing none. What one turn cost exactly, and what did and did not go along, is under the answer itself; see <a href="conversations.html#what-a-turn-cost">Conversations</a>.</p>
-<p>Across your whole usage you look in <strong>Statistics</strong> in the sidebar: activity, token usage over time, consumption per model, and how often your skills, personas and sources were brought in. Further down is what went wrong - failed tools, turns without a final answer, truncated answers, refused actions - broken down per model and per mode, plus how often your stored memories and approved skills were actually used. With every counter it says from when it has been measured; a low number is not automatically a good score.</p>
+<p>Across your whole usage you look in the <strong>Command Center</strong> in the sidebar. It has three tabs.</p>
+<p><strong>Usage</strong> holds activity, token usage over time, consumption per model, and how often your skills, personas and sources were brought in. At the top you pick a period: <strong>7 days</strong>, <strong>30 days</strong>, <strong>90 days</strong>, <strong>365 days</strong> or <strong>All</strong>, and All is where it starts.</p>
+<p><strong>Reliability</strong> is what went wrong - failed tools, turns without a final answer, truncated answers, refused actions - broken down per model and per kind of run, plus how often your stored memories and approved skills were actually used. That tab deliberately has no period filter: a safety-net counter is not something you want to filter down to nothing. With every counter it says from when it has been measured; a low number is not automatically a good score.</p>
+<p><strong>System</strong> is the tab you land on, and it answers a different question: not what happened, but whether things are working <em>right now</em>. It shows whether the scheduler is ticking, which tasks are paused, waiting for an approval or not being picked up, what the last failed run was, and what your monitors last saw. Everything there is calm grey when it is fine; colour only appears when something needs you. Reachability of MCP servers and local servers sits behind a <strong>Check now</strong> button rather than being measured when you open the page, because connecting to a server can start a process on your machine. Once you have checked, the age of that measurement is shown next to it.</p>
 <h2 id="helper-models-for-side-jobs">Helper models for side jobs</h2>
 <p>Not everything has to be done by your main model. Inventing a title, summarising a long conversation or judging a suggestion are side jobs, and by default they run on a cheap model from the same provider. Under Settings → General → Helper tasks you set a different model per task:</p>
 <ul>
@@ -247,12 +254,12 @@
 <li><strong>Model for skills review</strong> - checks after a turn whether there was a reusable lesson in it. This is also the pass that looks at your memory. See <a href="skills.html#skills-that-arise-by-themselves">Skills</a>.</li>
 <li><strong>Model for sub-agents</strong> - subtasks the assistant farms out.</li>
 <li><strong>Model for context compression</strong> - summarises the oldest turns of a long conversation. See <a href="conversations.html#when-a-conversation-gets-long">Conversations</a>.</li>
-<li><strong>Model for smart approval</strong> - judges agent actions in the &quot;Approve smartly&quot; setting. See <a href="agent-mode.html#what-happens-without-asking">Agent mode</a>.</li>
+<li><strong>Model for smart approval</strong> - judges agent actions in the &quot;Approve smartly&quot; setting. See <a href="working-in-a-folder.html#what-happens-without-asking">Working in a folder</a>.</li>
 </ul>
 <p><strong>Automatic</strong> means, for four of the five, the cheap model of the provider of your conversation; with sub-agents it means the model of the conversation itself, because that is real work and not a side job. If you run locally, &quot;automatic&quot; is simply your own model: there is no separate local helper model, and local is free anyway.</p>
 
         </article>
-        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="agent-mode.html"><span class="richting">Previous</span>Agent mode</a><a class="volgende" href="mcp-servers.html"><span class="richting">Next</span>MCP servers</a></nav>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="working-in-a-folder.html"><span class="richting">Previous</span>Working in a folder</a><a class="volgende" href="mcp-servers.html"><span class="richting">Next</span>MCP servers</a></nav>
       </main>
     </div>
 

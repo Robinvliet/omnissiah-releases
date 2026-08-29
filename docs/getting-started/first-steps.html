@@ -123,7 +123,7 @@
         <li><a href="../using/conversations.html">Conversations</a></li>
         <li><a href="../using/projects.html">Projects</a></li>
         <li><a href="../using/sources.html">Sources</a></li>
-        <li><a href="../using/agent-mode.html">Agent mode</a></li>
+        <li><a href="../using/working-in-a-folder.html">Working in a folder</a></li>
         <li><a href="../using/models.html">Models</a></li>
         <li><a href="../using/mcp-servers.html">MCP servers</a></li>
         <li><a href="../using/scheduled-tasks.html">Scheduled tasks</a></li>
@@ -171,15 +171,14 @@
 <p><strong>Local model.</strong> If a local server is already running on your machine, Omnissiah usually finds it by itself and you see &quot;Ollama found at …&quot; with a <strong>Connect</strong> button. If you have nothing yet, click <strong>Discover models</strong>: that searches the models on Hugging Face and downloads one straight to your local server. Free, private and without a key. There is more about this on <a href="../using/models.html">Models</a>.</p>
 <p><strong>Your own endpoint.</strong> Under &quot;Your own endpoint&quot; you connect OpenRouter, Groq or your own gateway: a name, the base URL, and the <strong>API format</strong> that endpoint speaks. Pick that format by what the endpoint speaks, not by the brand name of the model, because a gateway often serves models from another provider.</p>
 <h2 id="your-first-conversation">Your first conversation</h2>
-<p>Start a new conversation and type your question. In the bottom row of the input bar you choose two things.</p>
-<p><strong>The model.</strong> The model picker shows everything you have access to, cloud and local mixed together. A new conversation starts with the model you used last, so that choice remembers itself.</p>
-<p><strong>The mode.</strong> There are three, and they apply per conversation:</p>
+<p>Start a new conversation and type your question. There is no mode to pick first: you simply talk, and the assistant gets more to work with as you give it more.</p>
+<p><strong>The model</strong> is the one choice in the bottom row of the input bar. The picker shows everything you have access to, cloud and local mixed together. A new conversation starts with the model you used last, so that choice remembers itself.</p>
+<p><strong>Everything else follows from settings you can see</strong>, in the bar under the input bar:</p>
 <ul>
-<li><strong>Chat</strong> is simply talking, with the tools you have turned on.</li>
-<li><strong>Agent</strong> lets the assistant take several steps in a row and, if you link a folder, read and write files. What it may do without asking is set by the approval level in the bar under the input bar.</li>
-<li><strong>Research</strong> is for longer investigations and ends with a report that cites its sources.</li>
+<li>Link a folder with <strong>Work in a folder</strong> and the assistant can read the files in it. Set that folder to <strong>Read and write</strong> and it may change them and use a terminal as well. What it may do without asking is the <strong>approval level</strong> next to it. See <a href="../using/working-in-a-folder.html">Working in a folder</a>.</li>
+<li>For a longer investigation, open the <strong>+</strong> and pick <strong>Deep research</strong>, or type <code>/research</code>. That applies to your next message and ends with a saved report.</li>
 </ul>
-<p>Start with Chat. Agent and Research are there when you need them. One exception: in a project set to <strong>Answer only from the sources</strong> only Chat exists, see <a href="../using/projects.html#answer-only-from-the-sources">Projects</a>.</p>
+<p>So there is nothing to switch on to get started. A plain question in a fresh conversation just works.</p>
 <h2 id="how-deeply-the-model-thinks">How deeply the model thinks</h2>
 <p>The model picker has an <strong>Effort</strong> row: how thoroughly the model may think before it answers. More means a better considered answer, but also longer waiting and more tokens. The chosen level is shown next to the model name.</p>
 <p>The levels are called <strong>Off</strong>, <strong>Low</strong>, <strong>Medium</strong>, <strong>High</strong>, <strong>Extra high</strong> and <strong>Max</strong>, and which ones exist differs per model: Omnissiah only offers what that model actually knows, with a line explaining anything that is missing. Switch to a model that does not support your level and you will see it fall back.</p>

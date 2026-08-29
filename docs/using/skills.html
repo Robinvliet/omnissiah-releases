@@ -115,7 +115,7 @@
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="sources.html">Sources</a></li>
-        <li><a href="agent-mode.html">Agent mode</a></li>
+        <li><a href="working-in-a-folder.html">Working in a folder</a></li>
         <li><a href="models.html">Models</a></li>
         <li><a href="mcp-servers.html">MCP servers</a></li>
         <li><a href="scheduled-tasks.html">Scheduled tasks</a></li>
@@ -197,7 +197,7 @@
 <p>If you run a local model that does not support tools, that fetching cannot happen. The active skills then go along in full including their extra files, and the index stays away: the prompt never promises something that is not there.</p>
 <h2 id="skills-that-arise-by-themselves">Skills that arise by themselves</h2>
 <p>Two things can propose a skill. With both, you approve, and until that moment nothing is stored.</p>
-<p><strong>The assistant, during a conversation.</strong> Ask for it, or ask repeatedly for the same kind of help, and it can propose a skill. That proposal appears in the chat and waits for <strong>Approve</strong> or <strong>Reject</strong>. This tool is called <strong>Propose skills</strong> and sits behind the <strong>+</strong> on the input bar, where you can switch it off per conversation.</p>
+<p><strong>The assistant, during a conversation.</strong> Ask for it, or ask repeatedly for the same kind of help, and it can propose a skill. That proposal appears in the chat and waits for <strong>Approve</strong> or <strong>Reject</strong>. That happens through a tool called <strong>Propose skills</strong>; it is always available and every proposal waits for your approval, so there is nothing to switch off.</p>
 <p><strong>A helper model, after a turn.</strong> That checks whether the conversation holds a reusable lesson - the same post-turn review that also looks at your <a href="memory.html#suggestions-from-conversations">memory</a>. Such proposals pile up under <strong>Proposals from conversations</strong> on the Skills page, with a counter on the button in the sidebar: &quot;The assistant saw a reusable lesson here. Nothing is saved until you approve.&quot; Per proposal the reason is stated, with a quote from the message it rests on, and with <strong>View text</strong> you can read the whole skill first.</p>
 <p>If you do not want that, switch <strong>Self-learning skills</strong> off under Settings → General → Helper tasks. Which model does this you set there too; see <a href="models.html#helper-models-for-side-jobs">Models</a>.</p>
 <p>Skill and memory proposals share one ceiling per conversation - <strong>Suggestions per conversation</strong>, 3 by default. Once that is reached the review stops for the rest of that conversation, even if there was more to learn. Approving does not free up a slot: the ceiling counts every proposal that was made, whether you approved it or rejected it.</p>
