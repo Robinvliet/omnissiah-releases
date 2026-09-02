@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Skills - Omnissiah</title>
-    <meta name="description" content="Reusable instructions you switch on per conversation, written yourself or fetched from elsewhere." />
+    <meta name="description" content="Reusable instructions you attach to a message, or that the model picks up itself, written yourself or fetched from elsewhere." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -125,10 +125,12 @@
             <li><a href="#where-a-skill-lives">Where a skill lives</a></li>
             <li><a href="#writing-a-skill-yourself">Writing a skill yourself</a></li>
             <li><a href="#getting-a-skill-from-elsewhere">Getting a skill from elsewhere</a></li>
-            <li><a href="#switching-a-skill-on">Switching a skill on</a></li>
+            <li><a href="#attaching-a-skill-to-a-message">Attaching a skill to a message</a></li>
+            <li><a href="#who-may-invoke-a-skill">Who may invoke a skill</a></li>
             <li><a href="#what-the-model-does-with-your-skills">What the model does with your skills</a></li>
             <li><a href="#skills-that-arise-by-themselves">Skills that arise by themselves</a></li>
             <li><a href="#editing-and-deleting">Editing and deleting</a></li>
+            <li><a href="#when-a-skill-file-is-not-in-order">When a skill file is not in order</a></li>
           </ul>
         </li>
         <li><a href="memory.html">Memory</a></li>
@@ -163,8 +165,8 @@
         <article class="prose">
           <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
           <h1>Skills</h1>
-          <p>A skill is a piece of instruction you keep and use again. The page sums it up: &quot;Skills are reusable instructions. An active skill colours the answers in the conversation.&quot; You find them behind <strong>Skills</strong> in the sidebar; that button takes you to the page <strong>Skills</strong>.</p>
-<p>Unlike a persona, a skill replaces nothing: it comes on top of what is already there, and you can have several on at once.</p>
+          <p>A skill is a piece of instruction you keep and use again. The page sums it up: &quot;Skills are reusable instructions. Attach one to a message with / in the composer; the model can also load one itself when the description fits.&quot; You find them behind <strong>Skills</strong> in the sidebar; that button takes you to the page <strong>Skills</strong>.</p>
+<p>Unlike a persona, a skill replaces nothing: it comes on top of what is already there, and you can attach several to one message. A skill reaches the model in two ways: you attach it to a message yourself, or the model picks it from the list on its own when the description fits your question. Nothing is switched on per conversation; a skill you attach belongs to that message and stays in the conversation history with it.</p>
 <h2 id="where-a-skill-lives">Where a skill lives</h2>
 <p>Every skill is a folder with a <code>SKILL.md</code> in it, in the <code>skills/</code> folder of your data folder. That is ordinary markdown with a name and a description at the top, so you can just as well open it in your own editor. It is the same format Claude uses, so skills are interchangeable. See <a href="../data-and-backup.html#what-is-in-it">Data and backup</a>.</p>
 <h2 id="writing-a-skill-yourself">Writing a skill yourself</h2>
@@ -178,32 +180,40 @@
 <p>In the same <strong>Add skill</strong> menu are two other ways in:</p>
 <p><strong>Import…</strong> reads a <code>SKILL.md</code> file from your disk and opens it in the editor. Nothing is stored until you click <strong>Save</strong>.</p>
 <p><strong>From a URL…</strong> fetches a skill from the internet. You paste a GitHub folder (&quot;github.com/anthropics/skills/tree/main/…&quot;) or the direct URL of a <code>SKILL.md</code>. Omnissiah fetches the skill, checks it over and puts it in the editor for review: where it came from, the files that came with it and what the scan found. Only then does the <strong>Install</strong> button appear.</p>
-<p>If the scan found something, it is stated as a warning: &quot;External skills are untrusted. Read the instructions above before you install.&quot; Installing then asks for an extra confirmation. A flag is a reason to look, not a lock; what exactly is scanned is on <a href="../privacy.html#what-comes-in-is-looked-at-first">Privacy and security</a>. Skills you fetch this way carry the label <strong>imported</strong> in the list.</p>
-<h2 id="switching-a-skill-on">Switching a skill on</h2>
-<p>Two ways, both per conversation:</p>
+<p>If the scan found something, it is stated as a warning: &quot;External skills are untrusted. Read the instructions above before you install.&quot; Installing then asks for an extra confirmation. A flag is a reason to look, not a lock; what exactly is scanned is on <a href="../privacy.html#what-comes-in-is-looked-at-first">Privacy and security</a>. Skills you fetch this way carry the label <strong>hub</strong> in the list, and the settings in their file (see below) survive the installation.</p>
+<h2 id="attaching-a-skill-to-a-message">Attaching a skill to a message</h2>
+<p>Two ways in, and both do the same thing: they add a chip above the input bar for the message you are about to send.</p>
 <ul>
-<li>Click the <strong>+</strong> on the input bar and open the list <strong>Skills</strong>. Ticking switches it on.</li>
-<li>Type a <code>/</code> in the input bar. A menu with your skills appears, filtering on whatever you type next; Enter or a click switches it on and removes the <code>/</code> word from your text. Skills that are already on have &quot;· active&quot; after them.</li>
+<li>Type a <code>/</code> in the input bar. A menu the width of the input bar appears with two sections: <strong>Commands</strong> (for now only <strong>Deep research</strong>) and <strong>Skills</strong>, each skill with its description and, in grey, where it came from. Whatever you type after the <code>/</code> filters the list; Enter or a click adds the skill and removes the <code>/</code> word from your text. At the bottom sits <strong>Manage skills…</strong>, which opens this page.</li>
+<li>Click the <strong>+</strong> on the input bar and open the list <strong>Skills</strong>. It shows the same rows; a click adds the chip.</li>
 </ul>
-<p>An active skill appears as a chip above the input bar, with a cross to switch it off again.</p>
+<p>Every chip has a cross to take it off again, and you can combine skills with <strong>Deep research</strong>. There is a soft ceiling: &quot;At most 5 skills per message.&quot; When you send, the chips go along with that message and the input bar is empty again. The sent message shows the skills it carried as chips at the top, and the action timeline of the answer says &quot;Skill ‘name’ attached to the message&quot;. Edit that message, or retry the answer, and the same skills go along again.</p>
+<h2 id="who-may-invoke-a-skill">Who may invoke a skill</h2>
+<p>For every skill you decide who may use it, in two layers.</p>
+<p>The <strong>skill file</strong> carries the default. The same fields other tools use work here: <code>disable-model-invocation: true</code> (Claude Code) or <code>allow_implicit_invocation: false</code> in <code>agents/openai.yaml</code> (Codex) mean &quot;only you&quot;, and <code>user-invocable: false</code> means &quot;only the model&quot;. A skill fetched from elsewhere keeps its author&#39;s intent that way.</p>
+<p>On the Skills page every skill has a picker next to it, <strong>Who may invoke</strong>. <strong>Follow the file</strong> is the default and states what the file says; the other four settings overrule the file: <strong>You and the model</strong>, <strong>Only you (/ menu)</strong>, <strong>Only the model</strong> and <strong>Off</strong>. Off keeps the skill installed but offers it nowhere, which is the right setting for a skill you are still weighing. Skills only the model may use do not appear in the <code>/</code> menu; skills only you may use are not in the model&#39;s list.</p>
+<p>One name is reserved: <code>research</code> is the command behind <code>/research</code>. A skill folder with that name gets a warning on the Skills page and cannot be attached with <code>/</code>; rename the folder.</p>
 <h2 id="what-the-model-does-with-your-skills">What the model does with your skills</h2>
 <p>Not everything goes along every turn, and that is deliberate: skills that sit fully in the prompt cost room in every turn.</p>
 <ul>
-<li><strong>Skills you switched on</strong> are in there in full.</li>
-<li><strong>Their extra files</strong> (a <code>references/</code> folder for instance) are in there only as a list of paths. The assistant reads one when the task calls for it.</li>
-<li><strong>The skills you did <em>not</em> switch on</strong> are in there as an index: name and description, one line per skill. If one fits your question, the assistant fetches the full instructions itself.</li>
+<li><strong>A skill you attached</strong> goes along with that message in full.</li>
+<li><strong>Its extra files</strong> (a <code>references/</code> folder for instance) are in there only as a list of paths. The assistant reads one when the task calls for it.</li>
+<li><strong>The skills the model may pick itself</strong> are in the prompt as an index: name and description, one line per skill. If one fits your question, the assistant fetches the full instructions itself.</li>
 </ul>
 <p>That last part is why that one description line counts: it is the only thing the model can see whether a skill is relevant by.</p>
-<p>If you run a local model that does not support tools, that fetching cannot happen. The active skills then go along in full including their extra files, and the index stays away: the prompt never promises something that is not there.</p>
+<p>If you run a local model that does not support tools, that fetching cannot happen. An attached skill then goes along in full including its extra files, and the index stays away: the prompt never promises something that is not there.</p>
+<p>A skill attached to a message from long ago falls out of view when a long conversation is <a href="conversations.html#when-a-conversation-gets-long">condensed</a>: the summary keeps the gist, not the instruction. Attach it again if you still want it.</p>
 <h2 id="skills-that-arise-by-themselves">Skills that arise by themselves</h2>
 <p>Two things can propose a skill. With both, you approve, and until that moment nothing is stored.</p>
-<p><strong>The assistant, during a conversation.</strong> Ask for it, or ask repeatedly for the same kind of help, and it can propose a skill. That proposal appears in the chat and waits for <strong>Approve</strong> or <strong>Reject</strong>. That happens through a tool called <strong>Propose skills</strong>; it is always available and every proposal waits for your approval, so there is nothing to switch off.</p>
+<p><strong>The assistant, during a conversation.</strong> Ask for it, or ask repeatedly for the same kind of help, and it can propose a skill. That proposal appears in the chat and waits for <strong>Approve</strong> or <strong>Reject</strong>. That happens through a tool called <strong>Propose skills</strong>; it is always available and every proposal waits for your approval, so there is nothing to switch off. A skill that came into being this way carries the label <strong>assistant</strong> in the list; the ones you wrote yourself say <strong>own</strong>, the ones you fetched say <strong>hub</strong>.</p>
 <p><strong>A helper model, after a turn.</strong> That checks whether the conversation holds a reusable lesson - the same post-turn review that also looks at your <a href="memory.html#suggestions-from-conversations">memory</a>. Such proposals pile up under <strong>Proposals from conversations</strong> on the Skills page, with a counter on the button in the sidebar: &quot;The assistant saw a reusable lesson here. Nothing is saved until you approve.&quot; Per proposal the reason is stated, with a quote from the message it rests on, and with <strong>View text</strong> you can read the whole skill first.</p>
 <p>If you do not want that, switch <strong>Self-learning skills</strong> off under Settings → General → Helper tasks. Which model does this you set there too; see <a href="models.html#helper-models-for-side-jobs">Models</a>.</p>
 <p>Skill and memory proposals share one ceiling per conversation - <strong>Suggestions per conversation</strong>, 3 by default. Once that is reached the review stops for the rest of that conversation, even if there was more to learn. Approving does not free up a slot: the ceiling counts every proposal that was made, whether you approved it or rejected it.</p>
 <p>A scheduled task makes no proposals at all: a run without anyone watching would only pile them up.</p>
 <h2 id="editing-and-deleting">Editing and deleting</h2>
-<p>Click a skill in the list to open it, or use the pencil. Deleting asks for confirmation and is final: &quot;This cannot be undone.&quot; The folder disappears from your disk, so your backup is your only way back.</p>
+<p>Click a skill in the list to open it, or use the pencil. Below the instructions the editor lists the files in the skill folder, such as a <code>references/</code> or <code>scripts/</code> folder; scripts are listed, not run. Deleting asks for confirmation and is final: &quot;This cannot be undone.&quot; The folder disappears from your disk, so your backup is your only way back.</p>
+<h2 id="when-a-skill-file-is-not-in-order">When a skill file is not in order</h2>
+<p>The list tells you. A folder without a <code>SKILL.md</code>, a name that is not a valid skill name, a missing description, an empty set of instructions: each is stated under the skill, and a skill that cannot be used at all is greyed out until you fix the file. Unknown fields in the file are never a problem; skills written for other tools keep working here.</p>
 
         </article>
         <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="personas.html"><span class="richting">Previous</span>Personas</a><a class="volgende" href="memory.html"><span class="richting">Next</span>Memory</a></nav>
