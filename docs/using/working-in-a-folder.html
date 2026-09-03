@@ -118,6 +118,7 @@
         <li><a href="working-in-a-folder.html" aria-current="page">Working in a folder</a>
           <ul class="nav-koppen">
             <li><a href="#first-link-a-folder">First link a folder</a></li>
+            <li><a href="#without-a-folder-the-workspace">Without a folder: the workspace</a></li>
             <li><a href="#read-only-or-read-and-write">Read only, or read and write</a></li>
             <li><a href="#what-happens-without-asking">What happens without asking</a></li>
             <li><a href="#two-safety-nets-that-always-run">Two safety nets that always run</a></li>
@@ -164,13 +165,18 @@
         <article class="prose">
           <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
           <h1>Working in a folder</h1>
-          <p>Link a folder to a conversation and the assistant can work in it: look around, read files, and if you allow it, write, run commands and run scripts. There is no mode to switch on for this; what it may do follows from three things you can see - whether a folder is linked, whether that folder is read-only, and the approval level.</p>
+          <p>Link a folder to a conversation and the assistant can work in it: look around, read files, and if you allow it, write, run commands and run scripts. There is no mode to switch on for this; what it may do follows from three things you can see - whether a folder is linked, whether that folder is read-only, and the approval level. Without a folder it is not idle: it works in a <a href="#without-a-folder-the-workspace">workspace</a> of its own, away from your files.</p>
 <p>With tools it works in several steps in a row: plan, use a tool, look at the result and carry on. Twenty steps per turn at most.</p>
 <h2 id="first-link-a-folder">First link a folder</h2>
 <p>You link one with <strong>Work in a folder</strong> in the bar under the input bar, or with <strong>Add folder</strong> in the menu next to it. What you get to see before you confirm is on <a href="sources.html#linked-folders">Sources</a>.</p>
-<p>Only with a folder do the tools <strong>View folder</strong>, <strong>Read file</strong>, <strong>Write file</strong>, <strong>Terminal</strong> and <strong>Script</strong> exist. Without one, the conversation simply has no way to reach your disk.</p>
+<p>With a folder linked, the tools <strong>View folder</strong>, <strong>Read file</strong>, <strong>Write file</strong>, <strong>Terminal</strong> and <strong>Script</strong> work in that folder. Without one they are not gone: they work in the conversation&#39;s own workspace instead, and your own files stay out of reach.</p>
 <p>You can link several folders at once. Every folder has a name, and in the action timeline you see per step <em>which</em> folder it happened in.</p>
 <p>The terminal only works on macOS and Linux. On Windows the assistant says so and falls back to the file tools.</p>
+<h2 id="without-a-folder-the-workspace">Without a folder: the workspace</h2>
+<p>A conversation that is allowed to write gets a scratch folder of its own, inside the Omnissiah data folder under <code>data/scratch/</code>, one per conversation. Nothing is created up front: the folder appears the first time the assistant writes a file or runs a command there. From that moment a chip <strong>Workspace</strong> sits in the bar under the input bar; click it to show the folder in the Finder or Explorer. The assistant knows the path and is told to name the file when it leaves something there for you, such as a converted document or the output of a script.</p>
+<p>The workspace belongs to the conversation. Delete the conversation and the folder goes with it, including the snapshots the terminal made in it. A conversation you start from another one with <strong>Continue from here</strong> begins with an empty one.</p>
+<p>With a linked folder the workspace stays out of the way: the assistant works in your folder, and the workspace only comes along if it already existed before you linked the folder. In that case both exist side by side and every action says which of the two it happened in.</p>
+<p>One thing changed with this for older conversations. Version 0.21.0 set every conversation from before the read-only setting that was not an agent conversation to read only, to keep the guarantee its old mode gave. That setting is about linked folders and only appears once one is linked; a conversation without a folder now has the terminal and scripts again, in its workspace, under its own approval level, which is <strong>Approve manually</strong> unless you changed it.</p>
 <h2 id="read-only-or-read-and-write">Read only, or read and write</h2>
 <p>Next to the folder chips sits a second setting, and it is the one that decides whether anything on your disk can change:</p>
 <ul>
@@ -201,7 +207,7 @@
 <p>Some commands are refused unconditionally, in every approval setting, and no setting lifts that. Think of formatting a file system, recursively deleting a system folder or your home folder, shutting the machine down, and writing to the database or the <code>.env</code> of Omnissiah itself. The message says the assistant should not try again and should not work around it either. If you really want such a thing, you run it yourself in your own terminal.</p>
 <p>If your API keys happen to end up in the output of a command, a placeholder takes their place - <code>[GEMASKEERD]</code>, one of the few strings that is still Dutch - and the child process does not get them in the first place.</p>
 <h2 id="be-honest-about-what-this-is">Be honest about what this is</h2>
-<p>Those safety nets and levels prevent accidents; they are not a security boundary. The real boundary is your operating system. So do not link a folder whose contents you would not want to lose without a backup. More about that is on <a href="../privacy.html#what-you-control-yourself">Privacy and security</a>.</p>
+<p>Those safety nets and levels prevent accidents; they are not a security boundary. The real boundary is your operating system. Commands run directly on this machine without an operating-system sandbox, and the working folder or the workspace is a starting point for them, not a fence; the assistant is told exactly that in the description of its terminal tool. A sandbox around the terminal is planned. So do not link a folder whose contents you would not want to lose without a backup. More about that is on <a href="../privacy.html#what-you-control-yourself">Privacy and security</a>.</p>
 <h2 id="where-changing-things-does-not-exist">Where changing things does not exist</h2>
 <p>In a project with <strong>Answer only from the sources</strong> nothing on your disk can change, and scheduled tasks cannot run either. Reading a linked folder is still allowed there, and it is even one of the ways an answer gets its source reference. What falls away is writing, the terminal, scripts and sub-agents: those produce content that is not a source, and the promise could then no longer be kept. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
 

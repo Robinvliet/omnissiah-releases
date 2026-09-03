@@ -198,6 +198,7 @@
 <ul>
 <li><strong>A skill you attached</strong> goes along with that message in full.</li>
 <li><strong>Its extra files</strong> (a <code>references/</code> folder for instance) are in there only as a list of paths. The assistant reads one when the task calls for it.</li>
+<li><strong>Its scripts</strong> (a <code>scripts/</code> folder) the assistant can run with the terminal tool, straight from the skill folder; the skill tells it the exact path, and the script runs in your linked folder or the conversation&#39;s <a href="working-in-a-folder.html#without-a-folder-the-workspace">workspace</a>, under the approval level like any other command. The skill folder itself stays read-only for the assistant: to change a skill it proposes one, it never edits the folder directly, and a command that would write into or delete from the skills folder always pauses for your confirmation, whatever the approval level. A missing interpreter is just a failed command.</li>
 <li><strong>The skills the model may pick itself</strong> are in the prompt as an index: name and description, one line per skill. If one fits your question, the assistant fetches the full instructions itself.</li>
 </ul>
 <p>That last part is why that one description line counts: it is the only thing the model can see whether a skill is relevant by.</p>
@@ -211,7 +212,7 @@
 <p>Skill and memory proposals share one ceiling per conversation - <strong>Suggestions per conversation</strong>, 3 by default. Once that is reached the review stops for the rest of that conversation, even if there was more to learn. Approving does not free up a slot: the ceiling counts every proposal that was made, whether you approved it or rejected it.</p>
 <p>A scheduled task makes no proposals at all: a run without anyone watching would only pile them up.</p>
 <h2 id="editing-and-deleting">Editing and deleting</h2>
-<p>Click a skill in the list to open it, or use the pencil. Below the instructions the editor lists the files in the skill folder, such as a <code>references/</code> or <code>scripts/</code> folder; scripts are listed, not run. Deleting asks for confirmation and is final: &quot;This cannot be undone.&quot; The folder disappears from your disk, so your backup is your only way back.</p>
+<p>Click a skill in the list to open it, or use the pencil. Below the instructions the editor lists the files in the skill folder, such as a <code>references/</code> or <code>scripts/</code> folder; the assistant can run the scripts from the skill folder, see above. Deleting asks for confirmation and is final: &quot;This cannot be undone.&quot; The folder disappears from your disk, so your backup is your only way back.</p>
 <h2 id="when-a-skill-file-is-not-in-order">When a skill file is not in order</h2>
 <p>The list tells you. A folder without a <code>SKILL.md</code>, a name that is not a valid skill name, a missing description, an empty set of instructions: each is stated under the skill, and a skill that cannot be used at all is greyed out until you fix the file. Unknown fields in the file are never a problem; skills written for other tools keep working here.</p>
 
