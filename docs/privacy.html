@@ -176,24 +176,24 @@
 <h2 id="what-does-leave-your-machine">What does leave your machine</h2>
 <p>Only what you set in motion:</p>
 <ul>
-<li><strong>To your model provider</strong> goes the content of the conversation, including the sources that come along for that turn: your documents or fragments of them, the files you attached, and what the assistant has read from a linked folder. That is inherent to a cloud model, and it applies just as much to an endpoint you connected yourself. If you would rather not, use a local model: then nothing leaves your machine.</li>
+<li><strong>To your model provider</strong> goes the content of the conversation, including the sources that come along for that turn: your documents or fragments of them, the files you attached, and what the agent has read from a linked folder. That is inherent to a cloud model, and it applies just as much to an endpoint you connected yourself. If you would rather not, use a local model: then nothing leaves your machine.</li>
 <li><strong>To the search engine</strong> goes your query, if you have web search turned on.</li>
-<li><strong>To a web page</strong> goes a request, when the assistant fetches a page for you.</li>
+<li><strong>To a web page</strong> goes a request, when the agent fetches a page for you.</li>
 <li><strong>To Hugging Face</strong> goes a request when you use &quot;Discover models&quot;.</li>
 <li><strong>To GitHub</strong> goes a request when the desktop app checks for updates, and when you fetch a skill from a repository.</li>
 <li><strong>To api.osv.dev</strong> goes the name and version of a package before a local MCP server is started with <code>npx</code> or <code>uvx</code>. That is a check against a public database of known malware, and only that: it fails open, so a failed check does not block the server.</li>
 </ul>
 <p>The local embedding model that makes your documents searchable runs on your own machine. No document text goes out to be indexed.</p>
 <h2 id="what-comes-in-is-looked-at-first">What comes in is looked at first</h2>
-<p>Text from outside can contain instructions that are not yours but do talk to the model. Omnissiah therefore scans everything that enters your conversation from outside for such patterns before the model sees it: documents you add, pages the assistant fetches, search results, what an MCP server sends back, and the files you attach.</p>
-<p>If the scan finds something, you see a flag on that source and the model is told explicitly: this is material to read, not an instruction to carry out. A flagged document stays out of the block that goes along in full, but the assistant can still read it when it needs it; a flagged attachment is inside your message and cannot be left out of it, so it is named. You can have a flag reassessed with <strong>Reassess</strong>, without adding the source again.</p>
+<p>Text from outside can contain instructions that are not yours but do talk to the model. Omnissiah therefore scans everything that enters your conversation from outside for such patterns before the model sees it: documents you add, pages the agent fetches, search results, what an MCP server sends back, and the files you attach.</p>
+<p>If the scan finds something, you see a flag on that source and the model is told explicitly: this is material to read, not an instruction to carry out. A flagged document stays out of the block that goes along in full, but the agent can still read it when it needs it; a flagged attachment is inside your message and cannot be left out of it, so it is named. You can have a flag reassessed with <strong>Reassess</strong>, without adding the source again.</p>
 <p>Be honest here too about what this is: it recognises patterns, it does not understand intent. It is there to warn you and to arm the model, not to protect you from material you bring in yourself.</p>
 <h2 id="what-you-control-yourself">What you control yourself</h2>
-<p>The assistant can read and write files and run commands, but only inside a folder you link explicitly, only when that folder is not set to read-only, and only at the level you set with the approval level. There are safety nets underneath, such as checkpoints before a write and snapshots before a shell command.</p>
+<p>The agent can read and write files and run commands, but only inside a folder you link explicitly, only when that folder is not set to read-only, and only at the level you set with the approval level. There are safety nets underneath, such as checkpoints before a write and snapshots before a shell command.</p>
 <p>Be honest about what that is and is not: those layers prevent accidents, they are not a security boundary. The real boundary is your operating system. So do not link a folder whose contents you would not want to lose without a backup, and do not add an MCP server you do not trust. See <a href="using/mcp-servers.html#local-stdio">MCP servers</a>.</p>
 <h2 id="your-data-is-yours">Your data is yours</h2>
 <p>Everything lives in one data folder, in a database you can open with any SQLite tool, plus ordinary markdown files. No proprietary format, no export step, no service that has to give permission first. See <a href="data-and-backup.html">Data and backup</a>.</p>
-<p>What the assistant remembers about you between conversations lives there too, and you can read it back, edit it, wipe it or turn it off entirely. See <a href="using/memory.html">Memory</a>.</p>
+<p>What the agent remembers about you between conversations lives there too, and you can read it back, edit it, wipe it or turn it off entirely. See <a href="using/memory.html">Memory</a>.</p>
 
         </article>
         <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="troubleshooting.html"><span class="richting">Previous</span>Troubleshooting</a></nav>
@@ -201,7 +201,7 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
         <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
         <a href="https://github.com/Robinvliet/omnissiah-releases/releases"

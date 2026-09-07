@@ -181,7 +181,7 @@
 <p>Times are read in the time zone of the machine where Omnissiah runs, and that is your own machine.</p>
 <p>One thing to know about <strong>Every X minutes</strong>: the moments lie on a fixed grid that starts when you save the task - &quot;every 30 minutes&quot; means moments exactly 30 minutes apart, no matter how long each run takes. The app checks for due tasks once a minute, so a run can start up to a minute after its moment, but the next moment does not shift along with that. If a run is still going when its next moment arrives, that moment is skipped and the run list says so. Editing the schedule, or resuming a paused task, starts a fresh grid from that point. Cron expressions work the same way, tied to the clock.</p>
 <h2 id="or-just-ask-in-a-conversation">Or just ask in a conversation</h2>
-<p>You can also ask the assistant to schedule something. It translates your sentence into a schedule itself and makes a proposal that pauses until you approve it, just like with a skill. The task then inherits the model, the approval level and the project of the conversation you asked it in; adjusting comes afterwards in the overview.</p>
+<p>You can also ask the agent to schedule something. It translates your sentence into a schedule itself and makes a proposal that pauses until you approve it, just like with a skill. The task then inherits the model, the approval level and the project of the conversation you asked it in; adjusting comes afterwards in the overview.</p>
 <p>This tool is called <strong>Schedule tasks</strong>; it is always available in a normal conversation, and creating a task waits for your approval. Inside a scheduled run it does not exist at all - a task cannot plan tasks.</p>
 <h2 id="what-you-get-back">What you get back</h2>
 <p>When a run finishes, a counter appears at <strong>Scheduled tasks</strong> in the sidebar and a notification: &quot;Scheduled task &quot;Morning briefing&quot;: run succeeded&quot;, with a <strong>View</strong> button. The task conversation also gets a dot in the sidebar, in <strong>Conversations</strong> and in the conversation list of its project: this task has something you have not read yet. A silent run does not light the dot, so a task that found something looks different from one that had nothing to report.</p>
@@ -192,7 +192,7 @@
 <li><strong>succeeded</strong> - the run finished.</li>
 <li><strong>failed</strong> - something went wrong; the reason is stated.</li>
 <li><strong>silent</strong> - the run ran and had nothing to report. See below.</li>
-<li><strong>awaiting approval</strong> - the assistant wants to do something you have to say yes to first. You do that in the task conversation.</li>
+<li><strong>awaiting approval</strong> - the agent wants to do something you have to say yes to first. You do that in the task conversation.</li>
 <li><strong>skipped</strong> - this run did not happen, with the reason.</li>
 <li><strong>running</strong> - it is going on now.</li>
 </ul>
@@ -200,7 +200,7 @@
 <h2 id="in-the-task-conversation">In the task conversation</h2>
 <p>All runs of a task sit one after another in the same conversation, and that gets long. So the chat shows only the last run by default, with a pager at the top: <strong>Run 3 of 12</strong>, with the time next to it, arrows to previous and next, and <strong>Show all</strong> if you do want the whole history. Click a run in the run list and the conversation opens right on that run.</p>
 <h2 id="when-a-run-says-nothing">When a run says nothing</h2>
-<p>A task that summarises the news every morning does not have news every morning. In such a case the assistant answers with <code>[SILENT]</code>, and then the run gets the status <strong>silent</strong> and the notification stays away. The turn is simply there in the task conversation, so you can always check <em>that</em> it ran.</p>
+<p>A task that summarises the news every morning does not have news every morning. In such a case the agent answers with <code>[SILENT]</code>, and then the run gets the status <strong>silent</strong> and the notification stays away. The turn is simply there in the task conversation, so you can always check <em>that</em> it ran.</p>
 <p>That is also what the task is given in its instructions: it runs without a user present, asks no questions and waits for nothing, because its last answer is what you see later as the outcome. If it uses the protocol word <em>and</em> writes content anyway, the run row says &quot;[SILENT] protocol violated&quot; - a warning, not a status.</p>
 <h2 id="if-the-app-was-off">If the app was off</h2>
 <p>A scheduled task needs a running app. If your computer was off at nine o&#39;clock, the morning briefing still runs as soon as you open Omnissiah again.</p>
@@ -216,7 +216,7 @@
 <p>The first check always runs the task: there is nothing to compare against yet. After that:</p>
 <ul>
 <li><strong>Nothing changed.</strong> No run, no notification, no dot on the conversation. The run list shows a single skipped row that counts along quietly: &quot;12 checks without a change, last Aug 22, 2:45 PM&quot;. As long as nothing changes it stays one row, so the runs that did something stay visible.</li>
-<li><strong>Something changed.</strong> The task runs as usual, and the instruction is joined by a block showing what changed: a diff of the previous against the current output, plus the current output itself. In the task conversation it sits folded under &quot;Monitor: the source changed&quot;, so you can open it if you want to see exactly what the assistant was given.</li>
+<li><strong>Something changed.</strong> The task runs as usual, and the instruction is joined by a block showing what changed: a diff of the previous against the current output, plus the current output itself. In the task conversation it sits folded under &quot;Monitor: the source changed&quot;, so you can open it if you want to see exactly what the agent was given.</li>
 <li><strong>The source itself failed.</strong> An unreachable page, a 404, a command that exits with an error: that counts as a failed run and not as a change. You see it in the task conversation and in the run list, and after three in a row the task pauses itself, exactly as with any other failure. What was last seen is kept, so a source that recovers to its old content does not raise a false alarm.</li>
 </ul>
 <p>Two things worth knowing. A monitor needs a recurring schedule, so it does not go with <strong>Once</strong>. And a page that builds its content with JavaScript cannot be watched this way; you get an honest error saying so rather than a monitor that silently never reports anything. Point it at an API, a feed or a text file instead.</p>
@@ -245,7 +245,7 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
         <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
         <a href="https://github.com/Robinvliet/omnissiah-releases/releases"

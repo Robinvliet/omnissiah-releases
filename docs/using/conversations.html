@@ -116,7 +116,7 @@
           <ul class="nav-koppen">
             <li><a href="#what-a-conversation-can-do">What a conversation can do</a></li>
             <li><a href="#deep-research-per-message">Deep research, per message</a></li>
-            <li><a href="#when-the-assistant-asks-you-something">When the assistant asks you something</a></li>
+            <li><a href="#when-the-agent-asks-you-something">When the agent asks you something</a></li>
             <li><a href="#steering-an-answer">Steering an answer</a></li>
             <li><a href="#when-a-conversation-gets-long">When a conversation gets long</a></li>
             <li><a href="#what-a-turn-cost">What a turn cost</a></li>
@@ -167,29 +167,29 @@
           <h1>Conversations</h1>
           <p>A conversation is the unit you work in. The model, its settings and the sources all apply per conversation, so you can have two side by side that behave completely differently. Skills are the exception: you attach them per message, not per conversation.</p>
 <h2 id="what-a-conversation-can-do">What a conversation can do</h2>
-<p>There is no mode to pick. Every conversation is one and the same lane, and what the assistant can do in it follows from things you can see and set:</p>
+<p>There is no mode to pick. Every conversation is one and the same lane, and what the agent can do in it follows from things you can see and set:</p>
 <ul>
 <li><strong>A linked folder</strong>, and whether it is read-only or may be written in. That is what decides whether anything on your disk can change. See <a href="working-in-a-folder.html">Working in a folder</a>.</li>
-<li><strong>A workspace of its own</strong> when no folder is linked: a scratch folder inside the data folder where the assistant can still write files and run commands, without touching yours. It appears as a chip <strong>Workspace</strong> in the bar under the input bar once the assistant has used it, and it disappears with the conversation. See <a href="working-in-a-folder.html#without-a-folder-the-workspace">Working in a folder</a>.</li>
+<li><strong>A workspace of its own</strong> when no folder is linked: a scratch folder inside the data folder where the agent can still write files and run commands, without touching yours. It appears as a chip <strong>Workspace</strong> in the bar under the input bar once the agent has used it, and it disappears with the conversation. See <a href="working-in-a-folder.html#without-a-folder-the-workspace">Working in a folder</a>.</li>
 <li><strong>The approval level</strong>, next to the <strong>+</strong> on the input bar, for everything that reaches outside the app.</li>
 <li><strong>A project set to Answer only from the sources</strong>, which closes off every route to material outside your sources. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</li>
-<li><strong>What your model can do.</strong> A model without tool support gets a plain lane and says so: &quot;does not support tools; the assistant can only chat. Tools come back when you pick a model that supports them.&quot; Eight steps per turn at most, and nothing is stored - pick a capable model again and everything is back.</li>
+<li><strong>What your model can do.</strong> A model without tool support gets a plain lane and says so: &quot;does not support tools; the agent can only chat. Tools come back when you pick a model that supports them.&quot; Eight steps per turn at most, and nothing is stored - pick a capable model again and everything is back.</li>
 </ul>
-<p>How far a turn may go follows the same line: without tools it stops at the eight above, with tools it becomes twenty steps. What the assistant does with them is on <a href="working-in-a-folder.html">Working in a folder</a>.</p>
+<p>How far a turn may go follows the same line: without tools it stops at the eight above, with tools it becomes twenty steps. What the agent does with them is on <a href="working-in-a-folder.html">Working in a folder</a>.</p>
 <p>How thoroughly the model thinks is a separate matter, set with <strong>Effort</strong> in the model picker. That is on <a href="models.html#how-deeply-a-model-thinks">Models</a>.</p>
 <h2 id="deep-research-per-message">Deep research, per message</h2>
 <p>Deep research is not a mode you sit in but something you start for one message. Open the <strong>+</strong> on the input bar and pick <strong>Deep research</strong>, or type <code>/research</code>. A chip appears above the input bar and the next message runs as a research run: &quot;several rounds of web research, ending with a saved report.&quot; Twenty-four steps, and the web tools are on for that run whatever else is configured.</p>
-<p>The assistant runs it as an orchestrator. If your question is broad or ambiguous it asks you one question first, about scope, depth or audience; a sharp question is picked up straight away. It then scales the work to the question: something simple and factual is handled in one go, while a comparison or a composite question is split into a few sub-questions that each get their own sub-agent, with its own context and its own searches. You can follow those in the action timeline. The assistant reads what they found, checks it, and writes the report itself: an answer to your original question first, then one section per sub-question.</p>
+<p>The agent runs it as an orchestrator. If your question is broad or ambiguous it asks you one question first, about scope, depth or audience; a sharp question is picked up straight away. It then scales the work to the question: something simple and factual is handled in one go, while a comparison or a composite question is split into a few sub-questions that each get their own sub-agent, with its own context and its own searches. You can follow those in the action timeline. The agent reads what they found, checks it, and writes the report itself: an answer to your original question first, then one section per sub-question.</p>
 <p>How much of this you get depends on the model. The orchestration is an instruction, not a rail, so a small local model may ignore it and simply answer in one go.</p>
 <p>The chip disappears once that message is sent, so the run is exactly as long as the research. If the action is greyed out the reason is there: your model knows no tools, there is no Tavily key, or the project is source-bound.</p>
 <p>While the run is going the line under the answer says which phase it is in and how many sources have come by so far, next to the elapsed time. The source count jumps rather than creeps: a sub-agent only reports back when it finishes, so everything it found arrives at once.</p>
-<p>At the end a report is saved and appears as a card in the conversation. If the assistant forgets, Omnissiah saves the last answer itself and the card says so: &quot;Saved automatically, the model did not save the report itself.&quot; Both kinds also turn up under <strong>Reports</strong> in the sidebar.</p>
+<p>At the end a report is saved and appears as a card in the conversation. If the agent forgets, Omnissiah saves the last answer itself and the card says so: &quot;Saved automatically, the model did not save the report itself.&quot; Both kinds also turn up under <strong>Reports</strong> in the sidebar.</p>
 <p>A saved report carries one more line, on the card and in the viewer: &quot;All 12 sources appeared in this run&quot;, or &quot;3 of 12 sources could not be traced to this run&quot;. Omnissiah collects every url the run actually touched - what the searches returned, what was fetched, and what the sub-agents retrieved - and checks the report&#39;s own source list against it. It is a mechanical check and nothing more: it says a source came by, not that it says what the report claims it says, and it never blocks anything. Reports from before this check, and automatically saved ones (which have no source list), simply show no line.</p>
 <p><strong>Reports</strong> in the sidebar is where all of them live: title, age, how many sources, that same source line, and the conversation it came from as a link you can follow. A report you no longer want can be deleted there; it asks first, and the conversation it came from stays.</p>
 <p>From that list - and from the card in a conversation, and from the report itself - you can pick <strong>Discuss in a new conversation</strong>. A fresh conversation opens with the report attached as a source, so you can ask questions about it without the whole research run around it. It is a normal source like any other, so it shows up in the sources panel and you can unlink it there.</p>
-<h2 id="when-the-assistant-asks-you-something">When the assistant asks you something</h2>
-<p>Instead of guessing, the assistant can ask a question back: a choice from a few options, several at once, or an open question. It appears as a card above the input bar so it cannot scroll out of view, one question at a time with a counter and arrows when there are more. Paging forward keeps your answer, <strong>Skip</strong> drops it, and <strong>Send</strong> only becomes available on the last one.</p>
-<p>You are never forced: keep typing and the question closes itself, with &quot;You continued without choosing; the assistant decided for itself.&quot; Answered questions move into the action timeline of that turn.</p>
+<h2 id="when-the-agent-asks-you-something">When the agent asks you something</h2>
+<p>Instead of guessing, the agent can ask a question back: a choice from a few options, several at once, or an open question. It appears as a card above the input bar so it cannot scroll out of view, one question at a time with a counter and arrows when there are more. Paging forward keeps your answer, <strong>Skip</strong> drops it, and <strong>Send</strong> only becomes available on the last one.</p>
+<p>You are never forced: keep typing and the question closes itself, with &quot;You continued without choosing; the agent decided for itself.&quot; Answered questions move into the action timeline of that turn.</p>
 <h2 id="steering-an-answer">Steering an answer</h2>
 <p>Move over a message and three ways to go on appear:</p>
 <ul>
@@ -204,11 +204,11 @@
 <p>The header shows the token usage and an estimate of the cost of this conversation. The little ring next to it shows how much of the context window the last turn actually used. When a turn has tools, the budget per run comes after it.</p>
 <p>Click the token line under an answer for <strong>Details of this reply</strong>: input, output, what came from the cache, how long it took, and under &quot;What went in&quot; which sources went along and which were left out, with the reason.</p>
 <h2 id="stopping-waiting-and-going-on">Stopping, waiting and going on</h2>
-<p>While it is generating there is a stop button, and Escape does the same. An interrupted answer stays with a note that it is incomplete. If the assistant runs into its step limit or its token budget, it says so and offers <strong>Continue</strong>.</p>
+<p>While it is generating there is a stop button, and Escape does the same. An interrupted answer stays with a note that it is incomplete. If the agent runs into its step limit or its token budget, it says so and offers <strong>Continue</strong>.</p>
 <p>Send something while an answer is still running and it depends on the setting <strong>While generating</strong>: <strong>Queue</strong> makes your message wait until the turn is done, <strong>Interrupt</strong> cuts the running answer short and steers right away. The queue is one deep; send something else and it replaces the waiting message.</p>
 <h2 id="finding-what-you-already-discussed">Finding what you already discussed</h2>
 <p>The menu of a conversation holds <strong>Pin</strong>, <strong>Rename</strong>, <strong>Labels</strong>, <strong>Move to project</strong>, <strong>Export as Markdown</strong> or <strong>JSON</strong>, and <strong>Delete</strong>. A pinned conversation stays at the top of the sidebar.</p>
-<p>You can search in two places. The command bar (⌘K, or Ctrl+K) searches your conversations and runs actions right away; the conversations page has its own search over titles and messages. The assistant can reach them too: the tool <strong>Conversation history</strong> lets it look up and read back an older conversation.</p>
+<p>You can search in two places. The command bar (⌘K, or Ctrl+K) searches your conversations and runs actions right away; the conversations page has its own search over titles and messages. The agent can reach them too: the tool <strong>Conversation history</strong> lets it look up and read back an older conversation.</p>
 <h2 id="what-you-switch-on-per-conversation">What you switch on per conversation</h2>
 <p>Behind the <strong>+</strong> on the input bar sits a list <strong>Skills</strong>, and typing <code>/</code> opens the same skills as a menu; either way a skill becomes a chip above the input bar and goes along with the next message only, see <a href="skills.html#attaching-a-skill-to-a-message">Skills</a>. There is no list of tools there any more. What the model can do now follows from three things instead: tools that are always available, the settings of this conversation (a linked folder and whether it may write, the approval level, whether the project is source-bound), and what you have configured - web search exists once there is a Tavily key, and MCP servers you switch on for the whole app under <a href="mcp-servers.html">Settings → Tools</a>.</p>
 
@@ -218,7 +218,7 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
         <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
         <a href="https://github.com/Robinvliet/omnissiah-releases/releases"

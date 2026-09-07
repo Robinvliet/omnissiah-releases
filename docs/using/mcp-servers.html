@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>MCP servers - Omnissiah</title>
-    <meta name="description" content="Hanging extra tools on the assistant through the Model Context Protocol, and deciding which of them join." />
+    <meta name="description" content="Hanging extra tools on the agent through the Model Context Protocol, and deciding which of them join." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -184,7 +184,7 @@
 <p>Next to the switch the row says what the server costs: something like <strong>2 tools · ~4,200 tokens per turn</strong>. That is an estimate of what its tool definitions take up in the prompt of every turn, whether or not the model actually calls them - which is exactly why the switch is worth using when a server brings many tools. The tilde is honest: it is a calculation on characters, not a tokeniser. The number is measured when you add the server; <strong>Measure again</strong> in the row menu refreshes it.</p>
 <p>A server that is switched off keeps its last measurement, so you can see what turning it back on would cost.</p>
 <h2 id="what-you-see-in-a-conversation">What you see in a conversation</h2>
-<p>When the assistant calls a tool from a server, that step appears in the action timeline with the name of the tool and a small label with the server name next to it, so you see where it comes from. Behind the scenes they carry a longer name, <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>, so that two servers with a tool of the same name do not get in each other&#39;s way.</p>
+<p>When the agent calls a tool from a server, that step appears in the action timeline with the name of the tool and a small label with the server name next to it, so you see where it comes from. Behind the scenes they carry a longer name, <code>mcp__&lt;server&gt;__&lt;tool&gt;</code>, so that two servers with a tool of the same name do not get in each other&#39;s way.</p>
 <p>A call that has given no answer after five minutes is aborted, with the message that the server sent nothing back within that time. Without that limit one slow server would leave your whole turn hanging.</p>
 <h2 id="approval">Approval</h2>
 <p>Tools from MCP servers fall under the approval level of that conversation, just like writing files and the terminal, and they do so in <strong>every</strong> conversation. See <a href="working-in-a-folder.html#what-happens-without-asking">Working in a folder</a>.</p>
@@ -192,8 +192,8 @@
 <p>One difference is worth the trouble: in the <strong>Approve automatically</strong> setting an MCP tool only goes through without asking if the server marks it as read-only <em>itself</em>. Everything else pauses. That is deliberately cautious, because that marking comes from the server and you did not write it.</p>
 <h2 id="when-a-server-does-not-work">When a server does not work</h2>
 <p>A server that will not connect at the start of a turn is skipped. The turn simply goes on, with the tools of the servers that <em>do</em> work, and you see it in the chat: above the answer it says <strong>&quot;1 server unavailable&quot;</strong>, and if you unfold that block, the name of the server with the reason behind it. That message belongs to <em>that</em> answer and therefore stays with it after a reload.</p>
-<p>The assistant gets exactly the same message in its instructions, plus the note that the turn continued with the tools of the servers that did work. It can therefore say that it could not reach something, instead of answering confidently from an incomplete picture. One broken server never stops the turn; it is only no longer kept quiet.</p>
-<p>The reason is the error message of the server itself, shortened and with any keys filtered out. If it says too little, the full error is in the server logs. What the assistant did get from other servers stands apart from that.</p>
+<p>The agent gets exactly the same message in its instructions, plus the note that the turn continued with the tools of the servers that did work. It can therefore say that it could not reach something, instead of answering confidently from an incomplete picture. One broken server never stops the turn; it is only no longer kept quiet.</p>
+<p>The reason is the error message of the server itself, shortened and with any keys filtered out. If it says too little, the full error is in the server logs. What the agent did get from other servers stands apart from that.</p>
 
         </article>
         <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="models.html"><span class="richting">Previous</span>Models</a><a class="volgende" href="scheduled-tasks.html"><span class="richting">Next</span>Scheduled tasks</a></nav>
@@ -201,7 +201,7 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
         <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
         <a href="https://github.com/Robinvliet/omnissiah-releases/releases"

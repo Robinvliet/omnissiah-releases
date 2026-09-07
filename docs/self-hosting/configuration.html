@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Configuration - Omnissiah</title>
-    <meta name="description" content="The settings in .env, and which folder the assistant may read and write." />
+    <meta name="description" content="The settings in .env, and which folder the agent may read and write." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -133,7 +133,7 @@
           <ul class="nav-koppen">
             <li><a href="#the-variables">The variables</a></li>
             <li><a href="#setting-api-keys">Setting API keys</a></li>
-            <li><a href="#which-folder-the-assistant-may-see">Which folder the assistant may see</a></li>
+            <li><a href="#which-folder-the-agent-may-see">Which folder the agent may see</a></li>
           </ul>
         </li>
         <li><a href="on-your-phone.html">On your phone</a></li>
@@ -226,8 +226,8 @@
 <p><strong>In the app</strong>, which is the easiest: go to Settings → Models and paste your keys there. Omnissiah checks them live and writes them to <code>.env</code>. This works immediately, without a restart.</p>
 <p><strong>Up front in <code>.env</code></strong>: fill in the values before starting. If you edit <code>.env</code> by hand later, restart the app, in Docker with <code>docker compose up -d</code>, so the new values are read.</p>
 <p>Keys are read server-side only and never reach the browser.</p>
-<h2 id="which-folder-the-assistant-may-see">Which folder the assistant may see</h2>
-<p>With &quot;Add folder&quot; in the plus menu of the input bar you link a folder to a conversation. The assistant can then read the files in that folder, and edit them too when you set that folder to read and write.</p>
+<h2 id="which-folder-the-agent-may-see">Which folder the agent may see</h2>
+<p>With &quot;Add folder&quot; in the plus menu of the input bar you link a folder to a conversation. The agent can then read the files in that folder, and edit them too when you set that folder to read and write.</p>
 <p>How you point at that folder differs per way of running:</p>
 <ul>
 <li><strong>Desktop app:</strong> your system&#39;s normal folder picker, Finder or Explorer. Whatever you point at is allowed, including an external drive.</li>
@@ -242,7 +242,7 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
         <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
         <a href="https://github.com/Robinvliet/omnissiah-releases/releases"

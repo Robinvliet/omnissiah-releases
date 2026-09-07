@@ -188,7 +188,7 @@
 <p><strong>What it costs.</strong> An estimate, for example &quot;~1.2k tokens&quot;. An image in your sources says &quot;costs nothing&quot;, because it only comes into view when the model asks for it. A folder gets a dash: &quot;A folder is not in the context; the model reads the files with tools.&quot; To the right of every group heading is the total.</p>
 <p><strong>When the model last saw it.</strong> &quot;Not used yet&quot;, or &quot;Last used on August 5&quot;. With a project source it says &quot;in this project&quot;, because every conversation in that project may have read it.</p>
 <h2 id="on-and-off-and-where-that-applies">On and off, and where that applies</h2>
-<p>Every document has a switch that decides whether it joins in once the assistant starts searching; the label is <strong>Include in search</strong>. In a conversation it touches that conversation only, and the label says so. If a source is off, one of three things is going on:</p>
+<p>Every document has a switch that decides whether it joins in once the agent starts searching; the label is <strong>Include in search</strong>. In a conversation it touches that conversation only, and the label says so. If a source is off, one of three things is going on:</p>
 <ul>
 <li><strong>off</strong>, in the place where the source belongs.</li>
 <li><strong>off in this conversation</strong>, with a project source you switched off here. The project stays untouched and other conversations still see it.</li>
@@ -213,13 +213,13 @@
 <p><img src="../afbeeldingen/bronnen-map-koppelen.png" alt="The confirmation before linking: the folder name, the full path, &quot;20 files come into view, including subfolders&quot;, &quot;28 files fall away because of the fixed exclusions (which)&quot;, and the buttons Cancel and Link." loading="lazy" decoding="async" /></p>
 <p>There is no limit that stops you from linking a large folder. With a very large one the <em>counting</em> is cut short; then the numbers say &quot;At least&quot; and the dialog says they are a lower bound.</p>
 <p><strong>Your own material does stay in</strong>, including videos, recordings and archives: a folder of interviews that looks empty is worse than a longer list.</p>
-<p><strong>One thing is never opened:</strong> files with a dot at the start, and key files. You see <em>that</em> your <code>.env</code> is there, but the assistant does not read it of its own accord.</p>
-<p>Expand a folder in the panel and you see exactly the same selection as the assistant, with how much is in the whole tree underneath.</p>
+<p><strong>One thing is never opened:</strong> files with a dot at the start, and key files. You see <em>that</em> your <code>.env</code> is there, but the agent does not read it of its own accord.</p>
+<p>Expand a folder in the panel and you see exactly the same selection as the agent, with how much is in the whole tree underneath.</p>
 <p><strong>A folder that has disappeared from disk</strong> does not fall away quietly. The row states the reason, for example &quot;Not available: this folder no longer exists on this computer&quot;, with <strong>Link again</strong> in the menu. The other reasons are that the folder may not be read, that the path is no longer a folder, or that it lies outside the allowed location. The model gets that same message, so it does not answer confidently from an incomplete picture.</p>
 <p>If something changed since the last time, it says &quot;Files have been added, removed or renamed since then.&quot; That is exactly what is measured: about the <em>content</em> of a file that line makes no claim at all.</p>
 <h2 id="before-the-model-sees-a-source">Before the model sees a source</h2>
 <p>Everything that comes in from outside your conversation is first assessed for instructions that are not yours. What gets scanned, what a flag does and does not mean and what you do about it is on <a href="../privacy.html#what-comes-in-is-looked-at-first">Privacy and security</a>.</p>
-<p>If you work in a project with <strong>Answer only from the sources</strong>, stricter rules apply and the assistant refers to the source for every claim. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
+<p>If you work in a project with <strong>Answer only from the sources</strong>, stricter rules apply and the agent refers to the source for every claim. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
 
         </article>
         <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="projects.html"><span class="richting">Previous</span>Projects</a><a class="volgende" href="working-in-a-folder.html"><span class="richting">Next</span>Working in a folder</a></nav>
@@ -227,7 +227,7 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
         <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
         <a href="https://github.com/Robinvliet/omnissiah-releases/releases"

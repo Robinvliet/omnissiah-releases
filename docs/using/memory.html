@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Memory - Omnissiah</title>
-    <meta name="description" content="What the assistant remembers about you between conversations, where it lives and how you clear it." />
+    <meta name="description" content="What the agent remembers about you between conversations, where it lives and how you clear it." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -166,7 +166,7 @@
           <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
           <h1>Memory</h1>
           <p>A conversation knows nothing of another conversation. Memory is the exception: a small list of things about you that goes along in <em>every</em> conversation, so you do not have to explain who you are and how you work every time.</p>
-<p>You manage it under <strong>Settings → Memory</strong>: &quot;What the assistant remembers about you. Also readable as <code>data/memory.md</code>; you edit it here.&quot;</p>
+<p>You manage it under <strong>Settings → Memory</strong>: &quot;What the agent remembers about you. Also readable as <code>data/memory.md</code>; you edit it here.&quot;</p>
 <h2 id="two-lists">Two lists</h2>
 <ul>
 <li><strong>User profile</strong> - &quot;Who you are: role, preferences, style, how you want to be addressed.&quot;</li>
@@ -174,26 +174,26 @@
 </ul>
 <p>They stand apart, each with its own switch and its own room. An item moves to the other list with <strong>To Facts</strong> or <strong>To Profile</strong>.</p>
 <h2 id="how-it-fills-up">How it fills up</h2>
-<p>Mostly by itself. If the assistant learns something lasting about you during a conversation, or a clear preference, it writes it down. It is supposed to be restrained about that: no temporary conversation details and no task progress. If something is out of date it updates the existing item instead of putting a second version next to it.</p>
+<p>Mostly by itself. If the agent learns something lasting about you during a conversation, or a clear preference, it writes it down. It is supposed to be restrained about that: no temporary conversation details and no task progress. If something is out of date it updates the existing item instead of putting a second version next to it.</p>
 <p>You can do it yourself too: at the bottom of each list is an input field with <strong>Add</strong>. Click an existing item to edit it (Enter saves, Escape cancels), or use <strong>Delete</strong>.</p>
-<p>Ask in a conversation what the assistant knows about you and it can call up its whole memory and read it back to you.</p>
+<p>Ask in a conversation what the agent knows about you and it can call up its whole memory and read it back to you.</p>
 <h2 id="suggestions-from-conversations">Suggestions from conversations</h2>
-<p>Besides what the assistant stores directly during a conversation, a helper model looks back after every turn to see whether something lasting about you came up. If it finds something, a suggestion appears at the top of the Memory tab: the fact, the reason, and a quote from your own message that it rests on - so approving is not a matter of blind trust. Nothing is stored until you click <strong>Approve</strong>; <strong>Reject</strong> drops it, and the assistant will not suggest that same text again for two weeks.</p>
+<p>Besides what the agent stores directly during a conversation, a helper model looks back after every turn to see whether something lasting about you came up. If it finds something, a suggestion appears at the top of the Memory tab: the fact, the reason, and a quote from your own message that it rests on - so approving is not a matter of blind trust. Nothing is stored until you click <strong>Approve</strong>; <strong>Reject</strong> drops it, and the agent will not suggest that same text again for two weeks.</p>
 <p>If a list is already full, the suggestion comes with a proposal attached: which existing item it would replace. That item is shown struck through with the suggestion.</p>
 <p>This is the same post-turn review that also looks at your <a href="skills.html#skills-that-arise-by-themselves">skills</a>, with at most one memory suggestion at a time and a ceiling that skill and memory suggestions share: <strong>Suggestions per conversation</strong> under Settings → General → Helper tasks, 3 by default. If you would rather have no memory suggestions at all, that is what <strong>Self-learning memory</strong> in the same place is for.</p>
 <p>With a scheduled task none of this happens: there is nobody to put anything to.</p>
 <h2 id="the-room-per-list">The room per list</h2>
 <p>Under each list it says &quot;In use: 1,850/2,200 characters&quot;. By default that is 1,375 characters for your profile and 2,200 for the facts; the <strong>Limit</strong> field next to it changes that.</p>
-<p>Characters, not tokens, and that is deliberate: it makes the limit mean the same thing on every model. If a list is full the assistant cannot add anything and is told to clear up first. The counter then turns warning-coloured.</p>
+<p>Characters, not tokens, and that is deliberate: it makes the limit mean the same thing on every model. If a list is full the agent cannot add anything and is told to clear up first. The counter then turns warning-coloured.</p>
 <p>It is a small budget, and that is how it should be. Memory goes along in <em>every</em> turn in <em>every</em> conversation; it is a short summary of who you are, not an archive. For documents and longer notes you have <a href="sources.html">Sources</a>.</p>
 <h2 id="on-and-off">On and off</h2>
-<p>Each list has a switch, with underneath it what switching off does: &quot;Off = not in the assistant&#39;s context.&quot; A list that is off is also invisible when the assistant calls up its memory, and nothing can be stored in it.</p>
+<p>Each list has a switch, with underneath it what switching off does: &quot;Off = not in the agent&#39;s context.&quot; A list that is off is also invisible when the agent calls up its memory, and nothing can be stored in it.</p>
 <p>This is the only place where memory goes on or off. Unlike tools and skills there is no switch per conversation.</p>
 <h2 id="what-the-model-sees-exactly">What the model sees exactly</h2>
-<p>If there is anything in it, the assistant gets one block in its instructions: first your profile, then the remembered facts. If you filled in a name under <strong>What should Omnissiah call you?</strong>, that is in there too, with the instruction to address you that way.</p>
+<p>If there is anything in it, the agent gets one block in its instructions: first your profile, then the remembered facts. If you filled in a name under <strong>What should Omnissiah call you?</strong>, that is in there too, with the instruction to address you that way.</p>
 <p>Nothing else. Your conversations are not searched to fill the block; what is in it is exactly what you see in Settings.</p>
 <h2 id="where-it-does-not-count">Where it does not count</h2>
-<p>In a project with <strong>Answer only from the sources</strong> the assistant cannot call up its memory, and the block that <em>is</em> in the prompt does not count as a source there: it carries no source number, so you cannot base a claim on it. The contract is about where an answer comes from. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
+<p>In a project with <strong>Answer only from the sources</strong> the agent cannot call up its memory, and the block that <em>is</em> in the prompt does not count as a source there: it carries no source number, so you cannot base a claim on it. The contract is about where an answer comes from. See <a href="projects.html#answer-only-from-the-sources">Projects</a>.</p>
 <h2 id="clearing">Clearing</h2>
 <p>Per item with <strong>Delete</strong>; clearing everything is deleting every item. There is no undo, but there is your backup.</p>
 <p>Memory itself lives in the database in your data folder, with <code>data/memory.md</code> as a readable copy next to it: edit that copy and nothing changes, because the database is the source. To start completely fresh with everything, you delete the whole data folder; see <a href="../data-and-backup.html#starting-fresh">Data and backup</a>.</p>
@@ -206,7 +206,7 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
         <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
         <a href="https://github.com/Robinvliet/omnissiah-releases/releases"

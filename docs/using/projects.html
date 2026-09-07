@@ -176,21 +176,21 @@
 <h2 id="answer-only-from-the-sources">Answer only from the sources</h2>
 <p>Above the sources list is a switch with that name. Turn it on and <em>every</em> conversation in this project behaves differently. The line underneath says what it promises:</p>
 <blockquote>
-<p>The assistant uses only what is in this project and says so when the answer is not in there. No web searches, no MCP servers, no file changes or shell, no research runs and no scheduled tasks.</p>
+<p>The agent uses only what is in this project and says so when the answer is not in there. No web searches, no MCP servers, no file changes or shell, no research runs and no scheduled tasks.</p>
 </blockquote>
-<p>On top of that, the assistant can no longer search your other conversations, and of what it remembers about you only your profile stays in the prompt; the remembered facts are answer material and stay out.</p>
+<p>On top of that, the agent can no longer search your other conversations, and of what it remembers about you only your profile stays in the prompt; the remembered facts are answer material and stay out.</p>
 <p>Since there are no modes to fall back from, the contract simply takes those capabilities away: nothing on your disk can change, and the deep research action is greyed out with the reason &quot;A research run does not work with “Answer only from the sources” on.&quot; Reading a linked folder is still allowed, and it is one of the ways an answer gets its source reference.</p>
 <p>While it is on, a pill sits in the bar under the input bar: <strong>Sources only</strong>. Click it and it lists exactly what lapses, so the promise is readable where you work instead of only on the project page.</p>
 <p><strong>What the setting does not promise</strong> is stated literally as soon as you turn it on:</p>
 <blockquote>
-<p>What the model knows from its training is not switched off here; no more than your project instructions, your persona, what has been remembered about you and your active skills. Those are simply in the prompt. What the contract does do is close off every route along which the assistant fetches something extra while answering.</p>
+<p>What the model knows from its training is not switched off here; no more than your project instructions, your persona, what has been remembered about you and your active skills. Those are simply in the prompt. What the contract does do is close off every route along which the agent fetches something extra while answering.</p>
 </blockquote>
 <p><strong>With a linked folder the promise is smaller</strong>, and the sources panel says so: &quot;With a linked folder the promise covers what has been read, not everything in it.&quot;</p>
 <h3 id="where-the-answer-comes-from">Where the answer comes from</h3>
-<p>The assistant refers to its source for every claim, and those references are clickable: a document opens on the passage itself, an attachment jumps to the message you sent it with, a folder opens the sources panel. If the answer is not in your sources, it <em>says</em> so, with two ways out: add a source, or turn the setting off.</p>
+<p>The agent refers to its source for every claim, and those references are clickable: a document opens on the passage itself, an attachment jumps to the message you sent it with, a folder opens the sources panel. If the answer is not in your sources, it <em>says</em> so, with two ways out: add a source, or turn the setting off.</p>
 <p>Under the message is what came of that contract. There are three labels, and an answer that comes entirely from your sources deliberately carries none:</p>
 <ul>
-<li><strong>partly from your sources.</strong> Part of it comes from your sources; for the rest the assistant said it is not in there.</li>
+<li><strong>partly from your sources.</strong> Part of it comes from your sources; for the rest the agent said it is not in there.</li>
 <li><strong>not in your sources.</strong> Your sources do not cover the answer. This is the only label where the app names an action itself: add a source, or turn the setting off on the project page.</li>
 <li><strong>not grounded</strong>, in warning colour. The answer does not refer to a source, or refers to something that is not in there. The app says one thing about it: read it with extra care.</li>
 </ul>
@@ -204,7 +204,7 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI workspace. Built by Robin van Vliet.</span>
+      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
         <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
         <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
