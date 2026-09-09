@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Updating - Omnissiah</title>
+    <title>Updating - Babbage</title>
     <meta name="description" content="How the desktop app announces updates, and what happens per operating system." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -116,7 +116,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="../using/index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="../using/index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="../using/conversations.html">Conversations</a></li>
         <li><a href="../using/projects.html">Projects</a></li>
@@ -164,24 +164,43 @@
 <h2 id="windows">Windows</h2>
 <p>The item says &quot;Ready to download.&quot; with a <strong>Download</strong> button. While it downloads you see the progress in percentages, and when it is finished it says the version is ready and asks you to restart. The <strong>Restart</strong> button then installs the new version and starts the app again, so you decide the moment yourself and are never interrupted halfway through something.</p>
 <p>If a download fails, the item says so and offers <strong>Retry</strong>.</p>
-<h3 id="coming-from-0-23-1-or-older">Coming from 0.23.1 or older</h3>
-<p>If the update stops with &quot;Omnissiah cannot be closed. Please close it manually and click Retry to continue.&quot; and then a message that starts with &quot;Failed to uninstall old application files&quot; and ends in &quot;: 2&quot;, the app is not actually still running. The uninstaller that shipped with versions 0.21.0 through 0.23.1 fails its own integrity check before it touches a single file, and the installer reports that as the app refusing to close. Close the message, delete <code>Uninstall Omnissiah.exe</code> in <code>%LOCALAPPDATA%\Programs\Omnissiah</code> (paste that path into the address bar of Explorer), and start the update again. The installer then continues over the old files, your data is untouched, and the uninstaller it leaves behind is sound. This happens once; every update after it works as described above.</p>
+<h3 id="coming-from-0-23-2-or-older">Coming from 0.23.2 or older</h3>
+<p>Version 0.24.0 renames the app from Omnissiah to Babbage. Windows treats the new version as a different application: the Babbage installer does not remove Omnissiah, and the in-app updater of your current Omnissiah will still offer 0.24.0 and, if you let it, install Babbage next to it and start it straight away, before you have moved your data. Do not take that route. Decline the update and do the one-time manual switch below. Every update after that works as described above.</p>
+<p><strong>Move your data first, then install.</strong> The app data folder is named after the app, so a fresh Babbage looks in <code>%APPDATA%\Babbage</code> and starts empty while everything you had sits next to it in <code>%APPDATA%\Omnissiah</code>. Nothing is lost and nothing warns you either. Babbage creates that folder, a fresh session secret and an empty database the very first time it starts, so do this before that first start:</p>
+<ol>
+<li>Rename the folder <code>%APPDATA%\Omnissiah</code> to <code>%APPDATA%\Babbage</code>.</li>
+<li>Inside it, in <code>data\</code>, rename <code>omnissiah.db</code> to <code>babbage.db</code>. If <code>omnissiah.db-wal</code> and <code>omnissiah.db-shm</code> are there, rename those to <code>babbage.db-wal</code> and <code>babbage.db-shm</code> as well.</li>
+<li>Open <code>.env</code> in that folder and rename every key that starts with <code>OMNISSIAH_</code> so that it starts with <code>BABBAGE_</code>, keeping the values: <code>OMNISSIAH_AUTH_SECRET</code> becomes <code>BABBAGE_AUTH_SECRET</code>, and each <code>OMNISSIAH_CUSTOM_KEY_…</code> (the key of a custom endpoint) becomes <code>BABBAGE_CUSTOM_KEY_…</code>. Your provider keys (Google, Anthropic, Tavily) do not carry the name and stay as they are. Skipping the session secret only logs you out once; skipping a custom-endpoint key leaves that endpoint without a key until you rename the line.</li>
+</ol>
+<p>Then uninstall Omnissiah through Settings → Apps and install Babbage 0.24.0 from the <a href="https://robinvliet.github.io/babbage-releases/">download page</a>. On the last page of the installer, untick <strong>Run Babbage</strong> if you still have steps to do. The installer leaves the old program folder <code>%LOCALAPPDATA%\Programs\Omnissiah</code> alone; delete it by hand once Babbage runs.</p>
+<p>If Babbage already started before you moved your data, close it, delete the fresh <code>%APPDATA%\Babbage</code> it created, and then do the three steps above.</p>
+<p><strong>Snapshots.</strong> The folder snapshots the app makes before a shell command changes anything stay on disk, but Babbage looks for them under a new name. For a linked folder you can carry them over by renaming <code>omnissiah</code> to <code>babbage</code> in <code>%APPDATA%\Babbage\data\snapshots\store\refs\</code>, as long as that folder still contains files; if it is empty, git has packed the snapshots and the rename does nothing. Snapshots of a conversation&#39;s own workspace cannot be carried over at all, because their name is derived from the data folder&#39;s path, which just changed. They are a safety net of at most thirty days, so losing them is acceptable.</p>
+<p><strong>Uninstalling 0.21.0 through 0.23.1.</strong> The uninstaller that shipped with those versions fails its own integrity check (&quot;Installer integrity check has failed&quot;) before it touches a single file. If Settings → Apps stops on that message, delete <code>Uninstall Omnissiah.exe</code> in <code>%LOCALAPPDATA%\Programs\Omnissiah</code> (paste that path into the address bar of Explorer), then delete that whole folder. Your data lives in <code>%APPDATA%</code>, not there, and stays untouched.</p>
 <h2 id="macos">macOS</h2>
 <p>On the Mac the item says &quot;Download it and install it over this one.&quot; and the button is <strong>Download page</strong>. There you fetch the new <code>.dmg</code> and install it over the old one, just like the first time. That is not an oversight: an app that is not signed is not allowed to replace itself on macOS.</p>
 <p>Your data stays. It lives in the app data folder and not in the app itself, so reinstalling does not touch your conversations and settings. See <a href="../data-and-backup.html">Data and backup</a>.</p>
+<h3 id="coming-from-0-23-2-or-older-2">Coming from 0.23.2 or older</h3>
+<p>Version 0.24.0 renames the app from Omnissiah to Babbage, and that is the one update where the sentence above does not hold on its own. A fresh Babbage looks in <code>~/Library/Application Support/Babbage</code> and starts empty while everything you had sits next to it in <code>~/Library/Application Support/Omnissiah</code>, with no warning either way. Babbage creates that folder, a fresh session secret and an empty database the very first time it starts, so move your data before that first start:</p>
+<ol>
+<li>Rename the folder <code>~/Library/Application Support/Omnissiah</code> to <code>~/Library/Application Support/Babbage</code>.</li>
+<li>Inside it, in <code>data/</code>, rename <code>omnissiah.db</code> to <code>babbage.db</code>, and do the same for <code>omnissiah.db-wal</code> and <code>omnissiah.db-shm</code> if they are there.</li>
+<li>Open <code>.env</code> in that folder and rename every key that starts with <code>OMNISSIAH_</code> so that it starts with <code>BABBAGE_</code>, keeping the values: <code>OMNISSIAH_AUTH_SECRET</code> becomes <code>BABBAGE_AUTH_SECRET</code>, and each <code>OMNISSIAH_CUSTOM_KEY_…</code> (the key of a custom endpoint) becomes <code>BABBAGE_CUSTOM_KEY_…</code>. Your provider keys (Google, Anthropic, Tavily) do not carry the name and stay as they are. Skipping the session secret only logs you out once; skipping a custom-endpoint key leaves that endpoint without a key until you rename the line.</li>
+</ol>
+<p>Then drag <code>Omnissiah.app</code> to the trash and install Babbage 0.24.0 from the <a href="https://robinvliet.github.io/babbage-releases/">download page</a> as usual. If Babbage already started before you moved your data, quit it, delete the fresh <code>~/Library/Application Support/Babbage</code> it created, and then do the three steps above.</p>
+<p>Snapshots follow the same rule as on Windows: for linked folders, rename <code>omnissiah</code> to <code>babbage</code> in <code>data/snapshots/store/refs/</code> while that folder still contains files; workspace snapshots cannot be carried over, and all of them are a safety net of at most thirty days.</p>
 <h2 id="the-web-version">The web version</h2>
-<p>If you run Omnissiah yourself with Docker or Node, updating works differently. That is on <a href="../self-hosting/web-version.html">Web version</a>.</p>
+<p>If you run Babbage yourself with Docker or Node, updating works differently. That is on <a href="../self-hosting/web-version.html">Web version</a>.</p>
 
         </article>
-        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="first-steps.html"><span class="richting">Previous</span>First steps</a><a class="volgende" href="../using/index.html"><span class="richting">Next</span>Working with Omnissiah</a></nav>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="first-steps.html"><span class="richting">Previous</span>First steps</a><a class="volgende" href="../using/index.html"><span class="richting">Next</span>Working with Babbage</a></nav>
       </main>
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Data and backup - Omnissiah</title>
+    <title>Data and backup - Babbage</title>
     <meta name="description" content="Where your conversations and settings live, and how to make a copy." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="index.html">What is Omnissiah</a></li>
+        <li><a href="index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="using/index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="using/index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="using/conversations.html">Conversations</a></li>
         <li><a href="using/projects.html">Projects</a></li>
@@ -160,9 +160,9 @@
         <article class="prose">
           
           <h1>Data and backup</h1>
-          <p>Everything lives in one data folder. Where that is depends on how you run Omnissiah:</p>
+          <p>Everything lives in one data folder. Where that is depends on how you run Babbage:</p>
 <ul>
-<li><strong>Desktop app:</strong> your operating system&#39;s app data folder. macOS: <code>~/Library/Application Support/Omnissiah</code>. Windows: <code>%APPDATA%\Omnissiah</code>.</li>
+<li><strong>Desktop app:</strong> your operating system&#39;s app data folder. macOS: <code>~/Library/Application Support/Babbage</code>. Windows: <code>%APPDATA%\Babbage</code>.</li>
 <li><strong>Web version (Docker or Node):</strong> folders next to the project.</li>
 </ul>
 <h2 id="what-is-in-it">What is in it</h2>
@@ -175,7 +175,7 @@
 </thead>
 <tbody><tr>
 <td><code>data/</code></td>
-<td>the database (<code>omnissiah.db</code>) with all your conversations, projects, sources and settings, the memory mirror (<code>memory.md</code>), the folder snapshots (<code>snapshots/</code>), the workspaces (<code>scratch/</code>, one folder per conversation, gone with the conversation) and the local embedding model that makes your documents searchable (<code>models/</code>)</td>
+<td>the database (<code>babbage.db</code>) with all your conversations, projects, sources and settings, the memory mirror (<code>memory.md</code>), the folder snapshots (<code>snapshots/</code>), the workspaces (<code>scratch/</code>, one folder per conversation, gone with the conversation) and the local embedding model that makes your documents searchable (<code>models/</code>)</td>
 </tr>
 <tr>
 <td><code>skills/</code></td>
@@ -193,7 +193,7 @@
 <h2 id="starting-fresh">Starting fresh</h2>
 <p>Close the app and delete the data folder. That wipes all your conversations, projects and settings; there is no undo. Make a copy first if you are in doubt.</p>
 <h2 id="the-embedding-model">The embedding model</h2>
-<p>When you add your first document as a source, Omnissiah downloads a local embedding model to <code>data/models</code> once. That is roughly 465 MB, so it takes a moment. After that it is cached, and it is immediately the largest part of your backup: much bigger than the database itself.</p>
+<p>When you add your first document as a source, Babbage downloads a local embedding model to <code>data/models</code> once. That is roughly 465 MB, so it takes a moment. After that it is cached, and it is immediately the largest part of your backup: much bigger than the database itself.</p>
 <p>Everything stays on your own machine: no document text goes out to be made searchable.</p>
 
         </article>
@@ -202,10 +202,10 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

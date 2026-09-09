@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Web version - Omnissiah</title>
-    <meta name="description" content="Running Omnissiah with Docker or with Node, and updating it." />
+    <title>Web version - Babbage</title>
+    <meta name="description" content="Running Babbage with Docker or with Node, and updating it." />
     <meta name="color-scheme" content="light dark" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="../using/index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="../using/index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="../using/conversations.html">Conversations</a></li>
         <li><a href="../using/projects.html">Projects</a></li>
@@ -160,7 +160,7 @@
         <article class="prose">
           <p class="kruimel"><a href="index.html">Self-hosting</a></p>
           <h1>Web version</h1>
-          <p>The web version runs Omnissiah as an ordinary web app on <code>http://localhost:3000</code>, reachable only from the machine it runs on. This is also the route to your phone, see <a href="on-your-phone.html">On your phone</a>.</p>
+          <p>The web version runs Babbage as an ordinary web app on <code>http://localhost:3000</code>, reachable only from the machine it runs on. This is also the route to your phone, see <a href="on-your-phone.html">On your phone</a>.</p>
 <p>You need the source code. It is not on the download page: that page ships the installers for the desktop app.</p>
 <h2 id="with-docker">With Docker</h2>
 <p>Requirement: <a href="https://docs.docker.com/get-docker/">Docker</a> is installed.</p>
@@ -217,6 +217,16 @@ docker compose up -d --build
 </code></pre>
 <p>Without Docker: <code>npm run build &amp;&amp; npm run start</code>.</p>
 <p>Database migrations run automatically at startup, so there is nothing to do for those.</p>
+<h3 id="coming-from-0-23-2-or-older">Coming from 0.23.2 or older</h3>
+<p>Version 0.24.0 renames the app from Omnissiah to Babbage, and with it the Docker service, the database file and the <code>OMNISSIAH_*</code> settings. Nothing moves by itself. A plain <code>git pull</code> followed by <code>docker compose up -d --build</code> leaves the old <code>omnissiah</code> container running on the port and starts a fresh Babbage with an empty database next to your old one, so do this once instead:</p>
+<ol>
+<li>Stop the old container first: <code>docker compose down</code>, before you run <code>up</code> again. Without Docker: stop the running <code>npm run start</code>.</li>
+<li>In <code>data/</code>, rename <code>omnissiah.db</code> to <code>babbage.db</code>, and <code>omnissiah.db-wal</code> and <code>omnissiah.db-shm</code> too if they are there.</li>
+<li>In <code>.env</code>, rename every key that starts with <code>OMNISSIAH_</code> so that it starts with <code>BABBAGE_</code>, keeping the values: <code>OMNISSIAH_AUTH_SECRET</code>, <code>OMNISSIAH_DATA_DIR</code> if you set it, and each <code>OMNISSIAH_CUSTOM_KEY_…</code> (the key of a custom endpoint). The provider keys stay as they are. If you exported <code>OMNISSIAH_DATA_DIR</code> in your shell or a service file rather than in <code>.env</code>, rename it there; the old name is simply ignored and the data folder falls back to the working directory.</li>
+<li>To keep the folder snapshots of linked folders, rename <code>omnissiah</code> to <code>babbage</code> in <code>data/snapshots/store/refs/</code> while that folder still contains files.</li>
+<li><code>docker compose up -d --build</code>, or <code>npm run build &amp;&amp; npm run start</code>. The container is now called <code>babbage</code>.</li>
+</ol>
+<p>If you skipped the session secret, the first login creates a new one, but the server only reads it at startup: restart once after that login, otherwise it keeps sending you back to the login page. The same holds for a brand-new install whose <code>.env</code> started without a secret.</p>
 
         </article>
         <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="index.html"><span class="richting">Previous</span>Self-hosting</a><a class="volgende" href="configuration.html"><span class="richting">Next</span>Configuration</a></nav>
@@ -224,10 +234,10 @@ docker compose up -d --build
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

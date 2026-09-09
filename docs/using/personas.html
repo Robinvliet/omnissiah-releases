@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Personas - Omnissiah</title>
+    <title>Personas - Babbage</title>
     <meta name="description" content="Giving the agent a fixed role and tone, alone or in a group that answers together or separately." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -160,9 +160,9 @@
 
       <main class="vlak" id="inhoud">
         <article class="prose">
-          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <p class="kruimel"><a href="index.html">Working with Babbage</a></p>
           <h1>Personas</h1>
-          <p>A persona is a name plus a system prompt: a description of how the agent behaves in this conversation. Switch one on and it <strong>replaces</strong> the standard instructions of Omnissiah; it does not come on top of them.</p>
+          <p>A persona is a name plus a system prompt: a description of how the agent behaves in this conversation. Switch one on and it <strong>replaces</strong> the standard instructions of Babbage; it does not come on top of them.</p>
 <p>They live behind <strong>Prompts</strong> in the sidebar, together with your saved prompts. That button takes you to the page <strong>Prompts</strong>, with three tabs: <strong>Prompts</strong>, <strong>Personas</strong> and <strong>Persona groups</strong>. The tab is in the address, so <code>/prompts?tab=personas</code> opens this one right away.</p>
 <h2 id="making-one">Making one</h2>
 <p>On the <strong>Personas</strong> tab you click <strong>New persona</strong>. You fill in two fields:</p>
@@ -196,10 +196,10 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

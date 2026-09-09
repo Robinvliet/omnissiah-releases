@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>MCP servers - Omnissiah</title>
+    <title>MCP servers - Babbage</title>
     <meta name="description" content="Hanging extra tools on the agent through the Model Context Protocol, and deciding which of them join." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -161,23 +161,23 @@
 
       <main class="vlak" id="inhoud">
         <article class="prose">
-          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <p class="kruimel"><a href="index.html">Working with Babbage</a></p>
           <h1>MCP servers</h1>
           <p>Through <strong>Settings → Tools</strong> you link MCP servers that give the model extra tools, for example access to a file system, git or an external service. A server you switch on there joins every conversation. The page says it in one line: &quot;MCP servers give the model extra tools: remotely over HTTP/SSE, or locally over stdio (a command that runs as a process each turn). A server you switch on here joins every conversation.&quot;</p>
 <p>There are two flavours.</p>
 <h2 id="remote-http-or-sse">Remote (HTTP or SSE)</h2>
-<p>A URL, optionally with an Authorization header. The server runs somewhere else; Omnissiah only talks to it.</p>
+<p>A URL, optionally with an Authorization header. The server runs somewhere else; Babbage only talks to it.</p>
 <h2 id="local-stdio">Local (stdio)</h2>
-<p>A command that Omnissiah starts as a process at the beginning of a turn and shuts down again afterwards. This is the most common type for personal use: the official servers for files and git, among others, are stdio.</p>
+<p>A command that Babbage starts as a process at the beginning of a turn and shuts down again afterwards. This is the most common type for personal use: the official servers for files and git, among others, are stdio.</p>
 <p>Example: command <code>npx</code>, arguments <code>-y @modelcontextprotocol/server-filesystem /path/to/folder</code>. Environment variables, a <code>GITHUB_PERSONAL_ACCESS_TOKEN</code> for instance, you fill in as lines <code>NAME=value</code>; those values stay server-side and cannot be read back anywhere in the app.</p>
 <h3 id="what-you-should-know-before-you-add-one">What you should know before you add one</h3>
-<p><strong>The command runs on the machine where Omnissiah runs, with the rights of your own account.</strong> Registering a stdio server <em>is</em> configuring a local command. Only add servers you trust.</p>
-<p>As a safety net Omnissiah checks npx and uvx packages against the <a href="https://osv.dev">OSV database</a> for known malware before starting. Only confirmed malware blocks, and the check is fail-open on network trouble: it is an extra pair of eyes, not a lock.</p>
-<p><strong>Bare commands are found.</strong> <code>npx</code> and the like also work when the desktop app was started with a minimal PATH; Omnissiah also looks in the Homebrew, <code>/usr/local/bin</code> and <code>~/.local/bin</code> locations. If it still does not work, use an absolute path to the command.</p>
+<p><strong>The command runs on the machine where Babbage runs, with the rights of your own account.</strong> Registering a stdio server <em>is</em> configuring a local command. Only add servers you trust.</p>
+<p>As a safety net Babbage checks npx and uvx packages against the <a href="https://osv.dev">OSV database</a> for known malware before starting. Only confirmed malware blocks, and the check is fail-open on network trouble: it is an extra pair of eyes, not a lock.</p>
+<p><strong>Bare commands are found.</strong> <code>npx</code> and the like also work when the desktop app was started with a minimal PATH; Babbage also looks in the Homebrew, <code>/usr/local/bin</code> and <code>~/.local/bin</code> locations. If it still does not work, use an absolute path to the command.</p>
 <p><strong>In the Docker web version the command runs <em>inside</em> the container.</strong> <code>npx</code> is present there, because the container runs on a Node image; <code>uvx</code> and Python servers are not.</p>
 <p><strong>The child process gets a clean environment.</strong> Only PATH, HOME and similar basics plus what you supply yourself. Your API keys from <code>.env</code> do not leak into it.</p>
 <h2 id="adding-is-a-test">Adding is a test</h2>
-<p>The button is called <strong>Add (test connection)</strong> for a reason. Omnissiah first connects and fetches the tool list; if that fails you get the reason and nothing is stored. So you never have a server in your list that turns out mid-conversation not to work.</p>
+<p>The button is called <strong>Add (test connection)</strong> for a reason. Babbage first connects and fetches the tool list; if that fails you get the reason and nothing is stored. So you never have a server in your list that turns out mid-conversation not to work.</p>
 <p>The list shows per server what you filled in: the URL or the command with its arguments, and whether an auth header or environment variables belong to it. The values themselves are not there; those cannot be read back after saving. A server that is switched off is shown as <strong>switched off</strong> under Connections in the Command Center - not as a fault, because it is not broken, it simply is not taking part.</p>
 <h2 id="switching-a-server-on-and-off">Switching a server on and off</h2>
 <p>Each server in the list has its own switch, and it applies to the whole app: on means the server joins every conversation, off means it is not contacted at all. There is no per-conversation choice any more, and no switch per individual tool.</p>
@@ -201,10 +201,10 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

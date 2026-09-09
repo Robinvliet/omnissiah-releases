@@ -10,7 +10,7 @@
   "use strict";
 
   var wortel = document.documentElement;
-  var SLEUTEL = "omnissiah-docs-thema";
+  var SLEUTEL = "babbage-docs-thema";
 
   function isDonker() {
     if (wortel.classList.contains("dark")) return true;

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Working in a folder - Omnissiah</title>
+    <title>Working in a folder - Babbage</title>
     <meta name="description" content="Letting the agent read and change files on your own machine, with approval up front and safety nets underneath." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -163,7 +163,7 @@
 
       <main class="vlak" id="inhoud">
         <article class="prose">
-          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <p class="kruimel"><a href="index.html">Working with Babbage</a></p>
           <h1>Working in a folder</h1>
           <p>Link a folder to a conversation and the agent can work in it: look around, read files, and if you allow it, write, run commands and run scripts. There is no mode to switch on for this; what it may do follows from three things you can see - whether a folder is linked, whether that folder is read-only, and the approval level. Without a folder it is not idle: it works in a <a href="#without-a-folder-the-workspace">workspace</a> of its own, away from your files.</p>
 <p>With tools it works in several steps in a row: plan, use a tool, look at the result and carry on. Twenty steps per turn at most.</p>
@@ -173,7 +173,7 @@
 <p>You can link several folders at once. Every folder has a name, and in the action timeline you see per step <em>which</em> folder it happened in.</p>
 <p>On Windows the terminal needs <a href="https://git-scm.com/download/win">Git for Windows</a>: commands run in Git Bash, so the same shell syntax works on every platform. Without it the agent says so and falls back to the file tools.</p>
 <h2 id="without-a-folder-the-workspace">Without a folder: the workspace</h2>
-<p>A conversation that is allowed to write gets a scratch folder of its own, inside the Omnissiah data folder under <code>data/scratch/</code>, one per conversation. Nothing is created up front: the folder appears the first time the agent writes a file or runs a command there. From that moment a chip <strong>Workspace</strong> sits in the bar under the input bar; click it to show the folder in the Finder or Explorer. The agent knows the path and is told to name the file when it leaves something there for you, such as a converted document or the output of a script.</p>
+<p>A conversation that is allowed to write gets a scratch folder of its own, inside the Babbage data folder under <code>data/scratch/</code>, one per conversation. Nothing is created up front: the folder appears the first time the agent writes a file or runs a command there. From that moment a chip <strong>Workspace</strong> sits in the bar under the input bar; click it to show the folder in the Finder or Explorer. The agent knows the path and is told to name the file when it leaves something there for you, such as a converted document or the output of a script.</p>
 <p>The workspace belongs to the conversation. Delete the conversation and the folder goes with it, including the snapshots the terminal made in it. A conversation you start from another one with <strong>Continue from here</strong> begins with an empty one.</p>
 <p>With a linked folder the workspace stays out of the way: the agent works in your folder, and the workspace only comes along if it already existed before you linked the folder. In that case both exist side by side and every action says which of the two it happened in.</p>
 <p>One thing changed with this for older conversations. Version 0.21.0 set every conversation from before the read-only setting that was not an agent conversation to read only, to keep the guarantee its old mode gave. That setting is about linked folders and only appears once one is linked; a conversation without a folder now has the terminal and scripts again, in its workspace, under its own approval level, which is <strong>Approve manually</strong> unless you changed it.</p>
@@ -198,13 +198,13 @@
 <p>If the agent delegates a subtask to a sub-agent, <em>every</em> action that needs approval is automatically refused there, and that is stated in the summary you get back.</p>
 <h2 id="two-safety-nets-that-always-run">Two safety nets that always run</h2>
 <p>They work in every setting, including <strong>Skip approvals</strong>.</p>
-<p><strong>Before a file is overwritten</strong> Omnissiah keeps the old version. Under that step you then find <strong>Restore</strong>, and afterwards: &quot;Restored to the version from before this change.&quot; At most twenty versions per file are kept, for thirty days, and only for files up to 10 MB. If a file is too large for such a copy, the <strong>Automatic</strong> level pauses for the overwrite after all.</p>
-<p><strong>Before the first far-reaching command of a turn</strong> Omnissiah takes a snapshot of the whole working folder. Restoring asks for confirmation, and that dialog says exactly what happens: &quot;Files created after the snapshot stay. Before restoring, the current state is captured too, so the action is reversible.&quot;</p>
+<p><strong>Before a file is overwritten</strong> Babbage keeps the old version. Under that step you then find <strong>Restore</strong>, and afterwards: &quot;Restored to the version from before this change.&quot; At most twenty versions per file are kept, for thirty days, and only for files up to 10 MB. If a file is too large for such a copy, the <strong>Automatic</strong> level pauses for the overwrite after all.</p>
+<p><strong>Before the first far-reaching command of a turn</strong> Babbage takes a snapshot of the whole working folder. Restoring asks for confirmation, and that dialog says exactly what happens: &quot;Files created after the snapshot stay. Before restoring, the current state is captured too, so the action is reversible.&quot;</p>
 <h2 id="documents-are-not-overwritten-with-text">Documents are not overwritten with text</h2>
 <p>Word files, spreadsheets, PDFs and images are containers, not text. Writing plain text over one of them produces a file that no longer opens. That is now refused, in every approval setting, before the safety net above even comes into play: &quot;Refusing to write plain text over …: the existing file contains binary data.&quot;</p>
 <p>The message also says what does work: change such a document with a library through the terminal or a script, for example python-docx or openpyxl, or delete the file first to replace it entirely. Creating a new file is never refused; there is nothing to destroy yet.</p>
 <h2 id="what-never-goes-through">What never goes through</h2>
-<p>Some commands are refused unconditionally, in every approval setting, and no setting lifts that. Think of formatting a file system, recursively deleting a system folder or your home folder, shutting the machine down, and writing to the database or the <code>.env</code> of Omnissiah itself. The message says the agent should not try again and should not work around it either. If you really want such a thing, you run it yourself in your own terminal.</p>
+<p>Some commands are refused unconditionally, in every approval setting, and no setting lifts that. Think of formatting a file system, recursively deleting a system folder or your home folder, shutting the machine down, and writing to the database or the <code>.env</code> of Babbage itself. The message says the agent should not try again and should not work around it either. If you really want such a thing, you run it yourself in your own terminal.</p>
 <p>If your API keys happen to end up in the output of a command, a placeholder takes their place - <code>[GEMASKEERD]</code>, one of the few strings that is still Dutch - and the child process does not get them in the first place.</p>
 <h2 id="be-honest-about-what-this-is">Be honest about what this is</h2>
 <p>Those safety nets and levels prevent accidents; they are not a security boundary. The real boundary is your operating system. Commands run directly on this machine without an operating-system sandbox, and the working folder or the workspace is a starting point for them, not a fence; the agent is told exactly that in the description of its terminal tool. A sandbox around the terminal is planned. So do not link a folder whose contents you would not want to lose without a backup. More about that is on <a href="../privacy.html#what-you-control-yourself">Privacy and security</a>.</p>
@@ -217,10 +217,10 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

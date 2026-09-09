@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Models - Omnissiah</title>
+    <title>Models - Babbage</title>
     <meta name="description" content="Cloud models with your own key, local models through Ollama or LM Studio, your own endpoints, and how you choose between them." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -161,9 +161,9 @@
 
       <main class="vlak" id="inhoud">
         <article class="prose">
-          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <p class="kruimel"><a href="index.html">Working with Babbage</a></p>
           <h1>Models</h1>
-          <p>Omnissiah has no models of its own. You link one or more yourself, and after that they sit in the same model picker, cloud and local mixed together.</p>
+          <p>Babbage has no models of its own. You link one or more yourself, and after that they sit in the same model picker, cloud and local mixed together.</p>
 <h2 id="cloud-models">Cloud models</h2>
 <p>Go to <strong>Settings → Models</strong>, pick the provider under <strong>Add an API (cloud) model</strong>, paste your API key and click <strong>Add</strong>. The key is checked with the provider right away, so a typo shows up at the moment you make it.</p>
 <p>Your keys are read server-side only and never reach the browser. You pay the provider directly; what a conversation cost is shown in the Command Center.</p>
@@ -181,24 +181,24 @@
 <p>If your gateway speaks both formats, you add it twice, once per format.</p>
 <h3 id="what-your-own-endpoint-does-not-get">What your own endpoint does not get</h3>
 <ul>
-<li><strong>Costs are not calculated.</strong> Omnissiah does not know the rates of your endpoint, and an amount of 0 would suggest it was free. Instead it says &quot;not calculated&quot;, in the Command Center too. Tokens are still counted.</li>
+<li><strong>Costs are not calculated.</strong> Babbage does not know the rates of your endpoint, and an amount of 0 would suggest it was free. Instead it says &quot;not calculated&quot;, in the Command Center too. Tokens are still counted.</li>
 <li><strong>No adjustable thinking phase.</strong> The Effort row is missing: which levels your endpoint knows and how you drive them differs per service, and offering something that might do nothing is worse than leaving it out.</li>
 <li><strong>No prompt caching.</strong> If your endpoint points at Anthropic, the same turn is cheaper there through the ordinary Anthropic link above. Your own endpoints are for what is not in there yet, not as a detour to what already is.</li>
 <li>If you point your own endpoint at a <strong>local server</strong> you could also link directly (Ollama, LM Studio), that is allowed, but the app says so: through this route it misses measuring the context window, loading a model and managing models.</li>
 </ul>
 <h3 id="telling-it-what-your-endpoint-does-not-say">Telling it what your endpoint does not say</h3>
-<p>Bare servers (vLLM, llama.cpp behind an OpenAI-compatible layer) often publish no context window at all, and then Omnissiah has to guess conservatively. You can tell it instead: unfold the endpoint in Settings and fill in a <strong>context window</strong>, and optionally a maximum answer length, either for one model or for the whole endpoint.</p>
+<p>Bare servers (vLLM, llama.cpp behind an OpenAI-compatible layer) often publish no context window at all, and then Babbage has to guess conservatively. You can tell it instead: unfold the endpoint in Settings and fill in a <strong>context window</strong>, and optionally a maximum answer length, either for one model or for the whole endpoint.</p>
 <p>A value on a single model wins from what the endpoint publishes; a value for the whole endpoint only fills a gap. So you can declare one window for everything and still correct a single model that differs.</p>
 <p>What you declare is marked as such. In the detail panel the sources of a capability are kept apart per fact: guaranteed, detected, assumed, and now declared. A window you filled in yourself does not turn an assumption about tool support into a certainty.</p>
 <h3 id="what-a-model-promises-and-what-it-proves">What a model promises, and what it proves</h3>
-<p>Of the models in the list above, Omnissiah knows what they can do; that is maintained by hand. With your own endpoint it depends on what the service publishes itself, and you see that back in the detail panel:</p>
+<p>Of the models in the list above, Babbage knows what they can do; that is maintained by hand. With your own endpoint it depends on what the service publishes itself, and you see that back in the detail panel:</p>
 <ul>
 <li><strong>&quot;Properties read from this endpoint&quot;</strong> - the service reports per model what it can handle. If a model does not support tools, deep research is greyed out with the reason, and picking that model tells you the agent can only chat.</li>
 <li><strong>&quot;Properties not reported; these are assumptions&quot;</strong> - the service says nothing. Then nothing is blocked, but nothing is promised either: you see &quot;Tool support unknown - this server does not report what the model can do&quot; instead of a tick that merely looks like certainty.</li>
 </ul>
 <h2 id="local-models">Local models</h2>
-<p>Besides the cloud you can run models on your own machine: free, private, no key. Omnissiah talks to any server that speaks the OpenAI-compatible API; the best known is <a href="https://ollama.com">Ollama</a>, and LM Studio works too.</p>
-<p><strong>Connecting.</strong> Install Ollama and usually that is all. If it runs on the same machine, Omnissiah finds it by itself: Settings → Models then shows &quot;Ollama found at …&quot; with a <strong>Connect</strong> button. By hand works too, by filling in the base URL and clicking Connect.</p>
+<p>Besides the cloud you can run models on your own machine: free, private, no key. Babbage talks to any server that speaks the OpenAI-compatible API; the best known is <a href="https://ollama.com">Ollama</a>, and LM Studio works too.</p>
+<p><strong>Connecting.</strong> Install Ollama and usually that is all. If it runs on the same machine, Babbage finds it by itself: Settings → Models then shows &quot;Ollama found at …&quot; with a <strong>Connect</strong> button. By hand works too, by filling in the base URL and clicking Connect.</p>
 <p><strong>Fetching models.</strong> Click <strong>Discover models</strong> (in Settings → Models, or at the bottom of the model picker). There you search the GGUF models on Hugging Face, look at the details, parameters, context length, capabilities and README per model, and download a quant variant straight to your local server, with a progress bar. The model then appears in the model picker by itself. A 4-bit variant such as Q4_K_M is usually the best balance between size and quality, and the app says so with the choice.</p>
 <p>If you prefer the terminal, that works too (<code>ollama pull llama3.1</code>); with <strong>Test again</strong> you then refresh the list in the app.</p>
 <h3 id="which-url">Which URL</h3>
@@ -218,16 +218,16 @@
 <h3 id="the-context-window-of-your-local-server">The context window of your local server</h3>
 <p>This is the pitfall that bites most people, and it is not visible on the model.</p>
 <p>A model may handle an enormous context window, but Ollama loads it at <strong>4096 tokens</strong> by default. That is enough for a plain conversation and too tight as soon as there are tools: all their descriptions join the prompt, and with a linked folder you are over it in no time. The turn then stops immediately, with a message that shows the text of your server literally (&quot;request (5168 tokens) exceeds the available context size (4096 tokens)&quot;).</p>
-<p>You raise it on the server side, not in Omnissiah:</p>
+<p>You raise it on the server side, not in Babbage:</p>
 <ul>
 <li><strong>Ollama app</strong>: settings → <strong>Context length</strong> up, for example to 16k or 32k.</li>
 <li><strong>Ollama through the terminal</strong>: start it with <code>OLLAMA_CONTEXT_LENGTH=16384 ollama serve</code>.</li>
 </ul>
-<p>A bigger window costs more memory, so do not set it higher than your machine can take. Omnissiah measures for itself which window your server uses and reckons with that: the context ring in the header shows the real percentage, and the sources threshold takes it into account. So you do not have to set anything in the app, only restart your server after the change.</p>
+<p>A bigger window costs more memory, so do not set it higher than your machine can take. Babbage measures for itself which window your server uses and reckons with that: the context ring in the header shows the real percentage, and the sources threshold takes it into account. So you do not have to set anything in the app, only restart your server after the change.</p>
 <h3 id="good-to-know">Good to know</h3>
 <ul>
-<li>Bigger models, from roughly 8B, work best with tools and with work in a folder. Models without tool support can simply chat: Omnissiah then leaves the tools out automatically and says so.</li>
-<li>If an answer dies halfway, Omnissiah reports it with &quot;Answer truncated: this model&#39;s output limit was reached&quot;. With local models that limit is derived from the context window, so a bigger window solves that too.</li>
+<li>Bigger models, from roughly 8B, work best with tools and with work in a folder. Models without tool support can simply chat: Babbage then leaves the tools out automatically and says so.</li>
+<li>If an answer dies halfway, Babbage reports it with &quot;Answer truncated: this model&#39;s output limit was reached&quot;. With local models that limit is derived from the context window, so a bigger window solves that too.</li>
 <li>The official GGUF repos of some makers, Mistral for instance, are not compatible with Ollama. Pick a community variant then, such as those from lmstudio-community or bartowski. The error message in the app points you there as well.</li>
 <li>Local models cost nothing, and appear in the Command Center at $0.</li>
 <li>A token is only needed if your local server sits behind authentication. Ollama does not have that.</li>
@@ -264,10 +264,10 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

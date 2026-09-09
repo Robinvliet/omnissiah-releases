@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>First steps - Omnissiah</title>
+    <title>First steps - Babbage</title>
     <meta name="description" content="Add a model, pick the right one and have your first conversation." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -118,7 +118,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="../using/index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="../using/index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="../using/conversations.html">Conversations</a></li>
         <li><a href="../using/projects.html">Projects</a></li>
@@ -161,14 +161,14 @@
         <article class="prose">
           <p class="kruimel"><a href="index.html">Getting started</a></p>
           <h1>First steps</h1>
-          <p>Omnissiah arrives empty. There is no model inside the app: you connect your own key from a cloud provider, or you run a model on your own machine. As long as there is neither, the app shows &quot;No model available yet&quot; instead of an input bar that cannot do anything.</p>
+          <p>Babbage arrives empty. There is no model inside the app: you connect your own key from a cloud provider, or you run a model on your own machine. As long as there is neither, the app shows &quot;No model available yet&quot; instead of an input bar that cannot do anything.</p>
 <h2 id="the-interface-is-in-english">The interface is in English</h2>
-<p>Omnissiah starts in English. Would you rather read Dutch? Go to <strong>Settings → General → Language</strong> and click <strong>&quot;Nederlands&quot;</strong>. It sits right under your name, as two buttons side by side, and each language is written in its own language (&quot;English&quot;, &quot;Nederlands&quot;), so you can point at the right one without reading the rest. The whole interface follows immediately, including the desktop app&#39;s menu.</p>
+<p>Babbage starts in English. Would you rather read Dutch? Go to <strong>Settings → General → Language</strong> and click <strong>&quot;Nederlands&quot;</strong>. It sits right under your name, as two buttons side by side, and each language is written in its own language (&quot;English&quot;, &quot;Nederlands&quot;), so you can point at the right one without reading the rest. The whole interface follows immediately, including the desktop app&#39;s menu.</p>
 <p>Two things do not follow that setting. The language the model answers in follows the language <em>you</em> write in: write Dutch in an English interface and you get a Dutch answer. And jargon stays in the language it works in, so a tool keeps the name it has in every other tool.</p>
 <h2 id="adding-a-model">Adding a model</h2>
 <p>Click <strong>Settings</strong> at the bottom left of the sidebar and go to <strong>Models</strong>. There are three ways in.</p>
-<p><strong>Cloud provider.</strong> Under &quot;Add an API (cloud) model&quot;, pick Google or Anthropic, paste your API key and click <strong>Add</strong>. Omnissiah checks the key with the provider right away, so you know immediately whether it works. You only need one; two is fine too, and then you can switch per conversation. Keys stay server-side and never reach the browser.</p>
-<p><strong>Local model.</strong> If a local server is already running on your machine, Omnissiah usually finds it by itself and you see &quot;Ollama found at …&quot; with a <strong>Connect</strong> button. If you have nothing yet, click <strong>Discover models</strong>: that searches the models on Hugging Face and downloads one straight to your local server. Free, private and without a key. There is more about this on <a href="../using/models.html">Models</a>.</p>
+<p><strong>Cloud provider.</strong> Under &quot;Add an API (cloud) model&quot;, pick Google or Anthropic, paste your API key and click <strong>Add</strong>. Babbage checks the key with the provider right away, so you know immediately whether it works. You only need one; two is fine too, and then you can switch per conversation. Keys stay server-side and never reach the browser.</p>
+<p><strong>Local model.</strong> If a local server is already running on your machine, Babbage usually finds it by itself and you see &quot;Ollama found at …&quot; with a <strong>Connect</strong> button. If you have nothing yet, click <strong>Discover models</strong>: that searches the models on Hugging Face and downloads one straight to your local server. Free, private and without a key. There is more about this on <a href="../using/models.html">Models</a>.</p>
 <p><strong>Your own endpoint.</strong> Under &quot;Your own endpoint&quot; you connect OpenRouter, Groq or your own gateway: a name, the base URL, and the <strong>API format</strong> that endpoint speaks. Pick that format by what the endpoint speaks, not by the brand name of the model, because a gateway often serves models from another provider.</p>
 <h2 id="your-first-conversation">Your first conversation</h2>
 <p>Start a new conversation and type your question. There is no mode to pick first: you simply talk, and the agent gets more to work with as you give it more.</p>
@@ -181,7 +181,7 @@
 <p>So there is nothing to switch on to get started. A plain question in a fresh conversation just works.</p>
 <h2 id="how-deeply-the-model-thinks">How deeply the model thinks</h2>
 <p>The model picker has an <strong>Effort</strong> row: how thoroughly the model may think before it answers. More means a better considered answer, but also longer waiting and more tokens. The chosen level is shown next to the model name.</p>
-<p>The levels are called <strong>Off</strong>, <strong>Low</strong>, <strong>Medium</strong>, <strong>High</strong>, <strong>Extra high</strong> and <strong>Max</strong>, and which ones exist differs per model: Omnissiah only offers what that model actually knows, with a line explaining anything that is missing. Switch to a model that does not support your level and you will see it fall back.</p>
+<p>The levels are called <strong>Off</strong>, <strong>Low</strong>, <strong>Medium</strong>, <strong>High</strong>, <strong>Extra high</strong> and <strong>Max</strong>, and which ones exist differs per model: Babbage only offers what that model actually knows, with a line explaining anything that is missing. Switch to a model that does not support your level and you will see it fall back.</p>
 <h2 id="what-you-can-turn-on-later">What you can turn on later</h2>
 <p>None of this is required, but it is there if you want it:</p>
 <ul>
@@ -189,7 +189,7 @@
 <li><strong>Sources</strong> per conversation or per project. The Sources button at the top right (the one with the counter) opens the list; there you add text, a file or a URL, or link a folder. Everything the model can see in this conversation is in that one list. Drag a file onto the input bar and it goes along as an attachment with <em>that</em> message, and appears in the same list. See <a href="../using/sources.html">Sources</a>.</li>
 <li><strong>Memory</strong>, so the agent remembers things about you and your work between conversations. See <a href="../using/memory.html">Memory</a>.</li>
 <li><strong>Personas and skills</strong> to fix its role and its way of working. See <a href="../using/personas.html">Personas</a> and <a href="../using/skills.html">Skills</a>.</li>
-<li><strong>MCP servers</strong> to attach tools that Omnissiah does not have itself. See <a href="../using/mcp-servers.html">MCP servers</a>.</li>
+<li><strong>MCP servers</strong> to attach tools that Babbage does not have itself. See <a href="../using/mcp-servers.html">MCP servers</a>.</li>
 </ul>
 
         </article>
@@ -198,10 +198,10 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

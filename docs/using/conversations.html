@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Conversations - Omnissiah</title>
+    <title>Conversations - Babbage</title>
     <meta name="description" content="What a conversation can do, steering an answer, and what happens when it gets long." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="conversations.html" aria-current="page">Conversations</a>
           <ul class="nav-koppen">
@@ -163,7 +163,7 @@
 
       <main class="vlak" id="inhoud">
         <article class="prose">
-          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <p class="kruimel"><a href="index.html">Working with Babbage</a></p>
           <h1>Conversations</h1>
           <p>A conversation is the unit you work in. The model, its settings and the sources all apply per conversation, so you can have two side by side that behave completely differently. Skills are the exception: you attach them per message, not per conversation.</p>
 <h2 id="what-a-conversation-can-do">What a conversation can do</h2>
@@ -183,8 +183,8 @@
 <p>How much of this you get depends on the model. The orchestration is an instruction, not a rail, so a small local model may ignore it and simply answer in one go.</p>
 <p>The chip disappears once that message is sent, so the run is exactly as long as the research. If the action is greyed out the reason is there: your model knows no tools, there is no Tavily key, or the project is source-bound.</p>
 <p>While the run is going the line under the answer says which phase it is in and how many sources have come by so far, next to the elapsed time. The source count jumps rather than creeps: a sub-agent only reports back when it finishes, so everything it found arrives at once.</p>
-<p>At the end a report is saved and appears as a card in the conversation. If the agent forgets, Omnissiah saves the last answer itself and the card says so: &quot;Saved automatically, the model did not save the report itself.&quot; Both kinds also turn up under <strong>Reports</strong> in the sidebar.</p>
-<p>A saved report carries one more line, on the card and in the viewer: &quot;All 12 sources appeared in this run&quot;, or &quot;3 of 12 sources could not be traced to this run&quot;. Omnissiah collects every url the run actually touched - what the searches returned, what was fetched, and what the sub-agents retrieved - and checks the report&#39;s own source list against it. It is a mechanical check and nothing more: it says a source came by, not that it says what the report claims it says, and it never blocks anything. Reports from before this check, and automatically saved ones (which have no source list), simply show no line.</p>
+<p>At the end a report is saved and appears as a card in the conversation. If the agent forgets, Babbage saves the last answer itself and the card says so: &quot;Saved automatically, the model did not save the report itself.&quot; Both kinds also turn up under <strong>Reports</strong> in the sidebar.</p>
+<p>A saved report carries one more line, on the card and in the viewer: &quot;All 12 sources appeared in this run&quot;, or &quot;3 of 12 sources could not be traced to this run&quot;. Babbage collects every url the run actually touched - what the searches returned, what was fetched, and what the sub-agents retrieved - and checks the report&#39;s own source list against it. It is a mechanical check and nothing more: it says a source came by, not that it says what the report claims it says, and it never blocks anything. Reports from before this check, and automatically saved ones (which have no source list), simply show no line.</p>
 <p><strong>Reports</strong> in the sidebar is where all of them live: title, age, how many sources, that same source line, and the conversation it came from as a link you can follow. A report you no longer want can be deleted there; it asks first, and the conversation it came from stays.</p>
 <p>From that list - and from the card in a conversation, and from the report itself - you can pick <strong>Discuss in a new conversation</strong>. A fresh conversation opens with the report attached as a source, so you can ask questions about it without the whole research run around it. It is a normal source like any other, so it shows up in the sources panel and you can unlink it there.</p>
 <h2 id="when-the-agent-asks-you-something">When the agent asks you something</h2>
@@ -198,7 +198,7 @@
 <li><strong>Continue from here in a new conversation</strong>, also on an answer. A new conversation appears with the history up to and including that message and the same settings; the original stays untouched. Handy for exploring a side path without polluting your main line. How those branches hang together is shown in the <strong>Graph</strong> on the conversations page.</li>
 </ul>
 <h2 id="when-a-conversation-gets-long">When a conversation gets long</h2>
-<p>When a conversation grows towards the context window of your model, Omnissiah summarises the oldest turns for the model. A divider appears in the stream: &quot;Messages above are summarized for the model.&quot; Click it and you read the summary it gets instead: &quot;The messages above the divider no longer go to the model word for word; it gets this summary instead. For you the full conversation simply stays.&quot;</p>
+<p>When a conversation grows towards the context window of your model, Babbage summarises the oldest turns for the model. A divider appears in the stream: &quot;Messages above are summarized for the model.&quot; Click it and you read the summary it gets instead: &quot;The messages above the divider no longer go to the model word for word; it gets this summary instead. For you the full conversation simply stays.&quot;</p>
 <p>Nothing changes for you: the full conversation stays visible and stored. You cannot force it or undo it by hand; you can switch it off entirely, with <strong>Context compression</strong> under Settings → General → Helper tasks.</p>
 <h2 id="what-a-turn-cost">What a turn cost</h2>
 <p>The header shows the token usage and an estimate of the cost of this conversation. The little ring next to it shows how much of the context window the last turn actually used. When a turn has tools, the budget per run comes after it.</p>
@@ -213,15 +213,15 @@
 <p>Behind the <strong>+</strong> on the input bar sits a list <strong>Skills</strong>, and typing <code>/</code> opens the same skills as a menu; either way a skill becomes a chip above the input bar and goes along with the next message only, see <a href="skills.html#attaching-a-skill-to-a-message">Skills</a>. There is no list of tools there any more. What the model can do now follows from three things instead: tools that are always available, the settings of this conversation (a linked folder and whether it may write, the approval level, whether the project is source-bound), and what you have configured - web search exists once there is a Tavily key, and MCP servers you switch on for the whole app under <a href="mcp-servers.html">Settings → Tools</a>.</p>
 
         </article>
-        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="index.html"><span class="richting">Previous</span>Working with Omnissiah</a><a class="volgende" href="projects.html"><span class="richting">Next</span>Projects</a></nav>
+        <nav class="voetnav" aria-label="Previous and next page"><a class="vorige" href="index.html"><span class="richting">Previous</span>Working with Babbage</a><a class="volgende" href="projects.html"><span class="richting">Next</span>Projects</a></nav>
       </main>
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

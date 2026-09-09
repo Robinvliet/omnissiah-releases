@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Troubleshooting - Omnissiah</title>
+    <title>Troubleshooting - Babbage</title>
     <meta name="description" content="The messages you may run into, and what to do about them." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="index.html">What is Omnissiah</a></li>
+        <li><a href="index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="using/index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="using/index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="using/conversations.html">Conversations</a></li>
         <li><a href="using/projects.html">Projects</a></li>
@@ -172,15 +172,15 @@
           
           <h1>Troubleshooting</h1>
           <h2 id="the-app-does-not-start">The app does not start</h2>
-<p>The error message shows the bundle and data folder. Reinstalling the latest version from the <a href="https://robinvliet.github.io/omnissiah-releases/">download page</a> is usually the quickest fix; your data stays, because it lives in the app data folder and not in the app itself.</p>
+<p>The error message shows the bundle and data folder. Reinstalling the latest version from the <a href="https://robinvliet.github.io/babbage-releases/">download page</a> is usually the quickest fix; your data stays, because it lives in the app data folder and not in the app itself.</p>
 <h2 id="macos-says-the-app-is-damaged">macOS says the app is damaged</h2>
-<p>That comes with the territory and it is not damaged: the app is deliberately not signed, so macOS blocks it the first time. Clear it once per version through System Settings → Privacy &amp; Security → <strong>Open Anyway</strong>, or in Terminal with <code>xattr -cr /Applications/Omnissiah.app</code>. See <a href="getting-started/installation.html#macos">Installation</a>.</p>
+<p>That comes with the territory and it is not damaged: the app is deliberately not signed, so macOS blocks it the first time. Clear it once per version through System Settings → Privacy &amp; Security → <strong>Open Anyway</strong>, or in Terminal with <code>xattr -cr /Applications/Babbage.app</code>. See <a href="getting-started/installation.html#macos">Installation</a>.</p>
 <h2 id="windows-warns-about-the-installer">Windows warns about the installer</h2>
 <p>SmartScreen shows &quot;Windows protected your PC&quot; → <strong>More info</strong> → <strong>Run anyway</strong>. Once per version, and for the same reason: the installer is not signed.</p>
 <h2 id="there-is-no-model-at-all-in-the-picker">There is no model at all in the picker</h2>
 <p>Then there is no key and no local server yet. Go to Settings → Models; <a href="getting-started/first-steps.html">First steps</a> walks through it.</p>
 <h2 id="the-provider-returns-an-error">The provider returns an error</h2>
-<p>Omnissiah shows the message with the provider&#39;s name in it. A few come up often:</p>
+<p>Babbage shows the message with the provider&#39;s name in it. A few come up often:</p>
 <ul>
 <li><strong>429 from Gemini:</strong> the free tier has tight limits on the pro models. Wait a moment, or pick a flash model.</li>
 <li><strong>503 from Gemini:</strong> flash is temporarily overloaded.</li>
@@ -188,7 +188,7 @@
 </ul>
 <p>The practical answer is the same every time: switch model or provider and try again. The conversation simply stays, and another model can carry on where the previous one left off.</p>
 <h2 id="a-local-model-keeps-searching-and-never-answers">A local model keeps searching and never answers</h2>
-<p>Smaller models can end up in a loop with tools and finish their turn without a final answer. The step limit cuts that off, and Omnissiah nudges the model once to finish. Pick a bigger model, from roughly 8B, or give the conversation less to work with: unlink the folder, or switch an MCP server off under Settings → Tools. See <a href="using/models.html#good-to-know">Models</a>.</p>
+<p>Smaller models can end up in a loop with tools and finish their turn without a final answer. The step limit cuts that off, and Babbage nudges the model once to finish. Pick a bigger model, from roughly 8B, or give the conversation less to work with: unlink the folder, or switch an MCP server off under Settings → Tools. See <a href="using/models.html#good-to-know">Models</a>.</p>
 <h2 id="the-prompt-does-not-fit-in-the-context-window">&quot;The prompt does not fit in the context window&quot;</h2>
 <p>This is almost always a conversation with tools on an Ollama with the default context window of 4096 tokens. The tool descriptions count towards the prompt, and with a linked folder on top it no longer fits. The message quotes your server&#39;s own text, including how many tokens were asked for.</p>
 <p>Two ways out. Raise your server&#39;s window (in the Ollama app under <strong>Context length</strong>, or start it with <code>OLLAMA_CONTEXT_LENGTH=16384</code>; in LM Studio under <strong>Context Length</strong> in the load settings of the model) and restart it. Or make the prompt smaller: unlink the folder or the sources, or start a new conversation. See <a href="using/models.html#the-context-window-of-your-local-server">Models</a>.</p>
@@ -205,7 +205,7 @@
 <pre><code class="language-bash">docker compose logs -f
 </code></pre>
 <h2 id="web-version-password-lost">Web version: password lost</h2>
-<p>Delete the <code>authPasswordHash</code> row from the <code>settings</code> table in <code>data/omnissiah.db</code> with a SQLite tool. The login screen then shows &quot;Set a password to get started&quot; again, and your conversations stay.</p>
+<p>Delete the <code>authPasswordHash</code> row from the <code>settings</code> table in <code>data/babbage.db</code> with a SQLite tool. The login screen then shows &quot;Set a password to get started&quot; again, and your conversations stay.</p>
 <h2 id="web-version-something-is-off-after-an-update">Web version: something is off after an update</h2>
 <pre><code class="language-bash">docker compose build --no-cache
 </code></pre>
@@ -219,10 +219,10 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>

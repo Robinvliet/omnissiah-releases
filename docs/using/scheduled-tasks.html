@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Scheduled tasks - Omnissiah</title>
+    <title>Scheduled tasks - Babbage</title>
     <meta name="description" content="Work that runs on a schedule while you are not there, in a task conversation of its own." />
     <meta name="color-scheme" content="light dark" />
 
@@ -25,7 +25,7 @@
         // klasse blijft de navigatie op mobiel gewoon uitgeklapt staan.
         document.documentElement.classList.add("js");
         try {
-          var keuze = localStorage.getItem("omnissiah-docs-thema");
+          var keuze = localStorage.getItem("babbage-docs-thema");
           if (keuze === "donker")
             document.documentElement.classList.add("dark");
           if (keuze === "licht")
@@ -49,19 +49,19 @@
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M256 140 L170 372" />
-            <path d="M256 140 L342 372" />
-            <path d="M205 300 L307 300" />
+            <path d="M184 140 L184 372" />
+            <path d="M184 140 L262 140 A58 58 0 0 1 262 256 L184 256" />
+            <path d="M184 256 L270 256 A58 58 0 0 1 270 372 L184 372" />
           </g>
         </svg>
-        <span>Omnissiah</span>
+        <span>Babbage</span>
         <span class="merk-sectie">Documentation</span>
       </a>
 
       <div class="kop-acties">
         <a
           class="kop-link"
-          href="https://robinvliet.github.io/omnissiah-releases/"
+          href="https://robinvliet.github.io/babbage-releases/"
           >Download</a
         >
         <button
@@ -98,7 +98,7 @@
     <div class="raster">
       <nav class="zijbalk" id="zijbalk" aria-label="Documentation">    <div class="nav-groep">
       <ul class="nav-lijst">
-        <li><a href="../index.html">What is Omnissiah</a></li>
+        <li><a href="../index.html">What is Babbage</a></li>
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
@@ -110,7 +110,7 @@
       </ul>
     </div>
     <div class="nav-groep heeft-kop">
-      <a href="index.html" class="nav-kop">Working with Omnissiah</a>
+      <a href="index.html" class="nav-kop">Working with Babbage</a>
       <ul class="nav-lijst">
         <li><a href="conversations.html">Conversations</a></li>
         <li><a href="projects.html">Projects</a></li>
@@ -164,7 +164,7 @@
 
       <main class="vlak" id="inhoud">
         <article class="prose">
-          <p class="kruimel"><a href="index.html">Working with Omnissiah</a></p>
+          <p class="kruimel"><a href="index.html">Working with Babbage</a></p>
           <h1>Scheduled tasks</h1>
           <p>A scheduled task is an instruction that runs by itself: every morning, every weekday, once next week. You find them through <strong>Scheduled tasks</strong> in the sidebar.</p>
 <p>A task consists of three things: a name, a schedule, and the instruction every run carries out. That instruction runs in a <strong>task conversation of its own</strong>. The dialog says why that matters: write the instruction so it stands on its own, because the task knows no other conversations.</p>
@@ -178,7 +178,7 @@
 <li><strong>Model</strong> and <strong>Approval.</strong> Both apply to the task conversation. The approval level works exactly as in a conversation you have yourself; see <a href="working-in-a-folder.html#what-happens-without-asking">Working in a folder</a>.</li>
 <li><strong>Fallback model.</strong> Optional, and off by default (&quot;No fallback&quot;). &quot;Runs the task when the task model fails for good; the run reports that in the task conversation.&quot; Useful for a task that has to keep running when your usual provider is having a bad day; the task model itself never changes along with it.</li>
 </ul>
-<p>Times are read in the time zone of the machine where Omnissiah runs, and that is your own machine.</p>
+<p>Times are read in the time zone of the machine where Babbage runs, and that is your own machine.</p>
 <p>One thing to know about <strong>Every X minutes</strong>: the moments lie on a fixed grid that starts when you save the task - &quot;every 30 minutes&quot; means moments exactly 30 minutes apart, no matter how long each run takes. The app checks for due tasks once a minute, so a run can start up to a minute after its moment, but the next moment does not shift along with that. If a run is still going when its next moment arrives, that moment is skipped and the run list says so. Editing the schedule, or resuming a paused task, starts a fresh grid from that point. Cron expressions work the same way, tied to the clock.</p>
 <h2 id="or-just-ask-in-a-conversation">Or just ask in a conversation</h2>
 <p>You can also ask the agent to schedule something. It translates your sentence into a schedule itself and makes a proposal that pauses until you approve it, just like with a skill. The task then inherits the model, the approval level and the project of the conversation you asked it in; adjusting comes afterwards in the overview.</p>
@@ -203,7 +203,7 @@
 <p>A task that summarises the news every morning does not have news every morning. In such a case the agent answers with <code>[SILENT]</code>, and then the run gets the status <strong>silent</strong> and the notification stays away. The turn is simply there in the task conversation, so you can always check <em>that</em> it ran.</p>
 <p>That is also what the task is given in its instructions: it runs without a user present, asks no questions and waits for nothing, because its last answer is what you see later as the outcome. If it uses the protocol word <em>and</em> writes content anyway, the run row says &quot;[SILENT] protocol violated&quot; - a warning, not a status.</p>
 <h2 id="if-the-app-was-off">If the app was off</h2>
-<p>A scheduled task needs a running app. If your computer was off at nine o&#39;clock, the morning briefing still runs as soon as you open Omnissiah again.</p>
+<p>A scheduled task needs a running app. If your computer was off at nine o&#39;clock, the morning briefing still runs as soon as you open Babbage again.</p>
 <p>Piled-up missed runs do lapse: one is caught up, not five. That is visible as a skipped run that counts exactly what fell away: &quot;Scheduled run of Aug 6, 09:00 AM was missed (the server was off); one catch-up run was made, 2 later moments lapsed.&quot; A one-off task that has not run yet runs whatever time it is.</p>
 <h2 id="only-run-when-something-changed">Only run when something changed</h2>
 <p>A task that checks a page every fifteen minutes does not need to write a report every fifteen minutes. Give it a <strong>monitor</strong> and it looks first, and only does the actual work when what it sees has changed.</p>
@@ -245,10 +245,10 @@
     </div>
 
     <footer class="voet">
-      <span>Omnissiah, a personal AI agent. Built by Robin van Vliet.</span>
+      <span>Babbage, a personal AI agent. Built by Robin van Vliet.</span>
       <span class="voet-links">
-        <a href="https://robinvliet.github.io/omnissiah-releases/">Download</a>
-        <a href="https://github.com/Robinvliet/omnissiah-releases/releases"
+        <a href="https://robinvliet.github.io/babbage-releases/">Download</a>
+        <a href="https://github.com/Robinvliet/babbage-releases/releases"
           >Releases</a
         >
       </span>
